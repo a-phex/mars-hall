@@ -1,0 +1,24 @@
+{
+  "clients": [
+    {
+      "name": "Lenovo EMEA",
+      "logo": "static/img/thumbs/lenovo-logo.png",
+      "cover": "static/img/thumbs/lenovo-cover.jpg",
+      "blurb": "Launch films and case studies across the region.",
+      "videos": [
+        { "title": "ThinkBook Launch", "youtubeId": "VIDEO_ID_A1" },
+        { "title": "Client Story — Retail", "youtubeId": "VIDEO_ID_A2" }
+      ]
+    },
+    {
+      "name": "Microsoft",
+      "logo": "static/img/thumbs/msft-logo.png",
+      "cover": "static/img/thumbs/msft-cover.jpg",
+      "blurb": "Partner solution stories and field content.",
+      "videos": [
+        { "title": "Azure Case Study", "youtubeId": "VIDEO_ID_B1" },
+        { "title": "Copilot Overview", "youtubeId": "VIDEO_ID_B2" }
+      ]
+    }
+  ]
+}
