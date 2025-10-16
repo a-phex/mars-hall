@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Marshall — Electra Film</title>
+  <link rel="stylesheet" href="static/css/style.css" />
+  <meta name="color-scheme" content="dark">
+</head>
+<body>
+  <header class="hero hero--small">
+    <img class="hero-media" src="static/img/hero-greenwich.jpg" alt="Greenwich" />
+    <img class="hero-logo hero-logo--small" src="static/img/logo-marshall.png" alt="marshall" />
+  </header>
+
+  <nav class="site-nav" id="siteNav">
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <ul id="navList">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Me</a></li>
+      <li><a href="client-work.html">Client Work</a></li>
+      <li><a href="photography.html">Photography / Graphic Design</a></li>
+      <li><a href="behind-the-scenes.html">Behind the Scenes</a></li>
+      <li><a class="active" href="electra-film.html">Electra Film</a></li>
+    </ul>
+  </nav>
+
+  <main class="container narrow">
+    <section class="section">
+      <h1 class="section-title">Electra</h1>
+      <p class="lead">A university film project — a collection of hero stills, behind-the-scenes and the final cut.</p>
+
+      <!-- Simple carousel: drop 3–6 stills in /img and update sources below -->
+      <div class="carousel" id="carousel">
+        <button class="carousel-btn prev" aria-label="Previous">‹</button>
+        <div class="carousel-track">
+          <img src="static/img/electra-1.jpg" alt="Electra still 1" />
+          <img src="static/img/electra-2.jpg" alt="Electra still 2" />
+          <img src="static/img/electra-3.jpg" alt="Electra still 3" />
+        </div>
+        <button class="carousel-btn next" aria-label="Next">›</button>
+      </div>
+
+      <h2>Trailer</h2>
+      <div class="video-embed">
+        <!-- Replace with your YouTube trailer ID -->
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID_TRAILER" title="Electra Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+
+      <h2>Main Film</h2>
+      <div class="video-embed">
+        <!-- Replace with your YouTube film ID -->
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID_FILM" title="Electra Film" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+
+      <h3>Behind the Scenes</h3>
+      <div id="btsElectra" class="image-grid small-gap"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Marshall</p>
+    </div>
+  </footer>
+
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <div class="lightbox-backdrop" data-close="lightbox"></div>
+    <button class="lightbox-close" data-close="lightbox" aria-label="Close">×</button>
+    <img id="lightboxImg" alt="Preview" />
+  </div>
+
+  <script src="static/js/app.js"></script>
+  <script>
+    // Example: reuse BTS photos on this page if you like
+    window.addEventListener('DOMContentLoaded', () => {
+      renderImageGrid('btsElectra', [
+        'static/img/bts/bts-1.jpg',
+        'static/img/bts/bts-2.jpg',
+        'static/img/bts/bts-3.jpg'
+      ]);
+    });
+  </script>
+</body>
+</html>
