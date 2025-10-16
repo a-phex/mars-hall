@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Marshall — Behind the Scenes</title>
+  <link rel="stylesheet" href="static/css/style.css" />
+  <meta name="color-scheme" content="dark">
+</head>
+<body>
+  <header class="hero hero--small">
+    <img class="hero-media" src="static/img/hero-greenwich.jpg" alt="Greenwich" />
+    <img class="hero-logo hero-logo--small" src="static/img/logo-marshall.png" alt="marshall" />
+  </header>
+
+  <nav class="site-nav" id="siteNav">
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <ul id="navList">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Me</a></li>
+      <li><a href="client-work.html">Client Work</a></li>
+      <li><a href="photography.html">Photography / Graphic Design</a></li>
+      <li><a class="active" href="behind-the-scenes.html">Behind the Scenes</a></li>
+      <li><a href="electra-film.html">Electra Film</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <section class="section">
+      <h1 class="section-title">Behind the Scenes</h1>
+      <div id="btsGrid" class="image-grid" data-source="data/bts.json"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Marshall</p>
+    </div>
+  </footer>
+
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <div class="lightbox-backdrop" data-close="lightbox"></div>
+    <button class="lightbox-close" data-close="lightbox" aria-label="Close">×</button>
+    <img id="lightboxImg" alt="Preview" />
+  </div>
+
+  <script src="static/js/app.js"></script>
+</body>
+</html>
