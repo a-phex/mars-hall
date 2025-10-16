@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Marshall — Client Work</title>
+  <link rel="stylesheet" href="static/css/style.css" />
+  <meta name="color-scheme" content="dark">
+</head>
+<body>
+  <header class="hero hero--small">
+    <img class="hero-media" src="static/img/hero-greenwich.jpg" alt="Greenwich" />
+    <img class="hero-logo hero-logo--small" src="static/img/logo-marshall.png" alt="marshall" />
+  </header>
+
+  <nav class="site-nav" id="siteNav">
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <ul id="navList">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Me</a></li>
+      <li><a class="active" href="client-work.html">Client Work</a></li>
+      <li><a href="photography.html">Photography / Graphic Design</a></li>
+      <li><a href="behind-the-scenes.html">Behind the Scenes</a></li>
+      <li><a href="electra-film.html">Electra Film</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <section class="section">
+      <h1 class="section-title">Client Albums</h1>
+      <div id="clientGrid" class="album-grid" data-source="data/clients.json"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Marshall</p>
+    </div>
+  </footer>
+
+  <!-- Modal (reuses same) -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close="modal"></div>
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-label="Video player">
+      <button class="modal-close" data-close="modal" aria-label="Close">×</button>
+      <div class="modal-body">
+        <div id="playerContainer" class="player-container"></div>
+        <div id="playlist" class="playlist"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="static/js/app.js"></script>
+</body>
+</html>
