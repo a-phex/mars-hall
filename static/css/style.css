@@ -106,3 +106,18 @@ a:hover{color:var(--accent)}
   .about{grid-template-columns:1fr}
   .hero-logo{max-width:min(70vw,520px)}
 }
+
+/* Fix stacking order — ensure modal/lightbox appear above hero/nav */
+.modal,
+.lightbox {
+  z-index: 9999 !important;
+}
+
+.modal-backdrop,
+.lightbox-backdrop {
+  z-index: 9998 !important;
+}
+
+.modal-dialog {
+  z-index: 10000 !important;
+}
