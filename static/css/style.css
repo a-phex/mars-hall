@@ -22,12 +22,54 @@ a:hover{color:var(--accent)}
 .section{margin:32px 0 64px}
 .section-title{font-size:28px;margin:8px 0 24px;color:var(--fg);letter-spacing:.3px}
 
-/* HERO */
-.hero{position:relative;min-height:52vh;display:grid;place-items:center;padding:24px}
-.hero--small{min-height:32vh}
-.hero-media{position:absolute;inset:16px;border-radius:var(--radius);object-fit:cover;filter:brightness(.6);box-shadow:var(--shadow)}
-.hero-logo{position:relative;z-index:2;max-width:min(60vw,560px);opacity:.95;filter:drop-shadow(0 6px 18px rgba(0,0,0,.5))}
-.hero-logo--small{max-width:min(40vw,360px)}
+/* HERO SECTION – cropped, cinematic look */
+.hero {
+  position: relative;
+  height: 60vh;                  /* cropped height (adjust 50–65vh to taste) */
+  min-height: 420px;
+  max-height: 680px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;              /* ensures image doesn't spill into body */
+  margin-bottom: 40px;           /* space before the next section */
+}
+
+.hero--small {
+  height: 40vh;
+  min-height: 320px;
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;              /* crops rather than stretches */
+  border-radius: 0;               /* full width, no corner rounding */
+  filter: brightness(0.6) saturate(1.1);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 120px;
+  background: linear-gradient(to bottom, rgba(14,14,16,0) 0%, rgba(14,14,16,1) 100%);
+  pointer-events: none;           /* fades into body nicely */
+}
+
+.hero-logo {
+  position: relative;
+  z-index: 2;
+  max-width: min(60vw, 560px);
+  opacity: 0.95;
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.5));
+}
+
+.hero {
+  border-bottom: 1px solid var(--border);
+}
+
 
 /* NAV */
 .site-nav{position:sticky;top:0;z-index:10;background:rgba(15,15,17,.85);backdrop-filter:saturate(110%) blur(8px);border-bottom:1px solid var(--border)}
