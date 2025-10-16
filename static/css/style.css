@@ -71,7 +71,7 @@ a:hover{color:var(--accent)}
 .hero-logo {
   position: relative;
   z-index: 2;
-  max-width: min(60vw, 560px);
+  max-width: min(40vw, 360px);
   opacity: 0.95;
   filter: drop-shadow(0 6px 18px rgba(0,0,0,0.5));
 }
