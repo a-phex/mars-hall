@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Marshall — Home</title>
+  <link rel="stylesheet" href="static/css/style.css" />
+  <meta name="color-scheme" content="dark">
+</head>
+<body>
+  <!-- HERO -->
+  <header class="hero">
+    <!-- Still image now -->
+    <img class="hero-media" src="static/img/hero-greenwich.jpg" alt="Greenwich at twilight" />
+
+    <!-- Future: swap IMG for VIDEO by removing 'is-still' and adding the <video> below
+    <video class="hero-media" autoplay muted loop playsinline poster="static/img/hero-greenwich.jpg">
+      <source src="static/img/hero-greenwich.mp4" type="video/mp4">
+    </video> -->
+
+    <img class="hero-logo" src="static/img/logo-marshall.png" alt="marshall" />
+  </header>
+
+  <!-- NAV -->
+  <nav class="site-nav" id="siteNav">
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <ul id="navList">
+      <li><a class="active" href="index.html">Home</a></li>
+      <li><a href="about.html">About Me</a></li>
+      <li><a href="client-work.html">Client Work</a></li>
+      <li><a href="photography.html">Photography / Graphic Design</a></li>
+      <li><a href="behind-the-scenes.html">Behind the Scenes</a></li>
+      <li><a href="electra-film.html">Electra Film</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <section class="section">
+      <h2 class="section-title">Featured Work</h2>
+      <div id="videoGrid" class="video-grid" data-source="data/videos.json"></div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Marshall</p>
+      <p><a href="mailto:hello@example.com">hello@example.com</a> · <a href="#" target="_blank" rel="nofollow noopener">Instagram</a> · <a href="#" target="_blank" rel="nofollow noopener">LinkedIn</a></p>
+    </div>
+  </footer>
+
+  <!-- Modal Player -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close="modal"></div>
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-label="Video player">
+      <button class="modal-close" data-close="modal" aria-label="Close">×</button>
+      <div class="modal-body">
+        <div id="playerContainer" class="player-container"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="static/js/app.js"></script>
+</body>
+</html>
