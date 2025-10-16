@@ -30,8 +30,8 @@ a:hover{color:var(--accent)}
 .hero {
   position: relative;
   height: 60vh;                    /* main hero height */
-  min-height: 420px;
-  max-height: 680px;
+  min-height: 100px;
+  max-height: 200px;
   display: grid;
   place-items: center;
   overflow: hidden;                /* ensures no spillover */
