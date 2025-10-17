@@ -119,6 +119,7 @@ a:hover{color:var(--accent)}
 .album-grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
 .image-grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
 .image-grid.small-gap{gap:12px}
+.video-embed{margin-left: auto; margin-right: auto}
 
 .card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);transition:200ms}
 .card:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(0,0,0,.5)}
@@ -146,6 +147,7 @@ a:hover{color:var(--accent)}
 .modal-dialog{position:relative;max-width:min(1000px,92vw);margin:6vh auto;background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow)}
 .modal-close{position:absolute;top:8px;right:8px;background:transparent;border:0;color:#fff;font-size:28px;line-height:1;padding:8px;border-radius:8px}
 .modal-body{padding:14px}
+
 /* Video modal player — properly centered and scaled */
 .player-container {
   position: relative;
