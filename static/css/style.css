@@ -183,10 +183,10 @@ a:hover{color:var(--accent)}
 .lightbox-close{position:absolute;top:16px;right:16px;background:transparent;border:0;color:#fff;font-size:28px}
 
 /* CAROUSEL (Electra) */
-.carousel{position:relative;margin:8px 0 24px}
+.carousel{position:relative;margin:24px 0 24px}
 .carousel-track{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
 .carousel-track img{height:220px;border-radius:12px;border:1px solid var(--border);scroll-snap-align:center}
-.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);border:1px solid var(--border);color:#fff;border-radius:10px;padding:6px 10px}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);border:1px solid var(--border);color:#fff;border-radius:10px;padding:6px 6px}
 .carousel-btn.prev{left:-6px}
 .carousel-btn.next{right:-6px}
 
