@@ -44,22 +44,30 @@ a:hover{color:var(--accent)}
   object-fit: cover; object-position: center;
   filter: brightness(0.6) saturate(1.05);
 }
+
+/* FILM GRAIN — animated pixel noise layer (inspired by reactbits.dev) */
 .hero::before {
   content: "";
-  position: absolute; inset: 0;
-  background-image:
-    url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAABM8l3QAAAAp0lEQVR4Ae3UsQ2AQBQE0Q/HbnGBoRAgiCw1RMw6ruDNIS5Fnlh+twV5mKz/+HuzYw0AAAD4H1oAgD7ZB8yDRYp/0kaAkTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTDiCGE1Syo8K45GAAAAAElFTkSuQmCC");
-  background-size: 200px 200px;
+  position: absolute;
+  inset: -50%;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAb1BMVEX///////8AAADn5+eXl5f7+/vGxsbZ2dnb29vDw8Orq6uYmJjR0dHY2Nja2trLy8vb29vT09Pj4+Ps7OzPz8/j4+O/v7/W1tbn5+f09PTCwsLX19fe3t7k5OTm5ubq6ur8/PxOTk5ISEh5rNvQAAAAF3RSTlMAQYGAf7+/wMDAoKCh/f3+/v7+/v7+/v6hRnhQAAAAoElEQVQY02NgIBYwMjAwYmBgYGBgAABjgR+AgQEDEwSCAAyDA8LCIQAAk4EAyAAAWXkGXFPiG1QAAAABJRU5ErkJggg==");
+  background-size: 120px 120px;
+  opacity: 0.12;
   mix-blend-mode: soft-light;
-  opacity: 0.15;
-  animation: filmGrainFlicker 1.8s steps(2,end) infinite;
+  animation: grainShift 0.5s steps(2,end) infinite;
   pointer-events: none;
   z-index: 2;
+  transform: translateZ(0); /* force GPU layer */
 }
-@keyframes filmGrainFlicker {
-  0%,100% { opacity: 0.08; }
-  50%     { opacity: 0.13; }
+
+@keyframes grainShift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(5%, -5%); }
+  50% { transform: translate(-5%, 5%); }
+  75% { transform: translate(3%, -3%); }
+  100% { transform: translate(0, 0); }
 }
+
 .hero::after {
   content: "";
   position: absolute; inset: auto 0 0 0; height: 140px;
