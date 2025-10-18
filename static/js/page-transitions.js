@@ -1,12 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
   const body = document.body;
-  const isHome = location.pathname.endsWith("index.html") || location.pathname === "/";
-  const pageOrder = ["index.html", "about.html", "client-work.html", "photography.html", "behind.html", "electra.html"];
+  const path = location.pathname.split("/").pop() || "index.html";
+  const pageOrder = [
+    "index.html",       // 0
+    "about.html",       // 1
+    "client-work.html", // 2
+    "photography.html", // 3
+    "behind.html",      // 4
+    "electra.html"      // 5
+  ];
 
-  if (isHome) body.classList.add("home-page");
-  if (!isHome) body.classList.add("page-in");
+  // Mark homepage for CSS (so it keeps cinematic intro)
+  if (path === "index.html" || path === "") body.classList.add("home-page");
+  else body.classList.add("page-in");
 
-  // Smooth accent morph setup
   const accentMap = {
     "index.html": "blue",
     "about.html": "violet",
@@ -23,17 +30,24 @@ document.addEventListener("DOMContentLoaded", () => {
     link.addEventListener("click", e => {
       e.preventDefault();
 
-      const current = location.pathname.split("/").pop() || "index.html";
-      const next = href.split("/").pop();
-      const currentIndex = pageOrder.indexOf(current);
+      const next = href.split("/").pop() || "index.html";
+      const currentIndex = pageOrder.indexOf(path);
       const nextIndex = pageOrder.indexOf(next);
 
-      let direction = "forward";
-      if (nextIndex < currentIndex) direction = "backward";
+      // Only animate if both pages exist in the list
+      if (currentIndex === -1 || nextIndex === -1) {
+        window.location.href = href;
+        return;
+      }
 
+      // Determine direction based on index order
+      const direction = nextIndex > currentIndex ? "forward" : "backward";
+
+      // Set accent tint before leaving
       const nextAccent = accentMap[next] || "blue";
       body.setAttribute("data-accent", nextAccent);
 
+      // Apply exit animation classes
       body.classList.remove("page-in");
       body.classList.add("page-out", `dir-${direction}`);
 
