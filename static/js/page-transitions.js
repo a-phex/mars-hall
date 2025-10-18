@@ -1,59 +1,76 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const body = document.body;
-  const path = location.pathname.split("/").pop() || "index.html";
-  const pageOrder = [
-    "index.html",       // 0
-    "about.html",       // 1
-    "client-work.html", // 2
-    "photography.html", // 3
-    "behind.html",      // 4
-    "electra.html"      // 5
+// Deterministic, order-aware page transitions using sessionStorage
+// Order:
+// 1 index.html
+// 2 about.html
+// 3 client-work.html
+// 4 photography.html
+// 5 behind-the-scenes.html
+// 6 electra-film.html
+
+(function () {
+  const PAGES = [
+    "index.html",
+    "about.html",
+    "client-work.html",
+    "photography.html",
+    "behind-the-scenes.html",
+    "electra-film.html",
   ];
 
-  // Mark homepage for CSS (so it keeps cinematic intro)
-  if (path === "index.html" || path === "") body.classList.add("home-page");
-  else body.classList.add("page-in");
+  function filename(path) {
+    const f = path.split("/").pop();
+    return f && f.length ? f : "index.html";
+  }
 
-  const accentMap = {
-    "index.html": "blue",
-    "about.html": "violet",
-    "client-work.html": "teal",
-    "photography.html": "pink",
-    "behind.html": "orange",
-    "electra.html": "purple"
-  };
+  const current = filename(location.pathname);
 
-  document.querySelectorAll("a[href]").forEach(link => {
-    const href = link.getAttribute("href");
-    if (!href || href.startsWith("http") || href.startsWith("#") || href.startsWith("mailto:")) return;
+  // First load behaviour (fade-up on the very first visit)
+  // We use a flag so it runs once per tab/session.
+  if (!sessionStorage.getItem("visited")) {
+    document.body.classList.add("first-load");
+    sessionStorage.setItem("visited", "1");
+  }
 
-    link.addEventListener("click", e => {
-      e.preventDefault();
+  // Read planned entry direction from previous page click (if any)
+  const plannedEntry = sessionStorage.getItem("entryDirection"); // "from-left" | "from-right" | null
+  if (plannedEntry === "from-left")  document.body.classList.add("slide-in-from-left");
+  if (plannedEntry === "from-right") document.body.classList.add("slide-in-from-right");
+  // Clear it so refreshes don't replay
+  sessionStorage.removeItem("entryDirection");
 
-      const next = href.split("/").pop() || "index.html";
-      const currentIndex = pageOrder.indexOf(path);
-      const nextIndex = pageOrder.indexOf(next);
+  // Intercept internal nav clicks to set exit & next entry directions
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a[href]");
+    if (!a) return;
 
-      // Only animate if both pages exist in the list
-      if (currentIndex === -1 || nextIndex === -1) {
-        window.location.href = href;
-        return;
-      }
+    const href = a.getAttribute("href");
+    if (!href || href.startsWith("#") || href.startsWith("mailto:") || /^https?:\/\//i.test(href)) return;
 
-      // Determine direction based on index order
-      const direction = nextIndex > currentIndex ? "forward" : "backward";
+    e.preventDefault();
 
-      // Set accent tint before leaving
-      const nextAccent = accentMap[next] || "blue";
-      body.setAttribute("data-accent", nextAccent);
+    const next = filename(href);
+    const iCur = PAGES.indexOf(current);
+    const iNext = PAGES.indexOf(next);
 
-      // Apply exit animation classes
-      body.classList.remove("page-in");
-      body.classList.add("page-out", `dir-${direction}`);
+    // If either page isn't in our list, just go straight there
+    if (iCur === -1 || iNext === -1) {
+      window.location.href = href;
+      return;
+    }
 
-      setTimeout(() => {
-        window.location.href = href;
-      }, 450);
-    });
+    // Determine directions by index
+    // Forward (next > current): current slides LEFT, next enters FROM RIGHT
+    // Backward (next < current): current slides RIGHT, next enters FROM LEFT
+    const exitClass   = iNext > iCur ? "slide-out-to-left"  : "slide-out-to-right";
+    const entryPlanned = iNext > iCur ? "from-right"        : "from-left";
+
+    // Store the planned entry direction for the next page load
+    sessionStorage.setItem("entryDirection", entryPlanned);
+
+    // Add exit class and navigate after animation ends
+    document.body.classList.remove("slide-in-from-left", "slide-in-from-right", "first-load");
+    document.body.classList.add(exitClass);
+
+    setTimeout(() => { window.location.href = href; }, 450);
   });
-});
+})();
