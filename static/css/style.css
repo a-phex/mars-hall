@@ -43,6 +43,7 @@ a:hover{color:var(--accent)}
   position: absolute; inset: 0; width: 100%; height: 100%;
   object-fit: cover; object-position: center;
   filter: brightness(0.6) saturate(1.05);
+  z-index: 0; /* ensure it's the base layer */
 }
 
 /* FILM GRAIN — animated pixel noise layer (inspired by reactbits.dev) */
@@ -52,7 +53,7 @@ a:hover{color:var(--accent)}
   inset: -50%;
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAb1BMVEX///////8AAADn5+eXl5f7+/vGxsbZ2dnb29vDw8Orq6uYmJjR0dHY2Nja2trLy8vb29vT09Pj4+Ps7OzPz8/j4+O/v7/W1tbn5+f09PTCwsLX19fe3t7k5OTm5ubq6ur8/PxOTk5ISEh5rNvQAAAAF3RSTlMAQYGAf7+/wMDAoKCh/f3+/v7+/v7+/v6hRnhQAAAAoElEQVQY02NgIBYwMjAwYmBgYGBgAABjgR+AgQEDEwSCAAyDA8LCIQAAk4EAyAAAWXkGXFPiG1QAAAABJRU5ErkJggg==");
   background-size: 120px 120px;
-  opacity: 0.12;
+  opacity: 0.50;
   mix-blend-mode: soft-light;
   animation: grainShift 0.5s steps(2,end) infinite;
   pointer-events: none;
