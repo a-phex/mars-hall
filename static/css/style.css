@@ -47,7 +47,7 @@ a:hover{color:var(--accent)}
 }
 
 /* FILM GRAIN — animated pixel noise layer (inspired by reactbits.dev) */
-.hero::before {
+/*.hero::before {
   content: "";
   position: absolute;
   inset: -50%;
@@ -60,6 +60,31 @@ a:hover{color:var(--accent)}
   z-index: 2;
   transform: translateZ(0); /* force GPU layer */
 }
+
+/* REAL MOVING FILM GRAIN (layered div, not pseudo-element) */
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2; /* above hero-media, below logo */
+  background-image:
+    url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=="),
+    url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAZlBMVEUAAAD///8AAADw8PD+/v7x8fH19fX5+fn09PT29vb09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQP87yAAAAFHRSTlMABAbu8NQJAfrL3OjJv7Ckrm2BbZ7qkeM5FAAAAKlJREFUGNNjYBgFo2BgYGBgBAAqFhZWEyFjAQAhAgMzIAAgs1ACFmoIAAM2AAHLOVCNOAAAAAElFTkSuQmCC");
+  background-repeat: repeat, repeat;
+  background-size: 120px 120px, 80px 80px;
+  mix-blend-mode: soft-light;
+  opacity: 0.2;
+  animation: grainDrift 1.5s steps(3,end) infinite;
+}
+
+@keyframes grainDrift {
+  0%   { background-position: 0 0, 0 0; }
+  25%  { background-position: 20px -20px, -15px 15px; }
+  50%  { background-position: -20px 20px, 15px -15px; }
+  75%  { background-position: 10px -10px, -10px 10px; }
+  100% { background-position: 0 0, 0 0; }
+}
+
 
 @keyframes grainShift {
   0% { transform: translate(0, 0); }
