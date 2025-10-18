@@ -50,8 +50,8 @@ a:hover{color:var(--accent)}
   background-image:
     url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAABM8l3QAAAAp0lEQVR4Ae3UsQ2AQBQE0Q/HbnGBoRAgiCw1RMw6ruDNIS5Fnlh+twV5mKz/+HuzYw0AAAD4H1oAgD7ZB8yDRYp/0kaAkTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTHiCNAFgTTDiCGE1Syo8K45GAAAAAElFTkSuQmCC");
   background-size: 200px 200px;
-  mix-blend-mode: overlay;
-  opacity: 0.10;
+  mix-blend-mode: soft-light;
+  opacity: 0.15;
   animation: filmGrainFlicker 1.8s steps(2,end) infinite;
   pointer-events: none;
   z-index: 2;
