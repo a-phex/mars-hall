@@ -216,3 +216,117 @@ a:hover{color:var(--accent)}
    MISC ANIMATIONS
    ──────────────────────────────── */
 @keyframes fadeSlideIn{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
+
+/* ────────────────────────────────
+   PAGE TRANSITION ANIMATIONS (subpages)
+   ──────────────────────────────── */
+body.page-in {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeSlideIn 0.5s ease-out forwards;
+}
+
+body.page-out {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeSlideOut 0.4s ease-in forwards;
+}
+
+@keyframes fadeSlideIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlideOut {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-20px); }
+}
+
+/* Prevent double animations on homepage */
+body.home-page {
+  animation: none !important;
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+/* ────────────────────────────────
+   DIRECTION-AWARE PAGE TRANSITIONS
+   ──────────────────────────────── */
+body.page-in {
+  opacity: 0;
+  animation: fadeSlideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+body.page-out {
+  opacity: 1;
+  animation-duration: 0.45s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: forwards;
+}
+
+/* forward (slide left) */
+body.page-out.dir-forward {
+  animation-name: fadeSlideOutForward;
+}
+
+/* backward (slide right) */
+body.page-out.dir-backward {
+  animation-name: fadeSlideOutBackward;
+}
+
+@keyframes fadeSlideIn {
+  0% { opacity: 0; transform: translateX(30px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeSlideOutForward {
+  0% { opacity: 1; transform: translateX(0); }
+  100% { opacity: 0; transform: translateX(-30px); }
+}
+
+@keyframes fadeSlideOutBackward {
+  0% { opacity: 1; transform: translateX(0); }
+  100% { opacity: 0; transform: translateX(30px); }
+}
+
+/* prevent home hero replay */
+body.home-page {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ────────────────────────────────
+   BACKGROUND COLOUR MORPH EFFECT
+   ──────────────────────────────── */
+:root {
+  --bg-blue: #0E0E10;
+  --bg-violet: #130f1c;
+  --bg-teal: #0e1616;
+  --bg-pink: #1a0f15;
+  --bg-orange: #17120a;
+  --bg-purple: #140f18;
+}
+
+/* The base dark background still applies */
+body {
+  background-color: var(--bg);
+  transition: background-color 1.2s ease-in-out;
+}
+
+/* Accent-driven background tint */
+body[data-accent="blue"]    { background-color: var(--bg-blue); }
+body[data-accent="violet"]  { background-color: var(--bg-violet); }
+body[data-accent="teal"]    { background-color: var(--bg-teal); }
+body[data-accent="pink"]    { background-color: var(--bg-pink); }
+body[data-accent="orange"]  { background-color: var(--bg-orange); }
+body[data-accent="purple"]  { background-color: var(--bg-purple); }
+
+/* Optional — morph background of hero as well */
+.hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.04), transparent 60%);
+  pointer-events: none;
+}
