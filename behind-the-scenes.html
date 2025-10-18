@@ -27,7 +27,9 @@
   <main class="container">
     <section class="section">
       <h1 class="section-title">Behind the Scenes</h1>
-      <div id="btsGrid" class="image-grid" data-source="data/bts.json"></div>
+
+      <!-- Masonry Gallery -->
+      <div id="btsGallery" class="masonry-gallery"></div>
     </section>
   </main>
 
@@ -37,13 +39,53 @@
     </div>
   </footer>
 
+  <!-- Lightbox -->
   <div id="lightbox" class="lightbox" aria-hidden="true">
     <div class="lightbox-backdrop" data-close="lightbox"></div>
     <button class="lightbox-close" data-close="lightbox" aria-label="Close">×</button>
     <img id="lightboxImg" alt="Preview" />
   </div>
 
+  <!-- Masonry Loader -->
+  <script>
+  async function loadBTS() {
+    const gallery = document.getElementById('btsGallery');
+    if (!gallery) return;
+
+    try {
+      const res = await fetch('data/bts.json', { cache: 'no-cache' });
+      if (!res.ok) throw new Error('Cannot load bts.json');
+      const items = await res.json();
+
+      // Build each item
+      const html = items.map((item, i) => `
+        <figure class="masonry-item fade-in" style="animation-delay:${i * 70}ms">
+          <img src="${item.src}" alt="${item.alt || ''}" loading="lazy">
+          ${item.caption ? `<figcaption>${item.caption}</figcaption>` : ''}
+        </figure>
+      `).join('');
+
+      gallery.innerHTML = html;
+
+      // Lightbox logic
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      gallery.querySelectorAll('img').forEach(img => {
+        img.addEventListener('click', () => {
+          lightboxImg.src = img.src;
+          lightbox.setAttribute('aria-hidden', 'false');
+        });
+      });
+    } catch (err) {
+      console.error(err);
+      gallery.innerHTML = `<p style="color:#aaa;padding:1em;">Couldn’t load gallery content.</p>`;
+    }
+  }
+  document.addEventListener('DOMContentLoaded', loadBTS);
+  </script>
+
   <script src="static/js/app.js"></script>
   <script src="static/js/page-transitions.js"></script>
+
 </body>
 </html>

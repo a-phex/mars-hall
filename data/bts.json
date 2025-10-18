@@ -1,8 +1,17 @@
-{
-  "images": [
-    "static/img/bts/bts-001.jpg",
-    "static/img/bts/bts-002.jpg",
-    "static/img/bts/bts-003.jpg",
-    "static/img/bts/bts-004.jpg"
-  ]
-}
+[
+  { "src": "static/img/bts/000008.jpg", "alt": "Camera setup on location" },
+  { "src": "static/img/bts/000015.jpg", "alt": "Lighting rig detail" },
+  { "src": "static/img/bts/000016-1.jpg", "alt": "Interview in progress" },
+  { "src": "static/img/bts/000024.jpg", "alt": "Crew working in studio" },
+  { "src": "static/img/bts/000024.jpg", "alt": "Crew working in studio" },
+  { "src": "static/img/bts/000024.jpg", "alt": "Crew working in studio" },
+  { "src": "static/img/bts/000024.jpg", "alt": "Crew working in studio" },
+  { "src": "static/img/bts/000024.jpg", "alt": "Crew working in studio" },
+  { "src": "static/img/bts/000024.jpg", "alt": "Crew working in studio" },
+  { "src": "static/img/bts/000024.jpg", "alt": "Crew working in studio" },
+  { "src": "static/img/bts/000024.jpg", "alt": "Crew working in studio" },
+  { "src": "static/img/bts/000024.jpg", "alt": "Crew working in studio" },
+  { "src": "static/img/bts/000024.jpg", "alt": "Crew working in studio" },
+  { "src": "static/img/bts/000024.jpg", "alt": "Sound recording setup" }
+]
+
