@@ -1,17 +1,645 @@
 {
   "clients": [
     {
+      "name": "Exhibition World 2019",
+      "blurb": "",
+      "cover": "",
+      "logo": "https://aphex447589013.wordpress.com/wp-content/uploads/2019/04/ew19.png",
+      "videos": [
+        {
+          "title": "Elektra Awards 2019 | Electronics Weekly",
+          "youtubeId": "zEM290himyo"
+        },
+        {
+          "title": "EW BrightSparks -  the brightest and most talented young electronics engineers in the UK",
+          "youtubeId": "ZeJFrIZUzYs"
+        },
+        {
+          "title": "Interview: CEO Lindsley Ruth questions the UK's vision for engineering | Electronics Weekly",
+          "youtubeId": "0zUcfqoRuBA"
+        },
+        {
+          "title": "Tackling issues around Employment and Careers in Engineering | Electronics Weekly",
+          "youtubeId": "epKp1a050LM"
+        },
+        {
+          "title": "Chris Ard, TouchNetix: On recruiting young engineers - Embedded World 2019 | Electronics Weekly",
+          "youtubeId": "LzQNB6b7WBU"
+        },
+        {
+          "title": "Randall Restle, Digi-Key: A great time to be an engineer - Embedded World 2019 | Electronics Weekly",
+          "youtubeId": "ACACf_8xxZU"
+        },
+        {
+          "title": "Embedded World overview. Nuremberg 2019 | Electronics Weekly",
+          "youtubeId": "qpb28Pnn0rs"
+        },
+        {
+          "title": "Embedded World 2019 preview | Electronics Weekly",
+          "youtubeId": "hmdFNvuOZ2U"
+        }
+      ]
+    },
+    {
+      "name": "ISE / AV+TV 2019",
+      "blurb": "",
+      "cover": "",
+      "logo": "https://aphex447589013.wordpress.com/wp-content/uploads/2019/04/av-tv-logo-on-black-e1554895432743.png",
+      "videos": [
+        {
+          "title": "Zoran Veselic, president and COO, Christie Digital Systems",
+          "youtubeId": "Qz2xEDhEiOk"
+        },
+        {
+          "title": "Itzhak Bambagi, CEO, Kramer",
+          "youtubeId": "npoYkXUdIc0"
+        },
+        {
+          "title": "David Willrich, managing director, DJ Willrich",
+          "youtubeId": "IDrPHx4EGiw"
+        },
+        {
+          "title": "Jeff Hastings, CEO, BrightSign",
+          "youtubeId": "Mni0ZSeF1fo"
+        },
+        {
+          "title": "Joseph Valerio, program director, AVIXA",
+          "youtubeId": "U0PkaKyuPWU"
+        },
+        {
+          "title": "Andy Fliss, CMO and EVP, tvONE",
+          "youtubeId": "W83s3XiXidA"
+        },
+        {
+          "title": "Laurent Masia, director of product line management, Managed Switches, Netgear",
+          "youtubeId": "-uJ8ohPrEvM"
+        },
+        {
+          "title": "Mike Allan, founder & CTO, Exterity",
+          "youtubeId": "zVZFPaOvgdY"
+        },
+        {
+          "title": "Chris Merrick, global marketing director, Integrated Systems, Shure",
+          "youtubeId": "F9A9DETRdUk"
+        },
+        {
+          "title": "Dermot Quinn, COO and CTO, Digital Projection",
+          "youtubeId": "5EET-tsZK7k"
+        },
+        {
+          "title": "Luca Giorgi, sales and business development director, Powersoft",
+          "youtubeId": "PGMs5Gf888M"
+        },
+        {
+          "title": "Owen Ellis, chairman, AV User Group",
+          "youtubeId": "ajEkf82iexI"
+        },
+        {
+          "title": "Peter Cliff, creative director, Holovis",
+          "youtubeId": "69hgLWpleeU"
+        },
+        {
+          "title": "Robert Jeffrey Fairbanks, global head of IT operations, Bloomberg LP",
+          "youtubeId": "Epng7qbSM54"
+        },
+        {
+          "title": "Sean Wargo, senior director of market intelligence, AVIXA",
+          "youtubeId": "RBZOhZnUarQ"
+        },
+        {
+          "title": "Flexible tech integration at Facebook's new US event space",
+          "youtubeId": "ifukQMFwTk4"
+        },
+        {
+          "title": "Infocomm2019 Overview",
+          "youtubeId": "RH4_zAWNJJ4"
+        },
+        {
+          "title": "How do you deploy and manage enterprise AV?",
+          "youtubeId": "O6NHGczbTCE"
+        },
+        {
+          "title": "Pre-show 360* WalkingAround",
+          "youtubeId": "xMPPqocFi98"
+        },
+        {
+          "title": "Clive Couldwell introduces Talking Points: day two",
+          "youtubeId": "hbi_7N-75UU"
+        },
+        {
+          "title": "Daniel Jackson, director of enterprise technology, Crestron",
+          "youtubeId": "fYYoD2telEc"
+        },
+        {
+          "title": "Jason Goecke, vice-president and general manager, Intel Unite",
+          "youtubeId": "9Db2Tihqu44"
+        },
+        {
+          "title": "Christopher Jaynes, founder and CTO, Mersive",
+          "youtubeId": "NYWW-Xp5fO0"
+        },
+        {
+          "title": "TJ Adams, senior director of product management, QSC",
+          "youtubeId": "F_ZrS5RQW1M"
+        },
+        {
+          "title": "David Kung, vice-president, Oblong Industries",
+          "youtubeId": "f2H_6tKr0IY"
+        },
+        {
+          "title": "Clive Couldwell's InfoComm Talking Points",
+          "youtubeId": "xkbvjTpAmR0"
+        },
+        {
+          "title": "Justin Kennington, president, SDVoE Alliance",
+          "youtubeId": "Xar-5fYIH4w"
+        },
+        {
+          "title": "Mary Franck, senior designer, ESI Design",
+          "youtubeId": "zwEWHSdlWJg"
+        },
+        {
+          "title": "Christine Schyvinck, chairman, president and CEO at Shure Inc",
+          "youtubeId": "DJUxEPXcSTA"
+        },
+        {
+          "title": "Zoran Veselic, president and COO, Christie Digital",
+          "youtubeId": "mgC5imQQrCo"
+        },
+        {
+          "title": "Bart Kresa, Master Projection Designer, BARTKRESA Studio",
+          "youtubeId": "gfciVyFzkaA"
+        },
+        {
+          "title": "InfoComm and beyond",
+          "youtubeId": "S-snHBnfqfI"
+        },
+        {
+          "title": "1st day of InfoComm 2019",
+          "youtubeId": "Mi6OqW_FD3Y"
+        },
+        {
+          "title": "Why Clive is inspired by the TIDE Conference",
+          "youtubeId": "GG2qzwJFCkY"
+        },
+        {
+          "title": "AV Magazine editor Clive Couldwell brings mischief to InfoComm 2019",
+          "youtubeId": "dJ3vjEh0SIQ"
+        },
+        {
+          "title": "DynaScan Demonstrates New Retail Display Products",
+          "youtubeId": "H3ks2hug2E0"
+        },
+        {
+          "title": "Logitech further disrupts the AV market with its latest solution",
+          "youtubeId": "CQtQBKZ70t4"
+        },
+        {
+          "title": "Introducing the world\u2019s first Windows collaboration display created with Microsoft",
+          "youtubeId": "Uot48G5REZ0"
+        },
+        {
+          "title": "Nureva announces a groundbreaking new audioconferencing capability",
+          "youtubeId": "7FGC9UXByAM"
+        },
+        {
+          "title": "Canon bolsters 4K projector line-up and showcases superior optics at ISE",
+          "youtubeId": "DYJNtwfNwSg"
+        },
+        {
+          "title": "For Torus Power, the end justifies the Mains!",
+          "youtubeId": "_YUrSauq9-A"
+        },
+        {
+          "title": "The SOUNDNUT series, a new stylish pendant speaker range from WORK PRO",
+          "youtubeId": "gefhW056oX4"
+        },
+        {
+          "title": "Panasonic : better and brighter at ISE 2019",
+          "youtubeId": "HKIIaN3yNZo"
+        },
+        {
+          "title": "Introducing Polycom Studio. Bringing premium USB video to huddle spaces everywhere",
+          "youtubeId": "CSOhlTSSUSE"
+        },
+        {
+          "title": "ASTEL LED is closer to Europe, and closer to its customers",
+          "youtubeId": "pmrxgb4-I6M"
+        },
+        {
+          "title": "Daktronics Introduces Optica, a sub-1mm MicroLED display featuring true outdoor brightness",
+          "youtubeId": "-iQs8drRD2o"
+        },
+        {
+          "title": "DiGiCo 4REA4: The New Installed Audio Solution",
+          "youtubeId": "ZdwqUPIMnTY"
+        },
+        {
+          "title": "Experience The Power with Digital Projection at ISE",
+          "youtubeId": "Brv9oGBGg4Q"
+        },
+        {
+          "title": "Blackmagic Design at ISE 2019",
+          "youtubeId": "pGZXenzl2aU"
+        },
+        {
+          "title": "ISE - listen to this at your peril",
+          "youtubeId": "qVX48wD_rEA"
+        }
+      ]
+    },
+    {
+      "name": "Property Week",
+      "blurb": "",
+      "cover": "",
+      "logo": "https://aphex447589013.wordpress.com/wp-content/uploads/2019/04/pw2.png",
+      "videos": [
+        {
+          "title": "RESI 2019",
+          "youtubeId": "TrGpdcEkZZc"
+        },
+        {
+          "title": "Maples Teesdale discuss ESG concerns.",
+          "youtubeId": "dPpvj6fH_Vs"
+        },
+        {
+          "title": "How do you offer a better resident service with marketing automation?",
+          "youtubeId": "jfvshOeiRLc"
+        },
+        {
+          "title": "Happy Birthday Property Awards \u2013 celebrating 25 years",
+          "youtubeId": "UFOnJiHYDLQ"
+        },
+        {
+          "title": "The Boutique Work Space V2 DB 030919",
+          "youtubeId": "bea0_YeXUzE"
+        },
+        {
+          "title": "Identifying the value of Brownfield, Fladgate LLP",
+          "youtubeId": "puZay9GtsM8"
+        },
+        {
+          "title": "Property Awards 2019",
+          "youtubeId": "6BxFeWTXCWs"
+        },
+        {
+          "title": "Dentons industrial panel debate | Property Week",
+          "youtubeId": "aS-_NuZc5AI"
+        },
+        {
+          "title": "Property Awards 360 video \u2013 take a look around",
+          "youtubeId": "KoQdmotobgQ"
+        },
+        {
+          "title": "Good property managers help build communities",
+          "youtubeId": "xMgJZIacEC8"
+        },
+        {
+          "title": "PW GL HEARN 190219 DO NOT PUBLISH",
+          "youtubeId": "jr436SF2ygo"
+        },
+        {
+          "title": "PW Bywater 190319 DO NOT PUBLISH",
+          "youtubeId": "_VnYbHkEEvU"
+        },
+        {
+          "title": "An insider\u2019s view - cleaning and restoration of fa\u00e7ades",
+          "youtubeId": "SjYJCSJDY1I"
+        },
+        {
+          "title": "Phillip Arnold: Human touch beats online sales in tricky situations",
+          "youtubeId": "AoAAPCeNzLs"
+        },
+        {
+          "title": "Social Impact Spotlight highlights",
+          "youtubeId": "IRiizgbnPRI"
+        },
+        {
+          "title": "The forecast for outlet centres in 2019 - Ian Kitchen (KLM Retail)",
+          "youtubeId": "MXgiKo9eqiU"
+        }
+      ]
+    },
+    {
+      "name": "Industry Retail News",
+      "blurb": "",
+      "cover": "",
+      "logo": "https://aphex447589013.wordpress.com/wp-content/uploads/2019/03/irn-logo.png",
+      "videos": [
+        {
+          "title": "Fancy a slice of the action?",
+          "youtubeId": "EBovnTdrswE"
+        },
+        {
+          "title": "Could deposit return schemes work for smaller retailers?",
+          "youtubeId": "XP74f7nD7NM"
+        },
+        {
+          "title": "IRN Britvic RoundTable Trailer",
+          "youtubeId": "aFFejQ_wxr8"
+        },
+        {
+          "title": "Toby Lancaster from HEINEKEN UK explains how to boost beer and cider sales in 2019",
+          "youtubeId": "sJmo2xFDAyM"
+        },
+        {
+          "title": "Ben Taylor at Ferrero UK, explains how can retailers maximise their confectionery sales over spring",
+          "youtubeId": "Iits_UnprGo"
+        }
+      ]
+    },
+    {
+      "name": "Motor Trader",
+      "blurb": "",
+      "cover": "",
+      "logo": "https://aphex447589013.wordpress.com/wp-content/uploads/2019/03/mt_logo.png",
+      "videos": [
+        {
+          "title": "Rising Stars Awards 2019 | Motor Trader Magazine 13 May 2019",
+          "youtubeId": "J203v1Z4SLc"
+        },
+        {
+          "title": "NextGear talks profits through capital use and knowledge",
+          "youtubeId": "qiQu9slgFr8"
+        },
+        {
+          "title": "The Bottom Line. Joe Hague",
+          "youtubeId": "u3VPUBJCqQw"
+        }
+      ]
+    },
+    {
+      "name": "Packaging News",
+      "blurb": "",
+      "cover": "",
+      "logo": "https://aphex447589013.wordpress.com/wp-content/uploads/2019/03/brands-1.png",
+      "videos": [
+        {
+          "title": "UK Packaging Awards & Luxury Packaging Awards 2019",
+          "youtubeId": "EIzcCTkg8W0"
+        },
+        {
+          "title": "Luxury Packaging awards judging day 2019",
+          "youtubeId": "GvU0MPghuAA"
+        },
+        {
+          "title": "Packaging Awards Judging Day 170719",
+          "youtubeId": "NJF9GZb-BMI"
+        },
+        {
+          "title": "DRS roundtable \u2013 sponsored by Britvic",
+          "youtubeId": "mZdFtE2Ln-Q"
+        },
+        {
+          "title": "Extended Producer Responsibility RoundTable",
+          "youtubeId": "weWjhHDsUBI"
+        }
+      ]
+    },
+    {
+      "name": "DFNI / Frontier",
+      "blurb": "",
+      "cover": "",
+      "logo": "https://aphex447589013.wordpress.com/wp-content/uploads/2019/05/dfni.png",
+      "videos": [
+        {
+          "title": "DFNI - Cosmetics feature",
+          "youtubeId": "LbWIdyoBXEE"
+        },
+        {
+          "title": "Fiona Rayner, Blackjack Promotions | DFNI Perspectives",
+          "youtubeId": "EqT4oRz1UwE"
+        },
+        {
+          "title": "Frontier Awards 2019 Judging Day",
+          "youtubeId": "lmVmfdB8LbA"
+        },
+        {
+          "title": "DFNI Digest | DFNI Online",
+          "youtubeId": "XmXWETbbwBs"
+        }
+      ]
+    },
+    {
+      "name": "Quality Food Awards",
+      "blurb": "",
+      "cover": "",
+      "logo": "https://aphex447589013.wordpress.com/wp-content/uploads/2019/05/qfa.png",
+      "videos": [
+        {
+          "title": "Meet the Buyer on The Street 2019",
+          "youtubeId": "qVVD6kOUs1E"
+        },
+        {
+          "title": "Quality Food and Drink Awards Interview: Ken Edwards, managing director, Working Options",
+          "youtubeId": "JPmZmlu0qZE"
+        },
+        {
+          "title": "Meet the Buyer on The Street at LIT - Helen Lyons",
+          "youtubeId": "RRyHzGwwSt0"
+        },
+        {
+          "title": "Meet the Buyer on The Street at LIT - Jane Milton: the UK buyers delegation",
+          "youtubeId": "IdiJOiaQif4"
+        }
+      ]
+    },
+    {
+      "name": "Money Marketing Magazine",
+      "blurb": "",
+      "cover": "",
+      "logo": "https://aphex447589013.wordpress.com/wp-content/uploads/2019/08/money-marketing-logo-2018.png",
+      "videos": [
+        {
+          "title": "Roundtable: Are advisers up to the later life care challenge?",
+          "youtubeId": "7KeJf7_cl4o"
+        },
+        {
+          "title": "Business protection under the spotlight: Money Marketing meets iPipeline's Paul Yates",
+          "youtubeId": "y07bKxz0gIE"
+        },
+        {
+          "title": "Protection zone: Are mortgage advisers making the most of protection?",
+          "youtubeId": "8OvlFv9STB4"
+        },
+        {
+          "title": "Protection zone: Spotlight on protection.",
+          "youtubeId": "NeOKLY1eoek"
+        },
+        {
+          "title": "Introducing\u2026The Money Marketing DFM Centre",
+          "youtubeId": "592hMWgcrVA"
+        },
+        {
+          "title": "A note from the Editor | Money Marketing Interactive Harrogate 2019",
+          "youtubeId": "EXoFjJXbRo8"
+        },
+        {
+          "title": "Good Life Gurus : Chris Haems",
+          "youtubeId": "1TomRRie0Bc"
+        },
+        {
+          "title": "Good life gurus: Sam Sloma - From footballer to financial planner",
+          "youtubeId": "_8OYJ5X7Goc"
+        },
+        {
+          "title": "MM Masterclass: The IDD",
+          "youtubeId": "M2pVTwdp1vQ"
+        }
+      ]
+    },
+    {
+      "name": "Social Creations",
+      "blurb": "",
+      "cover": "",
+      "logo": "",
+      "videos": [
+        {
+          "title": "The Roundup   July 2022",
+          "youtubeId": "Fl5SeyRmx1c"
+        },
+        {
+          "title": "Template",
+          "youtubeId": "3ua0UswYZOM"
+        },
+        {
+          "title": "The Roundup Sept 2022",
+          "youtubeId": "XJ_RlTiXzt8"
+        },
+        {
+          "title": "AV Magflick 2021",
+          "youtubeId": "njPUrr9FE3k"
+        },
+        {
+          "title": "PW corp subs animation",
+          "youtubeId": "LFZYw2gjfYo"
+        },
+        {
+          "title": "Suppliers of New and Used Storage Tanks - Neil Vessey",
+          "youtubeId": "a37LF99FpfM"
+        },
+        {
+          "title": "Relocation of a Mayor pump manufacturing online auction over 700 lots",
+          "youtubeId": "3jyTN_a8eqY"
+        },
+        {
+          "title": "MM Magazine Flick animation v2",
+          "youtubeId": "sVj76WU9wMs"
+        },
+        {
+          "title": "Mag Features AV v2",
+          "youtubeId": "oEV0URuIijQ"
+        },
+        {
+          "title": "HM Social sting pensions masterclass",
+          "youtubeId": "OkDdgRrhjIg"
+        },
+        {
+          "title": "DFNI - Cosmetics feature",
+          "youtubeId": "LbWIdyoBXEE"
+        },
+        {
+          "title": "BecomeATrader IEM",
+          "youtubeId": "bvsFp0WYbvo"
+        },
+        {
+          "title": "IEM Digital",
+          "youtubeId": "DcBoqzJ0Hkg"
+        },
+        {
+          "title": "LatestAuctions",
+          "youtubeId": "hUwuGOrd7-0"
+        },
+        {
+          "title": "IRN Infographic twitter followers",
+          "youtubeId": "FaqURbsiB_0"
+        },
+        {
+          "title": "IRN infographic newsletter subs",
+          "youtubeId": "OCuAbq5FQmI"
+        },
+        {
+          "title": "IRN Infographic views",
+          "youtubeId": "Zi2XooaG_qw"
+        },
+        {
+          "title": "IRN Infographic visits",
+          "youtubeId": "i-Yc7gerGks"
+        }
+      ]
+    },
+    {
+      "name": "Inspire",
+      "blurb": "",
+      "cover": "",
+      "logo": "",
+      "videos": [
+        {
+          "title": "The Barbican | A City Within A City (Documentary)",
+          "youtubeId": "fdbSMfXbjTA"
+        },
+        {
+          "title": "Mac Miller - Self Care",
+          "youtubeId": "SsKT0s5J8ko"
+        },
+        {
+          "title": "Bring Me The Horizon - Ludens (Official Video)",
+          "youtubeId": "B9wvTuDC-H0"
+        },
+        {
+          "title": "He Danced Ivy - Cutting It Fine (Official Music Video)",
+          "youtubeId": "r_L0vULchFA"
+        },
+        {
+          "title": "My Chemical Romance - The Ghost Of You [Official Music Video - 4K Film Restored]",
+          "youtubeId": "uCUpvTMis-Y"
+        },
+        {
+          "title": "Bring Me The Horizon - True Friends (Official Video)",
+          "youtubeId": "jeQMuTf3B0E"
+        },
+        {
+          "title": "Bring Me The Horizon - sugar honey ice & tea (Official Video)",
+          "youtubeId": "-iM83TiKdY0"
+        },
+        {
+          "title": "Bring Me The Horizon - in the dark (Official Video)",
+          "youtubeId": "Thazgd1HFus"
+        },
+        {
+          "title": "Backstreet Atlas - A Skateboarding Documentary - PUSH",
+          "youtubeId": "YGNwvTv_2n4"
+        },
+        {
+          "title": "",
+          "youtubeId": "Ny-MGNf301k"
+        },
+        {
+          "title": "Robin Hood Gardens: Requiem For A Dream",
+          "youtubeId": "j5xEzkQDtQ8"
+        },
+        {
+          "title": "Suicide Squad - Official Trailer 1 [HD]",
+          "youtubeId": "CmRih_VtVAs"
+        }
+      ]
+    },
+    {
       "name": "Payment Choice Alliance",
       "blurb": "",
       "cover": "",
       "logo": "static/img/thumbs/1678904890199_20260512_081903_240.jpeg",
       "videos": [
         {
-          "title": "",
+          "title": "PaymentChoiceAlliance // PCA Champions",
           "youtubeId": "-rLrP_p3gDA"
         },
         {
-          "title": "",
+          "title": "PaymentChoiceAlliance // Social 3",
+          "youtubeId": "O2iZj8yAbBE"
+        },
+        {
+          "title": "PaymentChoiceAlliance // Did you know you'd struggle to spend this \u00a35 note ?",
           "youtubeId": "Wv6DYn_vx8o"
         }
       ]

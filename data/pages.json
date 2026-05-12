@@ -124,6 +124,22 @@
           "dataFile": "electra-bts"
         }
       ]
+    },
+    {
+      "slug": "personal-work",
+      "title": "Personal Work",
+      "file": "personal-work.html",
+      "icon": "🎬",
+      "navLabel": "Personal Work",
+      "description": "Personal creative video projects by Ash Marshall.",
+      "blocks": [
+        {
+          "id": "personal-videos",
+          "type": "video_grid",
+          "label": "Personal Videos",
+          "dataFile": "personal-work"
+        }
+      ]
     }
   ]
 }
