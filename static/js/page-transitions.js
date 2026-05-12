@@ -71,6 +71,6 @@
     document.body.classList.remove("slide-in-from-left", "slide-in-from-right", "first-load");
     document.body.classList.add(exitClass);
 
-    setTimeout(() => { window.location.href = href; }, 450);
+    setTimeout(() => { window.location.href = href; }, 300);
   });
 })();

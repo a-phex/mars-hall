@@ -22,8 +22,8 @@ async function renderVideoGrid(containerId, jsonPath){
   if(!el) return;
   const path = el.getAttribute('data-source') || jsonPath;
   const data = await fetch(path).then(r=>r.json()).catch(()=>({videos:[]}));
-  const tpl = (v)=>`
-    <article class="card" data-yt="${v.youtubeId}">
+  const tpl = (v, i)=>`
+    <article class="card" data-yt="${v.youtubeId}" style="animation-delay:${i*60}ms">
       <div class="thumb">
         <img src="${v.thumb || `https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg`}" alt="${escapeHtml(v.title)}" loading="lazy">
         <span class="play" aria-hidden="true">▶</span>
@@ -47,8 +47,8 @@ async function renderClientAlbums(containerId){
   if(!el) return;
   const path = el.getAttribute('data-source');
   const data = await fetch(path).then(r=>r.json()).catch(()=>({clients:[]}));
-  const tpl = (c)=>`
-    <article class="card album" data-client='${JSON.stringify(c).replaceAll("'", "&apos;")}'>
+  const tpl = (c, i)=>`
+    <article class="card album" data-client='${JSON.stringify(c).replaceAll("'", "&apos;")}' style="animation-delay:${i*60}ms">
       <div class="thumb">
         <img src="${c.cover || 'static/img/hero-greenwich.jpg'}" alt="${escapeHtml(c.name)}" loading="lazy">
       </div>
@@ -75,8 +75,8 @@ async function renderImageGrid(containerId, images){
     const data = await fetch(path).then(r=>r.json()).catch(()=>({images:[]}));
     list = data.images;
   }
-  el.innerHTML = list.map(src => `
-    <figure class="card">
+  el.innerHTML = list.map((src, i) => `
+    <figure class="card" style="animation-delay:${i*40}ms">
       <div class="thumb"><img src="${src}" alt="" loading="lazy"></div>
     </figure>
   `).join('');
