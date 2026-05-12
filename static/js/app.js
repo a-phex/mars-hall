@@ -51,9 +51,10 @@ async function renderClientAlbums(containerId){
     <article class="card album" data-client='${JSON.stringify(c).replaceAll("'", "&apos;")}' style="animation-delay:${i*60}ms">
       <div class="thumb">
         <img src="${c.cover || 'static/img/hero-greenwich.jpg'}" alt="${escapeHtml(c.name)}" loading="lazy">
+        ${c.logo ? `<img class="album-logo" src="${c.logo}" alt="${escapeHtml(c.name)} logo">` : ''}
       </div>
       <div class="meta">
-        <h3 class="title">${escapeHtml(c.name)} ${c.logo ? `<img class="album-logo" src="${c.logo}" alt="${escapeHtml(c.name)} logo">` : ''}</h3>
+        <h3 class="title">${escapeHtml(c.name)}</h3>
         ${c.blurb ? `<p class="sub">${escapeHtml(c.blurb)}</p>` : ``}
       </div>
     </article>`;

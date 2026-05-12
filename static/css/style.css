@@ -221,7 +221,17 @@ a:hover{color:var(--accent)}
 .card .sub{font-size:12px;color:var(--muted)}
 
 /* Album card: taller thumb ratio */
-.card.album .thumb{aspect-ratio:3/2}
+.card.album .thumb{aspect-ratio:3/2;position:relative}
+
+/* Client logo — top-left overlay on cover image */
+.card.album .thumb .album-logo{
+  position:absolute;top:10px;left:10px;
+  width:auto;height:28px;max-width:72px;max-height:28px;
+  object-fit:contain;
+  background:rgba(0,0,0,.55);
+  border-radius:5px;padding:4px 6px;
+  pointer-events:none;
+}
 
 /* ────────────────────────────────
    MODAL / LIGHTBOX
