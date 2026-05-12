@@ -23,7 +23,7 @@ async function renderVideoGrid(containerId, jsonPath){
   const path = el.getAttribute('data-source') || jsonPath;
   const data = await fetch(path).then(r=>r.json()).catch(()=>({videos:[]}));
   const tpl = (v, i)=>`
-    <article class="card" data-yt="${v.youtubeId}" style="animation-delay:${i*60}ms">
+    <article class="card${v.layout==='full'?' card--full':v.layout==='half'?' card--half':''}" data-yt="${v.youtubeId}" style="animation-delay:${i*60}ms">
       <div class="thumb">
         <img src="${v.thumb || `https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg`}" alt="${escapeHtml(v.title)}" loading="lazy">
         <span class="play" aria-hidden="true">▶</span>
