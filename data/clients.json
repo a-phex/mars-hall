@@ -1,3 +1,11 @@
 {
-  "clients": []
+  "clients": [
+    {
+      "name": "Payment Choice Alliance",
+      "blurb": "",
+      "cover": "",
+      "logo": "static/img/thumbs/1678904890199_20260512_081903_240.jpeg",
+      "videos": []
+    }
+  ]
 }

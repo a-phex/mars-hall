@@ -1,0 +1,104 @@
+{
+  "pages": [
+    {
+      "slug": "home",
+      "title": "Home",
+      "file": "index.html",
+      "icon": "🏠",
+      "navLabel": "Home",
+      "description": "Ash Marshall — Multimedia Production Manager and filmmaker. Cinematic video production, photography and design for brands across EMEA.",
+      "blocks": [
+        {
+          "id": "home-featured-videos",
+          "type": "video_grid",
+          "label": "Featured Videos",
+          "dataFile": "videos"
+        }
+      ]
+    },
+    {
+      "slug": "about",
+      "title": "About Me",
+      "file": "about.html",
+      "icon": "👤",
+      "navLabel": "About Me",
+      "description": "About Ash Marshall — UK-based filmmaker and Multimedia Production Manager.",
+      "blocks": [
+        {
+          "id": "about-info",
+          "type": "info_box",
+          "label": "About section",
+          "heading": "About Me",
+          "body": "Multimedia Production Manager and filmmaker based in the UK. I create cinematic, people-centred stories for brands and partners across EMEA — from concept to delivery.\n\nComfortable on location or in the edit suite, I blend practical production with design sensitivity to deliver reliable, on-brand content.",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "slug": "client-work",
+      "title": "Client Work",
+      "file": "client-work.html",
+      "icon": "🎯",
+      "navLabel": "Client Work",
+      "description": "Client work by Ash Marshall — video production and brand storytelling for clients across EMEA.",
+      "blocks": [
+        {
+          "id": "client-albums",
+          "type": "client_grid",
+          "label": "Client Albums",
+          "dataFile": "clients"
+        }
+      ]
+    },
+    {
+      "slug": "photography",
+      "title": "Photography & Design",
+      "file": "photography.html",
+      "icon": "📷",
+      "navLabel": "Photography & Design",
+      "description": "Photography and graphic design by Ash Marshall.",
+      "blocks": [
+        {
+          "id": "photography-grid",
+          "type": "photo_gallery",
+          "label": "Photography Grid",
+          "dataFile": "photos"
+        }
+      ]
+    },
+    {
+      "slug": "behind-the-scenes",
+      "title": "Behind the Scenes",
+      "file": "behind-the-scenes.html",
+      "icon": "🎥",
+      "navLabel": "Behind the Scenes",
+      "description": "Behind the scenes — a look into the making of Ash Marshall's productions.",
+      "blocks": [
+        {
+          "id": "bts-gallery",
+          "type": "bts_gallery",
+          "label": "BTS Masonry Gallery",
+          "dataFile": "bts"
+        }
+      ]
+    },
+    {
+      "slug": "electra-film",
+      "title": "Electra Film",
+      "file": "electra-film.html",
+      "icon": "🎬",
+      "navLabel": "Electra Film",
+      "description": "Electra — a short film project by Ash Marshall.",
+      "blocks": [
+        {
+          "id": "electra-info",
+          "type": "info_box",
+          "label": "Film overview",
+          "heading": "Electra",
+          "body": "A university film project — a collection of hero stills, behind-the-scenes and the final cut.",
+          "image": ""
+        }
+      ]
+    }
+  ]
+}
