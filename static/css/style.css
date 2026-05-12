@@ -438,3 +438,15 @@ body.slide-out-to-left{animation:slideOutLeft .3s cubic-bezier(.4,0,.2,1) forwar
 body.slide-out-to-right{animation:slideOutRight .3s cubic-bezier(.4,0,.2,1) forwards}
 @keyframes slideOutLeft{to{opacity:0;transform:translateX(-32px)}}
 @keyframes slideOutRight{to{opacity:0;transform:translateX(32px)}}
+
+/* ── Home Hub nav link (only visible on home network) ───────────────────── */
+.hub-link {
+  color: var(--accent) !important;
+  border: 1px solid rgba(232,168,56,.3);
+  border-radius: 8px !important;
+  padding: 4px 10px !important;
+}
+.hub-link:hover {
+  background: rgba(232,168,56,.12) !important;
+  color: var(--accent) !important;
+}

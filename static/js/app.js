@@ -299,3 +299,26 @@ async function initPage() {
 }
 
 document.addEventListener('DOMContentLoaded', initPage);
+
+// ── Home Hub probe ───────────────────────────────────────────────────────────
+// Silently checks if the local launcher is reachable (i.e. visitor is on the
+// home network). If so, reveals a nav link. The LAN IP is not sensitive.
+(function () {
+  const LAUNCHER = 'http://192.168.0.21:5050';
+
+  // Inject nav item, hidden by default
+  const li = document.createElement('li');
+  li.id = 'hub-nav-item';
+  li.style.display = 'none';
+  li.innerHTML = `<a href="${LAUNCHER}" target="_blank" rel="noopener" class="hub-link">⌂ Home Hub</a>`;
+  const navList = document.getElementById('navList');
+  if (navList) navList.appendChild(li);
+
+  // Probe — use an image load so CORS never blocks us
+  const probe = new Image();
+  probe.onload = function () { li.style.display = ''; };
+  // Point at a lightweight static asset on the launcher
+  probe.src = LAUNCHER + '/static/icons/meal_planner.svg?_=' + Date.now();
+  // 3 second timeout — if not home, stays hidden
+  setTimeout(function () { probe.src = ''; }, 3000);
+}());
