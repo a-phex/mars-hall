@@ -30,7 +30,8 @@
           "label": "About section",
           "heading": "About Me",
           "body": "Multimedia Production Manager and filmmaker based in the UK. I create cinematic, people-centred stories for brands and partners across EMEA — from concept to delivery.\n\nComfortable on location or in the edit suite, I blend practical production with design sensitivity to deliver reliable, on-brand content.",
-          "image": ""
+          "image": "static/img/portrait-placeholder.jpg",
+          "skills": ["Adobe Premiere Pro", "After Effects", "DaVinci Resolve", "Colour & Sound Mixing", "Lighting & Gaffing"]
         }
       ]
     },
@@ -97,6 +98,30 @@
           "heading": "Electra",
           "body": "A university film project — a collection of hero stills, behind-the-scenes and the final cut.",
           "image": ""
+        },
+        {
+          "id": "electra-stills",
+          "type": "carousel",
+          "label": "Stills",
+          "dataFile": "electra-stills"
+        },
+        {
+          "id": "electra-trailer",
+          "type": "video_embed",
+          "label": "Trailer",
+          "youtubeId": "pFjN3nzheBw"
+        },
+        {
+          "id": "electra-main",
+          "type": "video_embed",
+          "label": "Main Film",
+          "youtubeId": "t95c_MQEEHU"
+        },
+        {
+          "id": "electra-bts",
+          "type": "bts_gallery",
+          "label": "Behind the Scenes",
+          "dataFile": "electra-bts"
         }
       ]
     }

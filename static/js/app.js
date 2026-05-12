@@ -191,6 +191,25 @@ async function renderBTSGallery(containerId, srcPath) {
   }
 }
 
+// ------- Carousel -------
+async function renderCarousel(containerId, srcPath) {
+  const el = $(containerId); if (!el) return;
+  const src = srcPath || el.getAttribute('data-source');
+  const raw = await fetch(src).then(r => r.json()).catch(() => ({}));
+  const images = raw.images || (Array.isArray(raw) ? raw : []);
+  if (!images.length) { el.innerHTML = '<p style="color:var(--muted);padding:1em">No images yet</p>'; return; }
+  el.innerHTML = `
+    <button class="carousel-btn prev" aria-label="Previous">‹</button>
+    <div class="carousel-track">${images.map(s=>`<img src="${s}" alt="" loading="lazy">`).join('')}</div>
+    <button class="carousel-btn next" aria-label="Next">›</button>`;
+  let idx = 0;
+  const track = el.querySelector('.carousel-track');
+  const total = images.length;
+  function goTo(n) { idx = ((n % total) + total) % total; track.style.transform = `translateX(-${idx * 100}%)`; }
+  el.querySelector('.prev').addEventListener('click', () => goTo(idx - 1));
+  el.querySelector('.next').addEventListener('click', () => goTo(idx + 1));
+}
+
 // ------- Generic page initialiser (reads data/pages.json) -------
 async function initPage() {
   const container = $('page-content');
@@ -204,33 +223,53 @@ async function initPage() {
   for (const block of (page.blocks || [])) {
     const src = block.dataFile ? `data/${block.dataFile}.json` : `data/block-${block.id}.json`;
     const sec = document.createElement('section');
-    sec.className = 'section';
     sec.id = `block-${block.id}`;
 
+    // ── info_box ──────────────────────────────────────────────
     if (block.type === 'info_box') {
       if (block.image) {
-        const img = document.createElement('img');
-        img.src = block.image; img.alt = block.heading || ''; img.className = 'info-image';
-        sec.appendChild(img);
+        sec.className = 'about';
+        const mediaDiv = document.createElement('div');
+        mediaDiv.className = 'about-media';
+        const portrait = document.createElement('img');
+        portrait.src = block.image; portrait.alt = block.heading || '';
+        mediaDiv.appendChild(portrait);
+        sec.appendChild(mediaDiv);
+        const copyDiv = document.createElement('div');
+        copyDiv.className = 'about-copy';
+        if (block.heading) { const h1 = document.createElement('h1'); h1.textContent = block.heading; copyDiv.appendChild(h1); }
+        (block.body||'').split('\n\n').filter(Boolean).forEach(para => { const p = document.createElement('p'); p.textContent = para; copyDiv.appendChild(p); });
+        if (block.skills && block.skills.length) {
+          const h2 = document.createElement('h2'); h2.textContent = 'Skills & Certifications'; copyDiv.appendChild(h2);
+          const ul = document.createElement('ul'); ul.className = 'badge-list';
+          block.skills.forEach(s => { const li = document.createElement('li'); li.textContent = s; ul.appendChild(li); });
+          copyDiv.appendChild(ul);
+        }
+        sec.appendChild(copyDiv);
+      } else {
+        sec.className = 'section';
+        if (block.heading) { const h1 = document.createElement('h1'); h1.className = 'section-title'; h1.textContent = block.heading; sec.appendChild(h1); }
+        (block.body||'').split('\n\n').filter(Boolean).forEach(para => { const p = document.createElement('p'); p.textContent = para; sec.appendChild(p); });
       }
-      if (block.heading) {
-        const h1 = document.createElement('h1');
-        h1.className = 'section-title'; h1.textContent = block.heading;
-        sec.appendChild(h1);
-      }
-      (block.body || '').split('\n\n').filter(Boolean).forEach(para => {
-        const p = document.createElement('p'); p.textContent = para; sec.appendChild(p);
-      });
       container.appendChild(sec);
       continue;
     }
 
-    if (block.label) {
-      const h2 = document.createElement('h2');
-      h2.className = 'section-title'; h2.textContent = block.label;
-      sec.appendChild(h2);
+    // ── video_embed ───────────────────────────────────────────
+    if (block.type === 'video_embed') {
+      sec.className = 'section';
+      if (block.label) { const h2 = document.createElement('h2'); h2.className = 'section-title'; h2.textContent = block.label; sec.appendChild(h2); }
+      const wrap = document.createElement('div');
+      wrap.className = 'video-embed';
+      wrap.innerHTML = `<iframe src="https://www.youtube.com/embed/${block.youtubeId}" title="${escapeHtml(block.label||'')}" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>`;
+      sec.appendChild(wrap);
+      container.appendChild(sec);
+      continue;
     }
 
+    // ── grid/gallery blocks ───────────────────────────────────
+    sec.className = 'section';
+    if (block.label) { const h2 = document.createElement('h2'); h2.className = 'section-title'; h2.textContent = block.label; sec.appendChild(h2); }
     const grid = document.createElement('div');
     grid.id = `grid-${block.id}`;
     grid.dataset.source = src;
@@ -251,6 +290,10 @@ async function initPage() {
       grid.className = 'masonry-gallery';
       sec.appendChild(grid); container.appendChild(sec);
       renderBTSGallery(grid.id, src);
+    } else if (block.type === 'carousel') {
+      grid.className = 'carousel';
+      sec.appendChild(grid); container.appendChild(sec);
+      renderCarousel(grid.id, src);
     }
   }
 }

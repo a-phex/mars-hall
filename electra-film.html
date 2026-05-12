@@ -29,36 +29,7 @@
   </nav>
 
   <main class="container">
-    <section class="section">
-      <h1 class="section-title">Electra</h1>
-      <p class="lead">A university film project — a collection of hero stills, behind-the-scenes and the final cut.</p>
-
-      <!-- Simple carousel: drop 3–6 stills in /img and update sources below -->
-      <div class="carousel" id="carousel">
-        <button class="carousel-btn prev" aria-label="Previous">‹</button>
-        <div class="carousel-track">
-          <img src="static/img/Electra/13418877_10209524437526739_769422000863041608_n.jpg" alt="Electra still 1" />
-          <img src="static/img/Electra/13450804_10209524431726594_5437260650214992185_n-1.jpg" alt="Electra still 2" />
-          <img src="static/img/electra-3.jpg" alt="Electra still 3" />
-        </div>
-        <button class="carousel-btn next" aria-label="Next">›</button>
-      </div>
-
-      <h2>Trailer</h2>
-      <div class="video-embed">
-        <!-- Replace with your YouTube trailer ID -->
-        <iframe width="720" height="480" src="https://www.youtube.com/embed/pFjN3nzheBw" title="Electra Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      </div>
-
-      <h2>Main Film</h2>
-      <div class="video-embed">
-        <!-- Replace with your YouTube film ID -->
-        <iframe width="720" height="480" src="https://www.youtube.com/embed/t95c_MQEEHU" title="Electra Film" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      </div>
-
-      <h3>Behind the Scenes</h3>
-      <div id="btsElectra" class="image-grid small-gap"></div>
-    </section>
+    <div id="page-content" data-slug="electra-film"></div>
   </main>
 
   <footer class="site-footer">
@@ -75,15 +46,5 @@
 
   <script src="static/js/app.js"></script>
   <script src="static/js/page-transitions.js"></script>
-  <script>
-    // Example: reuse BTS photos on this page if you like
-    window.addEventListener('DOMContentLoaded', () => {
-      renderImageGrid('btsElectra', [
-        'static/img/bts/bts-1.jpg',
-        'static/img/bts/bts-2.jpg',
-        'static/img/bts/bts-3.jpg'
-      ]);
-    });
-  </script>
 </body>
 </html>
