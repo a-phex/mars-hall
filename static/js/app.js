@@ -37,7 +37,7 @@ async function renderVideoGrid(containerId, jsonPath){
   // open modal on click
   el.addEventListener('click', (e)=>{
     const card = e.target.closest('.card'); if(!card) return;
-    openVideoModal(card.dataset.yt);
+    openVideoModal(card.dataset.yt, card.querySelector('.title')?.textContent || '');
   });
 }
 
@@ -88,46 +88,59 @@ async function renderImageGrid(containerId, images){
 }
 
 // ------- Modal (YouTube) -------
-function openVideoModal(youtubeId){
-  const modal = $('modal'); if(!modal) return;
-  const player = $('playerContainer');
-  player.innerHTML = `<iframe width="560" height="315"
-    src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0"
-    title="YouTube video" frameborder="0"
+function loadPlayer(container, youtubeId, title=''){
+  container.innerHTML = `<iframe
+    src="https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1"
+    title="${escapeHtml(title)}" frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     allowfullscreen></iframe>`;
+}
+
+function openVideoModal(youtubeId, title=''){
+  const modal = $('modal'); if(!modal) return;
+  loadPlayer($('playerContainer'), youtubeId, title);
+  const pl = $('playlist'); if(pl) pl.innerHTML = '';
   modal.setAttribute('aria-hidden','false');
 }
 
 function openClientPlaylist(client){
   const modal = $('modal'); if(!modal) return;
   const player = $('playerContainer');
-  const first = client.videos?.[0];
-  if(first){
-    player.innerHTML = `<iframe width="560" height="315"
-      src="https://www.youtube.com/embed/${first.youtubeId}?autoplay=1&rel=0"
-      title="${escapeHtml(first.title)}" frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen></iframe>`;
-  }
+
+  // First playable video (skip category headers)
+  const playableVideos = (client.videos || []).filter(v => v.type !== 'category');
+  const first = playableVideos[0];
+  if(first) loadPlayer(player, first.youtubeId, first.title);
+  else player.innerHTML = '';
+
   const playlist = $('playlist');
   if(playlist && client.videos){
-    playlist.innerHTML = client.videos.map(v=>`
-      <article class="card" data-yt="${v.youtubeId}">
-        <div class="thumb">
+    playlist.innerHTML = client.videos.map(v => {
+      if(v.type === 'category'){
+        return `<div class="playlist-category">${escapeHtml(v.label || '')}</div>`;
+      }
+      return `<article class="playlist-card" data-yt="${v.youtubeId}" data-title="${escapeHtml(v.title)}">
+        <div class="playlist-thumb">
           <img src="${v.thumb || `https://img.youtube.com/vi/${v.youtubeId}/mqdefault.jpg`}" alt="${escapeHtml(v.title)}" loading="lazy">
-          <span class="play">▶</span>
+          <span class="play" aria-hidden="true">▶</span>
         </div>
-        <div class="meta">
-          <h4 class="title">${escapeHtml(v.title)}</h4>
+        <div class="playlist-meta">
+          <p class="playlist-title">${escapeHtml(v.title)}</p>
         </div>
-      </article>
-    `).join('');
+      </article>`;
+    }).join('');
+
     playlist.addEventListener('click',(e)=>{
-      const card = e.target.closest('.card'); if(!card) return;
-      openVideoModal(card.dataset.yt);
-    }, {once:false});
+      const card = e.target.closest('.playlist-card'); if(!card) return;
+      loadPlayer(player, card.dataset.yt, card.dataset.title);
+      playlist.querySelectorAll('.playlist-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+    });
+
+    // Mark first card as active
+    playlist.querySelector('.playlist-card')?.classList.add('active');
   }
+
   modal.setAttribute('aria-hidden','false');
 }
 
