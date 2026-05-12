@@ -300,13 +300,15 @@ async function initPage() {
 
 document.addEventListener('DOMContentLoaded', initPage);
 
-// ── Home Hub probe ───────────────────────────────────────────────────────────
-// Silently checks if the local launcher is reachable (i.e. visitor is on the
-// home network). If so, reveals a nav link. The LAN IP is not sensitive.
+// ── Home network tools ────────────────────────────────────────────────────────
+// Probes the local launcher. If reachable (home network), reveals:
+//  • Home Hub link in the nav
+//  • Edit pencil button fixed to top-right corner → Portfolio Publisher
 (function () {
-  const LAUNCHER = 'http://192.168.0.21:5050';
+  const LAUNCHER  = 'http://192.168.0.21:5050';
+  const PUBLISHER = 'http://192.168.0.21:5241';
 
-  // Inject nav item, hidden by default
+  // 1. Nav: Home Hub link
   const li = document.createElement('li');
   li.id = 'hub-nav-item';
   li.style.display = 'none';
@@ -314,11 +316,22 @@ document.addEventListener('DOMContentLoaded', initPage);
   const navList = document.getElementById('navList');
   if (navList) navList.appendChild(li);
 
-  // Probe — use an image load so CORS never blocks us
+  // 2. Edit pencil — fixed top-right
+  const editBtn = document.createElement('a');
+  editBtn.id = 'edit-btn';
+  editBtn.href = PUBLISHER;
+  editBtn.target = '_blank';
+  editBtn.rel = 'noopener';
+  editBtn.title = 'Portfolio Publisher';
+  editBtn.textContent = '✏️';
+  document.body.appendChild(editBtn);
+
+  // Probe — image load is CORS-free
   const probe = new Image();
-  probe.onload = function () { li.style.display = ''; };
-  // Point at a lightweight static asset on the launcher
+  probe.onload = function () {
+    li.style.display = '';
+    editBtn.classList.add('visible');
+  };
   probe.src = LAUNCHER + '/static/icons/meal_planner.svg?_=' + Date.now();
-  // 3 second timeout — if not home, stays hidden
   setTimeout(function () { probe.src = ''; }, 3000);
 }());
