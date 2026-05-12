@@ -170,10 +170,89 @@ function escapeHtml(str=''){
   })[m]);
 }
 
-// Page initialisers
-document.addEventListener('DOMContentLoaded', ()=>{
-  if($('videoGrid')) renderVideoGrid('videoGrid');
-  if($('clientGrid')) renderClientAlbums('clientGrid');
-  if($('photoGrid')) renderImageGrid('photoGrid');
-  if($('btsGrid')) renderImageGrid('btsGrid');
-});
+// ------- BTS masonry gallery -------
+async function renderBTSGallery(containerId, srcPath) {
+  const el = $(containerId); if (!el) return;
+  const src = srcPath || el.getAttribute('data-source');
+  const items = await fetch(src).then(r => r.json()).catch(() => []);
+  el.innerHTML = items.map((item, i) => `
+    <figure class="masonry-item fade-in" style="animation-delay:${i*70}ms">
+      <img src="${item.src}" alt="${escapeHtml(item.alt||'')}" loading="lazy">
+      ${item.caption ? `<figcaption>${escapeHtml(item.caption)}</figcaption>` : ''}
+    </figure>`).join('');
+  const lightbox = $('lightbox'), lightboxImg = $('lightboxImg');
+  if (lightbox && lightboxImg) {
+    el.querySelectorAll('img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.setAttribute('aria-hidden', 'false');
+      });
+    });
+  }
+}
+
+// ------- Generic page initialiser (reads data/pages.json) -------
+async function initPage() {
+  const container = $('page-content');
+  if (!container) return;
+  const slug = container.dataset.slug;
+  const pagesData = await fetch('data/pages.json').then(r => r.json()).catch(() => null);
+  if (!pagesData) return;
+  const page = pagesData.pages.find(p => p.slug === slug);
+  if (!page) return;
+
+  for (const block of (page.blocks || [])) {
+    const src = block.dataFile ? `data/${block.dataFile}.json` : `data/block-${block.id}.json`;
+    const sec = document.createElement('section');
+    sec.className = 'section';
+    sec.id = `block-${block.id}`;
+
+    if (block.type === 'info_box') {
+      if (block.image) {
+        const img = document.createElement('img');
+        img.src = block.image; img.alt = block.heading || ''; img.className = 'info-image';
+        sec.appendChild(img);
+      }
+      if (block.heading) {
+        const h1 = document.createElement('h1');
+        h1.className = 'section-title'; h1.textContent = block.heading;
+        sec.appendChild(h1);
+      }
+      (block.body || '').split('\n\n').filter(Boolean).forEach(para => {
+        const p = document.createElement('p'); p.textContent = para; sec.appendChild(p);
+      });
+      container.appendChild(sec);
+      continue;
+    }
+
+    if (block.label) {
+      const h2 = document.createElement('h2');
+      h2.className = 'section-title'; h2.textContent = block.label;
+      sec.appendChild(h2);
+    }
+
+    const grid = document.createElement('div');
+    grid.id = `grid-${block.id}`;
+    grid.dataset.source = src;
+
+    if (block.type === 'video_grid') {
+      grid.className = 'video-grid';
+      sec.appendChild(grid); container.appendChild(sec);
+      renderVideoGrid(grid.id);
+    } else if (block.type === 'client_grid') {
+      grid.className = 'album-grid';
+      sec.appendChild(grid); container.appendChild(sec);
+      renderClientAlbums(grid.id);
+    } else if (block.type === 'photo_gallery') {
+      grid.className = 'image-grid';
+      sec.appendChild(grid); container.appendChild(sec);
+      renderImageGrid(grid.id);
+    } else if (block.type === 'bts_gallery') {
+      grid.className = 'masonry-gallery';
+      sec.appendChild(grid); container.appendChild(sec);
+      renderBTSGallery(grid.id, src);
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initPage);
