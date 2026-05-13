@@ -27,11 +27,17 @@
         {
           "id": "about-info",
           "type": "info_box",
-          "label": "About section",
+          "label": "About Me",
           "heading": "About Me",
-          "body": "Multimedia Production Manager and filmmaker based in the UK. I create cinematic, people-centred stories for brands and partners across EMEA — from concept to delivery.\n\nComfortable on location or in the edit suite, I blend practical production with design sensitivity to deliver reliable, on-brand content.",
+          "body": "I lead multimedia production across EMEA, turning complex ideas into clear, engaging video content that supports marketing, partners and internal teams.\n\nMy role sits at the intersection of creative production, stakeholder management and technical delivery — owning projects end-to-end from concept through to final distribution.\n\nI produce and manage:\n\nWebinar and livestream content (Teams, OBS, studio & remote workflows)\n\nPartner and customer case-study videos across multiple countries\n\nThought leadership, product showcases and internal communications\n\nEvent video, photography and post-event content\n\nI work closely with marketing managers, partners and subject-matter experts to translate written case studies and ideas into video formats that are practical, scalable and repeatable across regions.\n\nAlongside production, I focus on improving workflows, standardising processes and making video easier for non-video teams to engage with, without compromising on quality.\n\nI’m particularly interested in roles where video is treated as a strategic communication tool, not just a creative output.",
           "image": "static/img/portrait-placeholder.jpg",
-          "skills": ["Adobe Premiere Pro", "After Effects", "DaVinci Resolve", "Colour & Sound Mixing", "Lighting & Gaffing"]
+          "skills": [
+            "Adobe Premiere Pro",
+            "After Effects",
+            "DaVinci Resolve",
+            "Colour & Sound Mixing",
+            "Lighting & Gaffing"
+          ]
         }
       ]
     },
