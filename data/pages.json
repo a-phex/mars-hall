@@ -152,6 +152,22 @@
           "dataFile": "personal-work"
         }
       ]
+    },
+    {
+      "slug": "test-sections",
+      "title": "test sections",
+      "file": "test-sections.html",
+      "icon": "📄",
+      "navLabel": "test sections",
+      "description": "",
+      "blocks": [
+        {
+          "id": "1cdafa7a",
+          "type": "video_grid",
+          "label": "test sections",
+          "dataFile": "block-1cdafa7a"
+        }
+      ]
     }
   ]
 }
