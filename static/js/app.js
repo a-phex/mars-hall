@@ -640,7 +640,7 @@ async function initPage() {
 // ─────────────────────────────────────────────────────────────
 //  BOOT
 // ─────────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   // Year
   const yr = $('year'); if (yr) yr.textContent = new Date().getFullYear();
 
