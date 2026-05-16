@@ -1,0 +1,31 @@
+{
+  "nav": {
+    "topbar_text": "London · Videographer & Director"
+  },
+  "hero": {
+    "vol_label": "Vol. I · 2025",
+    "tagline": "Commercial and documentary work for <strong>brands and individuals</strong> who believe the way something looks is part of what it means.",
+    "caption_title": "Electra — Short Film",
+    "caption_sub": "Director / DP · London, 2024"
+  },
+  "about": {
+    "headline": "Based in London,<br>working everywhere."
+  },
+  "footer": {
+    "cta": "Let's make something.",
+    "sub": "Open to commercial and creative briefs. Usually quicker to reply than you'd expect."
+  },
+  "contact": {
+    "email": "ash@marshallvisuals.com"
+  },
+  "social": {
+    "youtube": "https://www.youtube.com/cod4ash",
+    "linkedin": "https://www.linkedin.com/in/ash-marshall-b7725bb9"
+  },
+  "sections": {
+    "photography_count": 8,
+    "show_clients": true,
+    "show_photography": true,
+    "show_about": true
+  }
+}

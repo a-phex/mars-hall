@@ -3,60 +3,146 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Marshall — Home</title>
-  <meta name="description" content="Ash Marshall — Multimedia Production Manager and filmmaker. Cinematic video production, photography and design for brands across EMEA." />
+  <title>Ash Marshall — Videographer &amp; Director</title>
+  <meta name="description" content="Ash Marshall — Videographer, Director and Multimedia Producer based in London. Commercial and documentary work for brands across EMEA." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="preconnect" href="https://img.youtube.com" />
   <link rel="stylesheet" href="static/css/style.css" />
-  <meta name="color-scheme" content="dark">
 </head>
-<body>
-  <!-- HERO -->
-  <header class="hero">
-    <img class="hero-media" src="static/img/hero-greenwich.jpg" alt="Greenwich at twilight" />
-    <div class="hero-grain"></div>
-    <img class="hero-logo" src="static/img/logo-marshall.png" alt="marshall" />
-  </header>
+<body class="home">
 
-  <!-- NAV -->
-  <nav class="site-nav" id="siteNav">
-    <button class="nav-toggle" id="navToggle" aria-label="Open navigation" aria-expanded="false">
+<!-- ░░░ HEADER / NAV ░░░ -->
+<header id="site-header">
+  <div class="nav-topbar">
+    <span class="topbar-left" id="topbar-location">London &nbsp;·&nbsp; Videographer &amp; Director</span>
+    <a class="topbar-right" id="topbar-email" href="mailto:ash@marshallvisuals.com">ash@marshallvisuals.com</a>
+  </div>
+  <nav class="nav-main" id="siteNav">
+    <ul class="nav-group nav-left" id="navList">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#photography">Photography</a></li>
+    </ul>
+    <a class="nav-logo" href="#">Ash Marshall</a>
+    <ul class="nav-group nav-right">
+      <li><a href="#about">About</a></li>
+      <li><a href="mailto:ash@marshallvisuals.com" class="nav-contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
-    <ul id="navList">
-      <li><a class="active" href="index.html">Home</a></li>
-      <li><a href="about.html">About Me</a></li>
-      <li><a href="client-work.html">Client Work</a></li>
-      <li><a href="photography.html">Photography &amp; Design</a></li>
-      <li><a href="behind-the-scenes.html">Behind the Scenes</a></li>
-      <li><a href="electra-film.html">Electra Film</a></li>
-      <li><a href="personal-work.html">Personal Work</a></li>
-    </ul>
   </nav>
+</header>
 
-  <main class="container">
-    <div id="page-content" data-slug="home"></div>
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© <span id="year"></span> Marshall</p>
-      <p><a href="https://www.youtube.com/cod4ash" target="_blank" rel="nofollow noopener">YouTube</a> · <a href="https://www.linkedin.com/in/ash-marshall-b7725bb9" target="_blank" rel="nofollow noopener">LinkedIn</a></p>
+<!-- ░░░ HERO ░░░ -->
+<section class="hero">
+  <div class="hero-left">
+    <span class="hero-vol" id="hero-vol">Vol. I &nbsp;·&nbsp; 2025</span>
+    <div class="hero-headline-wrap">
+      <h1 class="hero-headline">MARSHALL</h1>
     </div>
-  </footer>
-
-  <!-- Modal Player -->
-  <div id="modal" class="modal" aria-hidden="true">
-    <div class="modal-backdrop" data-close="modal"></div>
-    <div class="modal-dialog" role="dialog" aria-modal="true" aria-label="Video player">
-      <button class="modal-close" data-close="modal" aria-label="Close">×</button>
-      <div class="modal-body">
-        <div id="playerContainer" class="player-container"></div>
-      </div>
+    <div class="hero-lower">
+      <div class="hero-rule"></div>
+      <p class="hero-body" id="hero-tagline">Commercial and documentary work for <strong>brands and individuals</strong> who believe the way something looks is part of what it means.</p>
     </div>
   </div>
+  <div class="hero-right">
+    <div class="hero-collage">
+      <div class="hero-cell" style="background:#241b10"></div>
+      <div class="hero-cell" style="background:#14201a"></div>
+      <div class="hero-cell" style="background:#1e1428"></div>
+      <div class="hero-cell" style="background:#0e1620"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-caption" id="hero-caption">
+      <strong>Electra — Short Film</strong>
+      Director / DP &nbsp;·&nbsp; London, 2024
+    </div>
+  </div>
+</section>
 
-  <script src="static/js/app.js"></script>
-  <script src="static/js/page-transitions.js"></script>
+<!-- ░░░ WORK ░░░ -->
+<section id="work" class="section section-work">
+  <div class="wrap">
+    <div class="section-masthead">
+      <span class="section-name">Selected Work</span>
+      <span class="section-count" id="work-count"></span>
+    </div>
+    <div class="work-layout">
+      <div class="work-feature" id="work-feature">
+        <div class="skeleton-thumb"></div>
+      </div>
+      <div class="work-sidebar" id="work-sidebar"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░ CLIENT WORK ░░░ -->
+<section id="clients" class="section section-clients">
+  <div class="wrap">
+    <div class="section-masthead">
+      <span class="section-name">Client Work</span>
+    </div>
+    <div class="album-grid" id="client-grid"></div>
+  </div>
+</section>
+
+<!-- ░░░ PHOTOGRAPHY ░░░ -->
+<section id="photography" class="section section-photography">
+  <div class="wrap">
+    <div class="section-masthead">
+      <span class="section-name">Photography &amp; Design</span>
+    </div>
+  </div>
+  <div class="photo-strip-wrap">
+    <div class="photo-strip" id="photo-strip"></div>
+  </div>
+</section>
+
+<!-- ░░░ ABOUT ░░░ -->
+<section id="about" class="section section-about">
+  <div class="wrap">
+    <div id="about-content"></div>
+  </div>
+</section>
+
+<!-- ░░░ FOOTER ░░░ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-cta" id="footer-cta">Let's make something.</p>
+    <p class="footer-sub" id="footer-sub">Open to commercial and creative briefs. Usually quicker to reply than you'd expect.</p>
+    <a class="footer-email" id="footer-email" href="mailto:ash@marshallvisuals.com">ash@marshallvisuals.com</a>
+    <div class="footer-bottom">
+      <span class="footer-sig">Ash Marshall</span>
+      <div class="footer-links">
+        <a href="https://www.youtube.com/cod4ash" target="_blank" rel="nofollow noopener">YouTube</a>
+        <a href="https://www.linkedin.com/in/ash-marshall-b7725bb9" target="_blank" rel="nofollow noopener">LinkedIn</a>
+      </div>
+      <span class="footer-copy">&copy; <span id="year"></span></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ░░░ VIDEO MODAL ░░░ -->
+<div id="modal" class="modal" aria-hidden="true">
+  <div class="modal-backdrop" data-close="modal"></div>
+  <div class="modal-dialog" role="dialog" aria-modal="true" aria-label="Video player">
+    <button class="modal-close" data-close="modal" aria-label="Close">✕</button>
+    <div class="modal-body">
+      <div id="playerContainer" class="player-container"></div>
+      <div id="playlist" class="playlist"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ LIGHTBOX ░░░ -->
+<div id="lightbox" class="lightbox" aria-hidden="true">
+  <div class="lightbox-backdrop" data-close="lightbox"></div>
+  <button class="lightbox-close" data-close="lightbox" aria-label="Close">✕</button>
+  <img id="lightboxImg" src="" alt="" />
+</div>
+
+<script src="static/js/app.js"></script>
 </body>
 </html>
