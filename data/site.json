@@ -36,11 +36,6 @@
       "slug": "home"
     },
     {
-      "slug": "test-sections",
-      "label": "test sections",
-      "icon": "📄"
-    },
-    {
       "builtin": "clients",
       "icon": "🎯",
       "label": "Client Work",
