@@ -27,5 +27,11 @@
     "show_clients": true,
     "show_photography": true,
     "show_about": true
-  }
+  },
+  "homepage_sections": [
+    { "slug": "home",        "label": "Selected Work",        "icon": "🎬", "builtin": "work" },
+    { "slug": "client-work", "label": "Client Work",          "icon": "🎯", "builtin": "clients" },
+    { "slug": "photography", "label": "Photography & Design", "icon": "📷", "builtin": "photography" },
+    { "slug": "about",       "label": "About",                "icon": "👤", "builtin": "about" }
+  ]
 }

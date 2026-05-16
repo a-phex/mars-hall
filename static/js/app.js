@@ -65,11 +65,17 @@ async function loadSiteSettings() {
     document.querySelectorAll('a[href*="linkedin.com"]').forEach(a => { a.href = s.social.linkedin; });
   }
 
-  // Section visibility
-  const sec = s.sections || {};
-  if (sec.show_clients === false)     { const el = document.getElementById('clients');     if (el) el.style.display = 'none'; }
-  if (sec.show_photography === false) { const el = document.getElementById('photography'); if (el) el.style.display = 'none'; }
-  if (sec.show_about === false)       { const el = document.getElementById('about');       if (el) el.style.display = 'none'; }
+  // Section visibility - check homepage_sections first, then fall back to show_* flags
+  const secs = s.homepage_sections || [];
+  const getVis = (slug, showKey) => {
+    const hpSec = secs.find(x => x.slug === slug);
+    if (hpSec && hpSec.visible === false) return false;
+    if (s.sections && s.sections[showKey] === false) return false;
+    return true;
+  };
+  if (!getVis('client-work', 'show_clients'))    { const el = document.getElementById('clients');     if (el) el.style.display = 'none'; }
+  if (!getVis('photography', 'show_photography')) { const el = document.getElementById('photography'); if (el) el.style.display = 'none'; }
+  if (!getVis('about', 'show_about'))             { const el = document.getElementById('about');       if (el) el.style.display = 'none'; }
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -350,6 +356,59 @@ async function loadAbout() {
       ${block.image ? `<img src="${block.image}" alt="${escapeHtml(block.heading || 'Ash Marshall')}">` : ''}
       <span class="about-portrait-label">On set, 2024</span>
     </div>`;
+}
+
+// ─────────────────────────────────────────────────────────────
+//  CUSTOM SECTIONS — non-builtin homepage_sections
+// ─────────────────────────────────────────────────────────────
+async function loadCustomSections() {
+  const site = _site;
+  if (!site?.homepage_sections) return;
+  const BUILTIN = new Set(['home', 'client-work', 'photography', 'about']);
+  const custom = site.homepage_sections.filter(s => !BUILTIN.has(s.slug) && s.visible !== false);
+  if (!custom.length) return;
+  const container = document.getElementById('custom-sections');
+  if (!container) return;
+  const pagesData = await fetch('data/pages.json').then(r => r.json()).catch(() => null);
+  if (!pagesData) return;
+  for (const sec of custom) {
+    const page = pagesData.pages.find(p => p.slug === sec.slug);
+    if (!page) continue;
+    const sectionEl = document.createElement('section');
+    sectionEl.id = sec.slug;
+    sectionEl.className = 'section section-custom';
+    sectionEl.style.cssText = 'opacity:0;transform:translateY(24px);transition:opacity 0.65s,transform 0.65s';
+    const wrap = document.createElement('div');
+    wrap.className = 'wrap';
+    wrap.innerHTML = `<div class="section-masthead" style="border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:16px;padding-bottom:12px;margin-bottom:24px"><span class="section-name">${escapeHtml(sec.label || page.title)}</span></div>`;
+    for (const block of page.blocks || []) {
+      const src = block.dataFile ? `data/${block.dataFile}.json` : `data/block-${block.id}.json`;
+      if (block.type === 'info_box') {
+        const div = document.createElement('div');
+        const paras = (block.body || '').split('\n\n').filter(Boolean);
+        div.innerHTML = `${block.heading ? `<h2 style="font-family:var(--font-serif);font-size:2em;margin-bottom:16px">${escapeHtml(block.heading)}</h2>` : ''}${paras.map(p => `<p style="margin-bottom:12px">${escapeHtml(p)}</p>`).join('')}${block.image ? `<img src="${block.image}" alt="" style="max-width:300px;margin-top:16px">` : ''}`;
+        wrap.appendChild(div);
+      } else if (block.type === 'video_embed') {
+        const div = document.createElement('div');
+        div.className = 'video-embed';
+        div.innerHTML = `<iframe src="https://www.youtube.com/embed/${block.youtubeId}" frameborder="0" allowfullscreen></iframe>`;
+        wrap.appendChild(div);
+      } else {
+        const grid = document.createElement('div');
+        grid.id = `custom-${block.id}`;
+        grid.dataset.source = src;
+        if (block.type === 'video_grid') { grid.className = 'video-grid'; wrap.appendChild(grid); renderVideoGrid(grid.id); }
+        else if (block.type === 'photo_gallery') { grid.className = 'image-grid'; wrap.appendChild(grid); renderImageGrid(grid.id); }
+        else if (block.type === 'client_grid') { grid.className = 'album-grid'; wrap.appendChild(grid); renderClientAlbums(grid.id); }
+        else if (block.type === 'bts_gallery') { grid.className = 'masonry-gallery'; wrap.appendChild(grid); renderBTSGallery(grid.id, src); }
+        else if (block.type === 'carousel') { grid.className = 'carousel'; wrap.appendChild(grid); renderCarousel(grid.id, src); }
+      }
+    }
+    sectionEl.appendChild(wrap);
+    container.appendChild(sectionEl);
+    // Fade in
+    requestAnimationFrame(() => { sectionEl.style.opacity = '1'; sectionEl.style.transform = 'translateY(0)'; });
+  }
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -656,7 +715,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initNav();
     initReveal();
     await loadSiteSettings();
-    Promise.all([loadWork(), loadClients(), loadPhotography(), loadAbout()]);
+    Promise.all([loadWork(), loadClients(), loadPhotography(), loadAbout(), loadCustomSections()]);
   } else if (isSubPage) {
     // Sub-page (about.html, photography.html, etc.)
     initPage();
