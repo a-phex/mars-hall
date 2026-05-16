@@ -70,6 +70,12 @@
           "type": "photo_gallery",
           "label": "Photography Grid",
           "dataFile": "photos"
+        },
+        {
+          "id": "aadb892a",
+          "type": "photo_gallery",
+          "label": "Photo Gallery",
+          "dataFile": "block-aadb892a"
         }
       ]
     },
