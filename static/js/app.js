@@ -339,10 +339,15 @@ async function loadAbout() {
   const skills     = block.skills || [];
 
   const aboutHeadline = _site?.about?.headline || 'Based in London,<br>working everywhere.';
+  const yearsActive = new Date().getFullYear() - 2014;
   el.innerHTML = `
     <div class="about-grid">
-      <div class="about-portrait">
-        ${block.image ? `<img src="${block.image}" alt="${escapeHtml(block.heading || 'Ash Marshall')}">` : ''}
+      <div class="about-portrait-wrap">
+        <div class="about-portrait-frame">
+          <div class="about-portrait">
+            ${block.image ? `<img src="${block.image}" alt="${escapeHtml(block.heading || 'Ash Marshall')}">` : ''}
+          </div>
+        </div>
         <div class="about-portrait-caption">
           <div class="about-portrait-caption-line"></div>
           <span class="about-portrait-label">On set, 2024</span>
@@ -353,6 +358,20 @@ async function loadAbout() {
         <div class="about-eyebrow">About</div>
         <h2 class="about-headline">${aboutHeadline}</h2>
         <div class="about-rule"></div>
+        <div class="about-stats">
+          <div class="about-stat">
+            <span class="about-stat-value">London</span>
+            <span class="about-stat-label">Based</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-value">${yearsActive}yrs</span>
+            <span class="about-stat-label">Experience</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-value">${skills.length || '—'}</span>
+            <span class="about-stat-label">Disciplines</span>
+          </div>
+        </div>
         <div class="about-body">
           ${paragraphs.map(p => `<p>${escapeHtml(p)}</p>`).join('')}
         </div>

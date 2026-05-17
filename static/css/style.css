@@ -617,15 +617,39 @@ img { display: block; max-width: 100%; }
   align-items: start;
 }
 
-/* Portrait column */
-.about-portrait {
+/* Portrait column — sticky wrapper */
+.about-portrait-wrap {
   position: sticky;
   top: calc(var(--header-h) + 24px);
+}
+
+/* Offset border frame behind the photo */
+.about-portrait-frame {
+  position: relative;
+  padding-right: 12px;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+}
+.about-portrait-frame::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  top: 12px;
+  left: 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+/* Photo box */
+.about-portrait {
+  position: relative;
+  z-index: 1;
   aspect-ratio: 3/4;
   border-radius: 6px;
   overflow: hidden;
   background: linear-gradient(160deg, #c8bfb0, #9a8878);
-  position: relative;
 }
 .about-portrait img {
   width: 100%;
@@ -636,7 +660,6 @@ img { display: block; max-width: 100%; }
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: 12px;
 }
 .about-portrait-caption-line {
   flex: 1;
@@ -676,6 +699,38 @@ img { display: block; max-width: 100%; }
   background: var(--accent);
   margin-bottom: 22px;
 }
+
+/* Stat cards row */
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.about-stat {
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: var(--bg);
+}
+.about-stat-value {
+  font-size: 22px;
+  font-weight: 700;
+  font-family: var(--font-serif);
+  color: var(--text);
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+.about-stat-label {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
 .about-body {
   font-size: 15px;
   line-height: 1.85;
@@ -740,8 +795,9 @@ img { display: block; max-width: 100%; }
 
 @media (max-width: 760px) {
   .about-grid { grid-template-columns: 1fr; gap: 32px; }
+  .about-portrait-wrap { position: static; }
   .about-portrait { aspect-ratio: 3/2; }
-  .about-portrait { position: static; }
+  .about-stats { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* ─────────────────────────────────────────────────────────────
