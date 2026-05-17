@@ -40,20 +40,21 @@
             "Final Cut",
             "Touch Designer",
             "Cinema 4D",
-            "OBS"
+            "OBS",
+            "Rode Video Caster"
           ],
           "stats": [
             {
-              "label": "Based",
-              "value": "London"
+              "label": "London",
+              "value": "Based"
             },
             {
-              "label": "Availability",
-              "value": "Open to briefs"
+              "label": "Open to briefs",
+              "value": "Availability"
             },
             {
-              "label": "Focus",
-              "value": "Commercial & Documentary"
+              "label": "Commercial & Documentary",
+              "value": "Focus"
             }
           ]
         }
@@ -118,10 +119,12 @@
         {
           "id": "electra-info",
           "type": "info_box",
-          "label": "Film overview",
+          "label": "Electra",
           "heading": "Electra",
           "body": "A university film project — a collection of hero stills, behind-the-scenes and the final cut.",
-          "image": ""
+          "image": "static/img/Electra/screenshot-2022-11-18-at-14.19.32.webp",
+          "skills": [],
+          "stats": []
         },
         {
           "id": "electra-stills",
