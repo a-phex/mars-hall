@@ -430,19 +430,19 @@ async function loadAbout() {
 function reorderSections() {
   if (!_site?.homepage_sections) return;
   const SEC_ID = { 'home': 'work', 'client-work': 'clients', 'photography': 'photography', 'about': 'about' };
-  const heroSection = document.querySelector('section.hero');
-  if (!heroSection) return;
-  const parent = heroSection.parentElement;
-  // Move any custom sections out of their container so they can be freely ordered
+  const footer = document.querySelector('footer.site-footer');
+  if (!footer) return;
+  const parent = footer.parentElement;
+  // Move custom sections out of their container so they can be freely ordered
   const customContainer = document.getElementById('custom-sections');
-  [...(customContainer?.children || [])].forEach(el => parent.insertBefore(el, customContainer));
-  // Re-append sections in homepage_sections order
+  [...(customContainer?.children || [])].forEach(el => parent.insertBefore(el, footer));
+  // Insert all sections in homepage_sections order, just before the footer
   _site.homepage_sections
     .filter(s => s.visible !== false)
     .map(s => document.getElementById(SEC_ID[s.slug] || s.slug))
     .filter(Boolean)
-    .forEach(el => parent.appendChild(el));
-  if (customContainer) parent.appendChild(customContainer);
+    .forEach(el => parent.insertBefore(el, footer));
+  if (customContainer) parent.insertBefore(customContainer, footer);
 }
 
 // ─────────────────────────────────────────────────────────────
