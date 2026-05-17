@@ -299,16 +299,17 @@ async function loadClients() {
 async function loadPhotography() {
   const el = $('photo-strip');
   if (!el) return;
-  const data   = await fetch('data/photos.json').then(r => r.json()).catch(() => ({ images: [] }));
-  const photoCount = _site?.sections?.photography_count || 8;
-  const images = (data.images || []).slice(0, photoCount);
+  const data      = await fetch('data/photos.json').then(r => r.json()).catch(() => ({ images: [] }));
+  const allImages = data.images || [];
+  const photoCount = _site?.sections?.photography_count || 16;
+  const preview   = allImages.slice(0, photoCount);
 
-  if (!images.length) {
+  if (!preview.length) {
     el.closest('.section-photography').style.display = 'none';
     return;
   }
 
-  el.innerHTML = images.map(src => `
+  el.innerHTML = preview.map(src => `
     <div class="photo-tile">
       <img src="${src}" alt="" loading="lazy">
     </div>`).join('');
@@ -316,9 +317,49 @@ async function loadPhotography() {
   el.addEventListener('click', e => {
     const tile = e.target.closest('.photo-tile');
     if (!tile) return;
-    const img = tile.querySelector('img');
-    if (img) openLightbox(img.src);
+    openLightbox(tile.querySelector('img').src);
   });
+
+  // Expand button
+  const expandBtn = document.createElement('button');
+  expandBtn.className = 'photo-expand-btn';
+  expandBtn.textContent = `See all ${allImages.length} photos`;
+  expandBtn.addEventListener('click', () => openPhotoModal(allImages));
+  el.closest('.photo-strip-wrap').appendChild(expandBtn);
+}
+
+function openPhotoModal(images) {
+  let modal = $('photo-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'photo-modal';
+    modal.className = 'photo-modal';
+    modal.innerHTML = `
+      <div class="photo-modal-bar">
+        <span class="photo-modal-count"></span>
+        <button class="photo-modal-close" onclick="closePhotoModal()">Collapse ↑</button>
+      </div>
+      <div class="photo-modal-grid" id="photo-modal-grid"></div>`;
+    document.body.appendChild(modal);
+  }
+  modal.querySelector('.photo-modal-count').textContent = `${images.length} photos`;
+  modal.querySelector('#photo-modal-grid').innerHTML = images.map(src => `
+    <div class="photo-tile">
+      <img src="${src}" alt="" loading="lazy">
+    </div>`).join('');
+  modal.querySelector('#photo-modal-grid').addEventListener('click', e => {
+    const tile = e.target.closest('.photo-tile');
+    if (tile) openLightbox(tile.querySelector('img').src);
+  });
+  modal.removeAttribute('hidden');
+  document.body.style.overflow = 'hidden';
+  modal.scrollTop = 0;
+}
+
+function closePhotoModal() {
+  const modal = $('photo-modal');
+  if (modal) modal.setAttribute('hidden', '');
+  document.body.style.overflow = '';
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -339,7 +380,7 @@ async function loadAbout() {
   const skills     = block.skills || [];
 
   const aboutHeadline = _site?.about?.headline || 'Based in London,<br>working everywhere.';
-  const yearsActive = new Date().getFullYear() - 2014;
+  const stats = block.stats || [];
   el.innerHTML = `
     <div class="about-grid">
       <div class="about-portrait-wrap">
@@ -353,25 +394,19 @@ async function loadAbout() {
           <span class="about-portrait-label">On set, 2024</span>
           <div class="about-portrait-caption-line"></div>
         </div>
+        ${stats.length ? `
+        <div class="about-stats">
+          ${stats.map(s => `
+          <div class="about-stat">
+            <span class="about-stat-value">${escapeHtml(s.value)}</span>
+            <span class="about-stat-label">${escapeHtml(s.label)}</span>
+          </div>`).join('')}
+        </div>` : ''}
       </div>
       <div class="about-text">
         <div class="about-eyebrow">About</div>
         <h2 class="about-headline">${aboutHeadline}</h2>
         <div class="about-rule"></div>
-        <div class="about-stats">
-          <div class="about-stat">
-            <span class="about-stat-value">London</span>
-            <span class="about-stat-label">Based</span>
-          </div>
-          <div class="about-stat">
-            <span class="about-stat-value">${yearsActive}yrs</span>
-            <span class="about-stat-label">Experience</span>
-          </div>
-          <div class="about-stat">
-            <span class="about-stat-value">${skills.length || '—'}</span>
-            <span class="about-stat-label">Disciplines</span>
-          </div>
-        </div>
         <div class="about-body">
           ${paragraphs.map(p => `<p>${escapeHtml(p)}</p>`).join('')}
         </div>

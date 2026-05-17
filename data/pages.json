@@ -41,6 +41,20 @@
             "Touch Designer",
             "Cinema 4D",
             "OBS"
+          ],
+          "stats": [
+            {
+              "label": "Based",
+              "value": "London"
+            },
+            {
+              "label": "Availability",
+              "value": "Open to briefs"
+            },
+            {
+              "label": "Focus",
+              "value": "Commercial & Documentary"
+            }
           ]
         }
       ]

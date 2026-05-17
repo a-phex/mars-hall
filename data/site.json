@@ -23,7 +23,7 @@
     "linkedin": "https://www.linkedin.com/in/ash-marshall-b7725bb9"
   },
   "sections": {
-    "photography_count": 8,
+    "photography_count": 16,
     "show_clients": true,
     "show_photography": true,
     "show_about": true
@@ -52,6 +52,12 @@
       "icon": "👤",
       "label": "About",
       "slug": "about"
+    },
+    {
+      "slug": "electra-film",
+      "label": "Electra — Short Film",
+      "icon": "🎬",
+      "visible": true
     }
   ]
 }
