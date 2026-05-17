@@ -275,8 +275,8 @@ async function loadClients() {
   el.innerHTML = clients.map((c, i) => `
     <div class="album-card" data-client='${JSON.stringify(c).replaceAll("'", "&apos;")}' style="animation-delay:${i * 60}ms">
       <div class="album-thumb">
-        <img src="${c.cover || ''}" alt="${escapeHtml(c.name)}" loading="lazy">
-        ${c.logo ? `<img class="album-logo" src="${c.logo}" alt="${escapeHtml(c.name)} logo">` : ''}
+        ${c.cover ? `<img src="${c.cover}" alt="${escapeHtml(c.name)}" loading="lazy">` : ''}
+        ${c.logo ? `<img class="album-logo" src="${c.logo}" alt="${escapeHtml(c.name)} logo" onerror="this.style.display='none'">` : ''}
         <div class="album-play"><div class="play-circle" style="width:44px;height:44px;font-size:14px">▶</div></div>
       </div>
       <div class="album-info">
@@ -562,8 +562,8 @@ async function renderClientAlbums(containerId) {
   const tpl = (c, i) => `
     <article class="card album" data-client='${JSON.stringify(c).replaceAll("'", "&apos;")}' style="animation-delay:${i * 60}ms">
       <div class="thumb">
-        <img src="${c.cover || ''}" alt="${escapeHtml(c.name)}" loading="lazy">
-        ${c.logo ? `<img class="album-logo" src="${c.logo}" alt="${escapeHtml(c.name)} logo">` : ''}
+        ${c.cover ? `<img src="${c.cover}" alt="${escapeHtml(c.name)}" loading="lazy">` : ''}
+        ${c.logo ? `<img class="album-logo" src="${c.logo}" alt="${escapeHtml(c.name)} logo" onerror="this.style.display='none'">` : ''}
         <span class="play" aria-hidden="true">▶</span>
       </div>
       <div class="meta"><h3 class="title">${escapeHtml(c.name)}</h3>${c.blurb ? `<p class="sub">${escapeHtml(c.blurb)}</p>` : ''}</div>
