@@ -48,16 +48,16 @@
       "slug": "photography"
     },
     {
+      "icon": "🎬",
+      "label": "Electra — Short Film",
+      "slug": "electra-film",
+      "visible": true
+    },
+    {
       "builtin": "about",
       "icon": "👤",
       "label": "About",
       "slug": "about"
-    },
-    {
-      "slug": "electra-film",
-      "label": "Electra — Short Film",
-      "icon": "🎬",
-      "visible": true
     }
   ]
 }
