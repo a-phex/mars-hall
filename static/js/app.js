@@ -340,21 +340,33 @@ async function loadAbout() {
 
   const aboutHeadline = _site?.about?.headline || 'Based in London,<br>working everywhere.';
   el.innerHTML = `
-    <div class="about-text">
-      <div class="about-eyebrow">About</div>
-      <h2 class="about-headline">${aboutHeadline}</h2>
-      <div class="about-body">
-        ${paragraphs.map(p => `<p>${escapeHtml(p)}</p>`).join('')}
+    <div class="about-grid">
+      <div class="about-portrait">
+        ${block.image ? `<img src="${block.image}" alt="${escapeHtml(block.heading || 'Ash Marshall')}">` : ''}
+        <div class="about-portrait-caption">
+          <div class="about-portrait-caption-line"></div>
+          <span class="about-portrait-label">On set, 2024</span>
+          <div class="about-portrait-caption-line"></div>
+        </div>
       </div>
-      ${skills.length ? `
-        <div class="about-skills-label">Skills &amp; Tools</div>
-        <ul class="about-skills">
-          ${skills.map(s => `<li>${escapeHtml(s)}</li>`).join('')}
-        </ul>` : ''}
-    </div>
-    <div class="about-portrait">
-      ${block.image ? `<img src="${block.image}" alt="${escapeHtml(block.heading || 'Ash Marshall')}">` : ''}
-      <span class="about-portrait-label">On set, 2024</span>
+      <div class="about-text">
+        <div class="about-eyebrow">About</div>
+        <h2 class="about-headline">${aboutHeadline}</h2>
+        <div class="about-rule"></div>
+        <div class="about-body">
+          ${paragraphs.map(p => `<p>${escapeHtml(p)}</p>`).join('')}
+        </div>
+        ${skills.length ? `
+          <div class="about-skills-block">
+            <div class="about-skills-header">
+              <span class="about-skills-label">Skills &amp; Tools</span>
+              <span class="about-skills-count">${skills.length} discipline${skills.length !== 1 ? 's' : ''}</span>
+            </div>
+            <ul class="about-skills">
+              ${skills.map(s => `<li>${escapeHtml(s)}</li>`).join('')}
+            </ul>
+          </div>` : ''}
+      </div>
     </div>`;
 }
 
