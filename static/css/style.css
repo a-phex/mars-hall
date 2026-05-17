@@ -20,7 +20,7 @@
   --nav-h:    56px;
   --header-h: calc(var(--topbar-h) + var(--nav-h));
 
-  --wrap: 1280px;
+  --wrap: 1440px;
   --pad:  clamp(24px, 4vw, 56px);
   --radius: 4px;
 }
@@ -799,12 +799,12 @@ img { display: block; max-width: 100%; }
 .about-body strong { color: var(--text); font-weight: 400; }
 .about-body p + p { margin-top: 16px; }
 
-/* Skills — dark card */
+/* Skills — dark card, lives in portrait column */
 .about-skills-block {
-  margin-top: 36px;
+  margin-top: 10px;
   background: var(--dark);
   border-radius: 6px;
-  padding: 20px 24px;
+  padding: 16px 18px;
 }
 .about-skills-header {
   display: flex;

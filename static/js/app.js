@@ -402,6 +402,16 @@ async function loadAbout() {
             <span class="about-stat-label">${escapeHtml(s.label)}</span>
           </div>`).join('')}
         </div>` : ''}
+        ${skills.length ? `
+        <div class="about-skills-block">
+          <div class="about-skills-header">
+            <span class="about-skills-label">Skills &amp; Tools</span>
+            <span class="about-skills-count">${skills.length} discipline${skills.length !== 1 ? 's' : ''}</span>
+          </div>
+          <ul class="about-skills">
+            ${skills.map(s => `<li>${escapeHtml(s)}</li>`).join('')}
+          </ul>
+        </div>` : ''}
       </div>
       <div class="about-text">
         <div class="about-eyebrow">About</div>
@@ -410,18 +420,29 @@ async function loadAbout() {
         <div class="about-body">
           ${paragraphs.map(p => `<p>${escapeHtml(p)}</p>`).join('')}
         </div>
-        ${skills.length ? `
-          <div class="about-skills-block">
-            <div class="about-skills-header">
-              <span class="about-skills-label">Skills &amp; Tools</span>
-              <span class="about-skills-count">${skills.length} discipline${skills.length !== 1 ? 's' : ''}</span>
-            </div>
-            <ul class="about-skills">
-              ${skills.map(s => `<li>${escapeHtml(s)}</li>`).join('')}
-            </ul>
-          </div>` : ''}
       </div>
     </div>`;
+}
+
+// ─────────────────────────────────────────────────────────────
+//  SECTION ORDERING — reorder DOM to match homepage_sections
+// ─────────────────────────────────────────────────────────────
+function reorderSections() {
+  if (!_site?.homepage_sections) return;
+  const SEC_ID = { 'home': 'work', 'client-work': 'clients', 'photography': 'photography', 'about': 'about' };
+  const heroSection = document.querySelector('section.hero');
+  if (!heroSection) return;
+  const parent = heroSection.parentElement;
+  // Move any custom sections out of their container so they can be freely ordered
+  const customContainer = document.getElementById('custom-sections');
+  [...(customContainer?.children || [])].forEach(el => parent.insertBefore(el, customContainer));
+  // Re-append sections in homepage_sections order
+  _site.homepage_sections
+    .filter(s => s.visible !== false)
+    .map(s => document.getElementById(SEC_ID[s.slug] || s.slug))
+    .filter(Boolean)
+    .forEach(el => parent.appendChild(el));
+  if (customContainer) parent.appendChild(customContainer);
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -446,14 +467,20 @@ async function loadCustomSections() {
     sectionEl.style.cssText = 'opacity:0;transform:translateY(24px);transition:opacity 0.65s,transform 0.65s';
     const wrap = document.createElement('div');
     wrap.className = 'wrap';
-    wrap.innerHTML = `<div class="section-masthead" style="border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:16px;padding-bottom:12px;margin-bottom:24px"><span class="section-name">${escapeHtml(sec.label || page.title)}</span></div>`;
+    // Use the first info_box body as a subtitle in the masthead
+    const infoBlock = (page.blocks || []).find(b => b.type === 'info_box');
+    const subtitle = infoBlock?.body?.split('\n\n')[0] || '';
+    wrap.innerHTML = `<div class="section-masthead" style="border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:24px">
+      <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:${subtitle ? '8px' : '0'}">
+        <span class="section-name">${escapeHtml(sec.label || page.title)}</span>
+      </div>
+      ${subtitle ? `<p style="font-size:14px;color:var(--muted);line-height:1.6;max-width:640px">${escapeHtml(subtitle)}</p>` : ''}
+    </div>`;
     for (const block of page.blocks || []) {
       const src = block.dataFile ? `data/${block.dataFile}.json` : `data/block-${block.id}.json`;
       if (block.type === 'info_box') {
-        const div = document.createElement('div');
-        const paras = (block.body || '').split('\n\n').filter(Boolean);
-        div.innerHTML = `${block.heading ? `<h2 style="font-family:var(--font-serif);font-size:2em;margin-bottom:16px">${escapeHtml(block.heading)}</h2>` : ''}${paras.map(p => `<p style="margin-bottom:12px">${escapeHtml(p)}</p>`).join('')}${block.image ? `<img src="${block.image}" alt="" style="max-width:300px;margin-top:16px">` : ''}`;
-        wrap.appendChild(div);
+        // Already used in masthead — skip standalone rendering
+        continue;
       } else if (block.type === 'video_embed') {
         const div = document.createElement('div');
         div.className = 'video-embed';
@@ -781,7 +808,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     initNav();
     initReveal();
     await loadSiteSettings();
-    Promise.all([loadWork(), loadClients(), loadPhotography(), loadAbout(), loadCustomSections()]);
+    await Promise.all([loadWork(), loadClients(), loadPhotography(), loadAbout(), loadCustomSections()]);
+    reorderSections();
   } else if (isSubPage) {
     // Sub-page (about.html, photography.html, etc.)
     initPage();
