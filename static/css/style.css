@@ -326,15 +326,14 @@ img { display: block; max-width: 100%; }
    ───────────────────────────────────────────────────────────── */
 .section-work { background: var(--bg); }
 
-.work-layout {
+.work-layout { display: block; }
+.work-feature { position: relative; }
+.work-sidebar {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 3px;
+  margin-top: 3px;
 }
-.work-feature { border-right: 1px solid var(--border); }
-.work-sidebar { display: flex; flex-direction: column; }
 
 /* Feature card */
 .feature-card { cursor: pointer; }
@@ -387,10 +386,15 @@ img { display: block; max-width: 100%; }
   border-radius: 2px;
 }
 
-.feature-info { padding: 18px 22px 20px; }
+.feature-info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.72));
+  padding: 48px 22px 20px;
+}
 .feature-num {
   font-size: 10px;
-  color: var(--muted);
+  color: rgba(255,255,255,0.45);
   letter-spacing: 1px;
   display: block;
   margin-bottom: 8px;
@@ -402,65 +406,39 @@ img { display: block; max-width: 100%; }
   font-weight: 700;
   letter-spacing: -0.3px;
   margin-bottom: 6px;
-  color: var(--text);
+  color: #fff;
   line-height: 1.2;
 }
-.feature-meta { font-size: 12px; color: var(--muted); }
+.feature-meta { font-size: 12px; color: rgba(255,255,255,0.55); }
 
-/* Sidebar items */
-.sidebar-item {
-  display: grid;
-  grid-template-columns: 68px 1fr;
-  gap: 12px;
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--border);
-  cursor: pointer;
-  align-items: center;
-  transition: background 0.15s;
-}
-.sidebar-item:last-child { border-bottom: none; }
-.sidebar-item:hover { background: rgba(0,0,0,0.02); }
-
-.sidebar-thumb {
+/* Reel tiles — compact video grid below the feature */
+.reel-item {
   position: relative;
-  aspect-ratio: 4/3;
-  border-radius: 3px;
+  aspect-ratio: 16/9;
   overflow: hidden;
-  background: #1c1810;
-  flex-shrink: 0;
+  background: #1a1410;
+  cursor: pointer;
 }
-.sidebar-thumb img { width: 100%; height: 100%; object-fit: cover; }
-.sidebar-play {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  color: #fff;
-  background: rgba(0,0,0,0.4);
-  opacity: 0;
-  transition: opacity 0.15s;
+.reel-item img { width: 100%; height: 100%; object-fit: cover; opacity: 0.82; transition: opacity 0.25s, transform 0.4s; display: block; }
+.reel-item:hover img { opacity: 1; transform: scale(1.04); }
+.reel-item-play {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.2s;
+  background: rgba(0,0,0,0.15);
 }
-.sidebar-item:hover .sidebar-play { opacity: 1; }
-
-.sidebar-num {
-  font-size: 10px;
-  color: var(--muted);
-  letter-spacing: 1px;
-  display: block;
-  margin-bottom: 3px;
-  font-family: var(--font-sans);
+.reel-item:hover .reel-item-play { opacity: 1; }
+.reel-item-info {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.72));
+  padding: 24px 10px 8px;
 }
-.sidebar-title {
-  font-family: var(--font-serif);
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.3;
-  margin-bottom: 3px;
-  color: var(--text);
+.reel-item-title {
+  font-size: 11px; font-weight: 500; color: #fff;
+  line-height: 1.3; font-family: var(--font-sans);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.sidebar-meta { font-size: 11px; color: var(--muted); }
+.reel-item-meta { font-size: 9px; color: rgba(255,255,255,0.55); margin-top: 2px; font-family: var(--font-sans); }
 
 .skeleton-thumb {
   aspect-ratio: 16/10;
@@ -471,8 +449,7 @@ img { display: block; max-width: 100%; }
 @keyframes shimmer { to { background-position: -200% 0; } }
 
 @media (max-width: 880px) {
-  .work-layout { grid-template-columns: 1fr; }
-  .work-feature { border-right: none; border-bottom: 1px solid var(--border); }
+  .work-sidebar { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -483,60 +460,57 @@ img { display: block; max-width: 100%; }
 .album-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
+  gap: 3px;
 }
 
 .album-card {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  background: #1a1410;
+  border: none;
+  border-radius: 0;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+  transition: opacity 0.2s;
 }
-.album-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.07); }
+.album-card:hover { opacity: 0.88; }
 
 .album-thumb {
   position: relative;
-  aspect-ratio: 3/2;
+  aspect-ratio: 16/9;
   background: #1a1410;
   overflow: hidden;
 }
-.album-thumb img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: transform 0.4s ease; }
+.album-thumb img { width: 100%; height: 100%; object-fit: cover; opacity: 0.88; transition: transform 0.4s ease; display: block; }
 .album-card:hover .album-thumb img { transform: scale(1.04); }
 
 .album-logo {
   position: absolute;
   top: 12px; left: 12px;
-  height: 22px;
-  max-width: 68px;
+  height: 20px;
+  max-width: 72px;
   object-fit: contain;
-  background: rgba(0,0,0,0.5);
-  border-radius: 3px;
+  background: rgba(0,0,0,0.45);
+  border-radius: 2px;
   padding: 3px 6px;
 }
 
-.album-play {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.2);
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-.album-card:hover .album-play { opacity: 1; }
+.album-play { display: none; }
 
-.album-info { padding: 14px 16px; }
+.album-info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.72));
+  padding: 32px 14px 12px;
+}
 .album-name {
   font-family: var(--font-serif);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: -0.2px;
-  margin-bottom: 4px;
+  margin-bottom: 0;
+  color: #fff;
 }
-.album-blurb { font-size: 12px; color: var(--muted); line-height: 1.5; }
+.album-blurb { font-size: 11px; color: rgba(255,255,255,0.6); line-height: 1.5; margin-top: 2px; }
 
 /* ─────────────────────────────────────────────────────────────
    PHOTOGRAPHY STRIP

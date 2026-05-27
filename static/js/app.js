@@ -207,11 +207,11 @@ async function loadWork() {
           <img src="${thumb}" alt="${escapeHtml(featured.title)}" loading="eager">
           <div class="feature-play"><div class="play-circle">▶</div></div>
           <span class="feature-tag">Featured</span>
-        </div>
-        <div class="feature-info">
-          <span class="feature-num">01</span>
-          <h2 class="feature-title">${escapeHtml(featured.title)}</h2>
-          ${featured.sub ? `<p class="feature-meta">${escapeHtml(featured.sub)}</p>` : ''}
+          <div class="feature-info">
+            <span class="feature-num">01</span>
+            <h2 class="feature-title">${escapeHtml(featured.title)}</h2>
+            ${featured.sub ? `<p class="feature-meta">${escapeHtml(featured.sub)}</p>` : ''}
+          </div>
         </div>
       </div>`;
     featureEl.querySelector('.feature-card').addEventListener('click', () => {
@@ -219,28 +219,24 @@ async function loadWork() {
     });
   }
 
-  // ── Sidebar list
+  // ── Reel grid (all non-featured videos)
   const sidebarEl = $('work-sidebar');
   if (sidebarEl && rest.length) {
-    sidebarEl.innerHTML = rest.map((v, i) => {
-      const thumb = v.thumb || `https://img.youtube.com/vi/${v.youtubeId}/mqdefault.jpg`;
-      const num   = String(i + 2).padStart(2, '0');
+    sidebarEl.innerHTML = rest.map((v) => {
+      const thumb = v.thumb || `https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg`;
       return `
-        <div class="sidebar-item" data-yt="${v.youtubeId}" data-title="${escapeHtml(v.title)}">
-          <div class="sidebar-thumb">
-            <img src="${thumb}" alt="${escapeHtml(v.title)}" loading="lazy">
-            <span class="sidebar-play">▶</span>
-          </div>
-          <div class="sidebar-info">
-            <span class="sidebar-num">${num}</span>
-            <h3 class="sidebar-title">${escapeHtml(v.title)}</h3>
-            ${v.sub ? `<p class="sidebar-meta">${escapeHtml(v.sub)}</p>` : ''}
+        <div class="reel-item" data-yt="${v.youtubeId}" data-title="${escapeHtml(v.title)}">
+          <img src="${thumb}" alt="${escapeHtml(v.title)}" loading="lazy">
+          <div class="reel-item-play"><div class="play-circle" style="width:36px;height:36px;font-size:12px">▶</div></div>
+          <div class="reel-item-info">
+            <div class="reel-item-title">${escapeHtml(v.title)}</div>
+            ${v.sub ? `<div class="reel-item-meta">${escapeHtml(v.sub)}</div>` : ''}
           </div>
         </div>`;
     }).join('');
 
     sidebarEl.addEventListener('click', e => {
-      const item = e.target.closest('.sidebar-item');
+      const item = e.target.closest('.reel-item');
       if (item) openVideoModal(item.dataset.yt, item.dataset.title);
     });
   } else if (sidebarEl) {
@@ -262,18 +258,23 @@ async function loadClients() {
     return;
   }
 
-  el.innerHTML = clients.map((c, i) => `
+  el.innerHTML = clients.map((c, i) => {
+    // Use explicit cover, else auto-generate from first video thumbnail
+    const cover = c.cover || (c.videos?.length
+      ? `https://img.youtube.com/vi/${c.videos[0].youtubeId}/maxresdefault.jpg`
+      : '');
+    return `
     <div class="album-card" data-client='${JSON.stringify(c).replaceAll("'", "&apos;")}' style="animation-delay:${i * 60}ms">
       <div class="album-thumb">
-        ${c.cover ? `<img src="${c.cover}" alt="${escapeHtml(c.name)}" loading="lazy">` : ''}
+        ${cover ? `<img src="${cover}" alt="${escapeHtml(c.name)}" loading="lazy">` : ''}
         ${c.logo ? `<img class="album-logo" src="${c.logo}" alt="${escapeHtml(c.name)} logo" onerror="this.style.display='none'">` : ''}
-        <div class="album-play"><div class="play-circle" style="width:44px;height:44px;font-size:14px">▶</div></div>
       </div>
       <div class="album-info">
         <div class="album-name">${escapeHtml(c.name)}</div>
         ${c.blurb ? `<p class="album-blurb">${escapeHtml(c.blurb)}</p>` : ''}
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 
   el.addEventListener('click', e => {
     const card = e.target.closest('.album-card');
