@@ -27,16 +27,9 @@ async function loadSiteSettings() {
   const topbarLoc = $('topbar-location');
   if (topbarLoc && s.nav?.topbar_text) topbarLoc.textContent = s.nav.topbar_text;
 
-  // Email — update text + href on all email links
-  const email = s.contact?.email;
-  if (email) {
-    document.querySelectorAll('a[href^="mailto:"]').forEach(a => {
-      a.href = 'mailto:' + email;
-    });
-    const topbarEmail = $('topbar-email');
-    if (topbarEmail) topbarEmail.textContent = email;
-    const footerEmail = $('footer-email');
-    if (footerEmail) footerEmail.textContent = email;
+  // Contact — update LinkedIn links from site.json
+  if (s.social?.linkedin) {
+    document.querySelectorAll('a[href*="linkedin.com"]').forEach(a => { a.href = s.social.linkedin; });
   }
 
   // Hero
@@ -60,9 +53,6 @@ async function loadSiteSettings() {
   // Social links
   if (s.social?.youtube) {
     document.querySelectorAll('a[href*="youtube.com"]').forEach(a => { a.href = s.social.youtube; });
-  }
-  if (s.social?.linkedin) {
-    document.querySelectorAll('a[href*="linkedin.com"]').forEach(a => { a.href = s.social.linkedin; });
   }
 
   // Section visibility - check homepage_sections first, then fall back to show_* flags
