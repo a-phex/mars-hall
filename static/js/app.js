@@ -286,23 +286,37 @@ async function loadClients() {
 // ─────────────────────────────────────────────────────────────
 //  PHOTOGRAPHY STRIP
 // ─────────────────────────────────────────────────────────────
+
+/**
+ * Render a photo entry as a tile HTML string.
+ * Supports both legacy string URLs and optimised {src, srcset, w, h} objects.
+ * When dimensions are known, sets aspect-ratio on the container so the browser
+ * reserves the correct space before the image loads — eliminates layout shift.
+ */
+function photoTileHTML(item) {
+  const src    = typeof item === 'string' ? item : item.src;
+  const alt    = typeof item === 'object' && item.alt ? escapeHtml(item.alt) : '';
+  const ratio  = item?.w && item?.h ? ` style="aspect-ratio:${item.w}/${item.h}"` : '';
+  const srcset = item?.srcset
+    ? ` srcset="${item.srcset}" sizes="(max-width:600px) 50vw, (max-width:900px) 33vw, 25vw"`
+    : '';
+  return `<div class="photo-tile"${ratio}><img src="${escapeHtml(src)}"${srcset} alt="${alt}" loading="lazy"></div>`;
+}
+
 async function loadPhotography() {
   const el = $('photo-strip');
   if (!el) return;
-  const data      = await fetch('data/photos.json').then(r => r.json()).catch(() => ({ images: [] }));
-  const allImages = data.images || [];
+  const data       = await fetch('data/photos.json').then(r => r.json()).catch(() => ({ images: [] }));
+  const allImages  = data.images || [];
   const photoCount = _site?.sections?.photography_count || 16;
-  const preview   = allImages.slice(0, photoCount);
+  const preview    = allImages.slice(0, photoCount);
 
   if (!preview.length) {
     el.closest('.section-photography').style.display = 'none';
     return;
   }
 
-  el.innerHTML = preview.map(src => `
-    <div class="photo-tile">
-      <img src="${src}" alt="" loading="lazy">
-    </div>`).join('');
+  el.innerHTML = preview.map(photoTileHTML).join('');
 
   el.addEventListener('click', e => {
     const tile = e.target.closest('.photo-tile');
@@ -310,8 +324,8 @@ async function loadPhotography() {
     openLightbox(tile.querySelector('img').src);
   });
 
-  // Expand button — in a padded centred wrapper so it sits cleanly under the full-bleed strip
-  const btnWrap = document.createElement('div');
+  // Expand button — padded centred wrapper under the full-bleed strip
+  const btnWrap  = document.createElement('div');
   btnWrap.className = 'photo-expand-wrap';
   const expandBtn = document.createElement('button');
   expandBtn.className = 'photo-expand-btn';
@@ -336,10 +350,7 @@ function openPhotoModal(images) {
     document.body.appendChild(modal);
   }
   modal.querySelector('.photo-modal-count').textContent = `${images.length} photos`;
-  modal.querySelector('#photo-modal-grid').innerHTML = images.map(src => `
-    <div class="photo-tile">
-      <img src="${src}" alt="" loading="lazy">
-    </div>`).join('');
+  modal.querySelector('#photo-modal-grid').innerHTML = images.map(photoTileHTML).join('');
   modal.querySelector('#photo-modal-grid').addEventListener('click', e => {
     const tile = e.target.closest('.photo-tile');
     if (tile) openLightbox(tile.querySelector('img').src);
