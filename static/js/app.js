@@ -310,12 +310,15 @@ async function loadPhotography() {
     openLightbox(tile.querySelector('img').src);
   });
 
-  // Expand button
+  // Expand button — in a padded centred wrapper so it sits cleanly under the full-bleed strip
+  const btnWrap = document.createElement('div');
+  btnWrap.className = 'photo-expand-wrap';
   const expandBtn = document.createElement('button');
   expandBtn.className = 'photo-expand-btn';
   expandBtn.textContent = `See all ${allImages.length} photos`;
   expandBtn.addEventListener('click', () => openPhotoModal(allImages));
-  el.closest('.photo-strip-wrap').appendChild(expandBtn);
+  btnWrap.appendChild(expandBtn);
+  el.closest('.photo-strip-wrap').appendChild(btnWrap);
 }
 
 function openPhotoModal(images) {
@@ -327,7 +330,7 @@ function openPhotoModal(images) {
     modal.innerHTML = `
       <div class="photo-modal-bar">
         <span class="photo-modal-count"></span>
-        <button class="photo-modal-close" onclick="closePhotoModal()">Collapse ↑</button>
+        <button class="photo-modal-close" onclick="closePhotoModal()">Close</button>
       </div>
       <div class="photo-modal-grid" id="photo-modal-grid"></div>`;
     document.body.appendChild(modal);

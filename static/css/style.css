@@ -541,39 +541,39 @@ img { display: block; max-width: 100%; }
 /* ─────────────────────────────────────────────────────────────
    PHOTOGRAPHY STRIP
    ───────────────────────────────────────────────────────────── */
-.section-photography { background: var(--bg); padding-bottom: 0; }
-.section-photography .section-masthead { margin-bottom: 28px; }
+.section-photography { background: var(--bg); padding-bottom: 0; overflow: hidden; }
+.section-photography .section-masthead { margin-bottom: 24px; }
 .section-photography .wrap { padding-bottom: 0; }
 
-.photo-strip-wrap {
-  padding: 0 var(--pad) 56px;
-  max-width: var(--wrap);
-  margin: 0 auto;
-}
+/* Full-bleed strip — images run edge to edge */
+.photo-strip-wrap { padding: 0; }
+
 .photo-strip {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+  columns: 3;
+  column-gap: 2px;
 }
 .photo-tile {
-  aspect-ratio: 3/4;
-  border-radius: var(--radius);
+  break-inside: avoid;
+  margin-bottom: 2px;
   overflow: hidden;
   cursor: pointer;
-  min-width: 0;
+  display: block;
 }
 .photo-tile img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
-  transition: transform 0.45s ease;
+  transition: transform 0.5s ease;
 }
-.photo-tile:hover img { transform: scale(1.05); }
+.photo-tile:hover img { transform: scale(1.025); }
 
+/* Centred expand trigger, padded back in */
+.photo-expand-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 24px var(--pad) 52px;
+}
 .photo-expand-btn {
-  display: block;
-  margin: 20px auto 0;
   background: none;
   border: 1px solid var(--border);
   border-radius: 3px;
@@ -608,8 +608,6 @@ img { display: block; max-width: 100%; }
   align-items: center;
   justify-content: space-between;
   padding: 14px var(--pad);
-  max-width: var(--wrap);
-  margin: 0 auto;
 }
 .photo-modal-count {
   font-size: 10px;
@@ -632,18 +630,21 @@ img { display: block; max-width: 100%; }
   transition: background 0.2s;
 }
 .photo-modal-close:hover { background: var(--accent); }
+
+/* Full-bleed masonry gallery — natural image ratios */
 .photo-modal-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  padding: 24px var(--pad);
-  max-width: var(--wrap);
-  margin: 0 auto;
+  columns: 4;
+  column-gap: 2px;
+  padding: 2px 0 40px;
 }
 
+@media (max-width: 900px) {
+  .photo-strip { columns: 2; }
+  .photo-modal-grid { columns: 3; }
+}
 @media (max-width: 600px) {
-  .photo-strip { grid-template-columns: repeat(2, 1fr); }
-  .photo-modal-grid { grid-template-columns: repeat(2, 1fr); }
+  .photo-strip { columns: 2; }
+  .photo-modal-grid { columns: 2; }
 }
 
 /* ─────────────────────────────────────────────────────────────
