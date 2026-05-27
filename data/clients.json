@@ -4,7 +4,7 @@
       "name": "Exhibition World 2019",
       "blurb": "",
       "cover": "",
-      "logo": "https://aphex447589013.wordpress.com/wp-content/uploads/2019/04/ew19.png",
+      "logo": "",
       "videos": [
         {
           "title": "Elektra Awards 2019 | Electronics Weekly",
@@ -44,7 +44,7 @@
       "name": "ISE / AV+TV 2019",
       "blurb": "",
       "cover": "",
-      "logo": "https://aphex447589013.wordpress.com/wp-content/uploads/2019/04/av-tv-logo-on-black-e1554895432743.png",
+      "logo": "",
       "videos": [
         {
           "title": "Zoran Veselic, president and COO, Christie Digital Systems",
@@ -195,7 +195,7 @@
           "youtubeId": "CQtQBKZ70t4"
         },
         {
-          "title": "Introducing the world\u2019s first Windows collaboration display created with Microsoft",
+          "title": "Introducing the world’s first Windows collaboration display created with Microsoft",
           "youtubeId": "Uot48G5REZ0"
         },
         {
@@ -252,7 +252,7 @@
       "name": "Property Week",
       "blurb": "",
       "cover": "",
-      "logo": "https://aphex447589013.wordpress.com/wp-content/uploads/2019/04/pw2.png",
+      "logo": "",
       "videos": [
         {
           "title": "RESI 2019",
@@ -267,7 +267,7 @@
           "youtubeId": "jfvshOeiRLc"
         },
         {
-          "title": "Happy Birthday Property Awards \u2013 celebrating 25 years",
+          "title": "Happy Birthday Property Awards – celebrating 25 years",
           "youtubeId": "UFOnJiHYDLQ"
         },
         {
@@ -287,7 +287,7 @@
           "youtubeId": "aS-_NuZc5AI"
         },
         {
-          "title": "Property Awards 360 video \u2013 take a look around",
+          "title": "Property Awards 360 video – take a look around",
           "youtubeId": "KoQdmotobgQ"
         },
         {
@@ -303,7 +303,7 @@
           "youtubeId": "_VnYbHkEEvU"
         },
         {
-          "title": "An insider\u2019s view - cleaning and restoration of fa\u00e7ades",
+          "title": "An insider’s view - cleaning and restoration of façades",
           "youtubeId": "SjYJCSJDY1I"
         },
         {
@@ -324,7 +324,7 @@
       "name": "Industry Retail News",
       "blurb": "",
       "cover": "",
-      "logo": "https://aphex447589013.wordpress.com/wp-content/uploads/2019/03/irn-logo.png",
+      "logo": "",
       "videos": [
         {
           "title": "Fancy a slice of the action?",
@@ -352,7 +352,7 @@
       "name": "Motor Trader",
       "blurb": "",
       "cover": "",
-      "logo": "https://aphex447589013.wordpress.com/wp-content/uploads/2019/03/mt_logo.png",
+      "logo": "",
       "videos": [
         {
           "title": "Rising Stars Awards 2019 | Motor Trader Magazine 13 May 2019",
@@ -372,7 +372,7 @@
       "name": "Packaging News",
       "blurb": "",
       "cover": "",
-      "logo": "https://aphex447589013.wordpress.com/wp-content/uploads/2019/03/brands-1.png",
+      "logo": "static/img/clients/packaging-news.png",
       "videos": [
         {
           "title": "UK Packaging Awards & Luxury Packaging Awards 2019",
@@ -387,7 +387,7 @@
           "youtubeId": "NJF9GZb-BMI"
         },
         {
-          "title": "DRS roundtable \u2013 sponsored by Britvic",
+          "title": "DRS roundtable – sponsored by Britvic",
           "youtubeId": "mZdFtE2Ln-Q"
         },
         {
@@ -400,7 +400,7 @@
       "name": "DFNI / Frontier",
       "blurb": "",
       "cover": "",
-      "logo": "https://aphex447589013.wordpress.com/wp-content/uploads/2019/05/dfni.png",
+      "logo": "",
       "videos": [
         {
           "title": "DFNI - Cosmetics feature",
@@ -424,7 +424,7 @@
       "name": "Quality Food Awards",
       "blurb": "",
       "cover": "",
-      "logo": "https://aphex447589013.wordpress.com/wp-content/uploads/2019/05/qfa.png",
+      "logo": "static/img/clients/quality-food.png",
       "videos": [
         {
           "title": "Meet the Buyer on The Street 2019",
@@ -448,7 +448,7 @@
       "name": "Money Marketing Magazine",
       "blurb": "",
       "cover": "",
-      "logo": "https://aphex447589013.wordpress.com/wp-content/uploads/2019/08/money-marketing-logo-2018.png",
+      "logo": "",
       "videos": [
         {
           "title": "Roundtable: Are advisers up to the later life care challenge?",
@@ -467,7 +467,7 @@
           "youtubeId": "NeOKLY1eoek"
         },
         {
-          "title": "Introducing\u2026The Money Marketing DFM Centre",
+          "title": "Introducing…The Money Marketing DFM Centre",
           "youtubeId": "592hMWgcrVA"
         },
         {
@@ -639,7 +639,7 @@
           "youtubeId": "O2iZj8yAbBE"
         },
         {
-          "title": "PaymentChoiceAlliance // Did you know you'd struggle to spend this \u00a35 note ?",
+          "title": "PaymentChoiceAlliance // Did you know you'd struggle to spend this £5 note ?",
           "youtubeId": "Wv6DYn_vx8o"
         }
       ]

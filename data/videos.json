@@ -1,82 +1,101 @@
 {
   "videos": [
     {
-      "title": "HP ProBook - Innovation made affordable",
+      "title": "HP ProBook — Innovation Made Affordable",
       "youtubeId": "9Z-TO-MqjPA",
-      "sub": "",
+      "sub": "Commercial · HP / Insight",
       "thumb": ""
     },
     {
-      "title": "The all New Surface Laptop with 5G - hands on with the latest innovation from Microsoft Surface",
+      "title": "Surface Laptop with 5G — Hands On",
       "youtubeId": "i646SlroC3o",
-      "sub": "",
+      "sub": "Commercial · Microsoft / Insight",
       "thumb": ""
     },
     {
-      "title": "Showcasing the New Surface Laptop 13\" & Surface Pro 12\" | Sleek, Smart & Built for AI",
+      "title": "Surface Laptop 13\" & Surface Pro 12\" Showcase",
       "youtubeId": "SyLqcxnxJe4",
-      "sub": "",
+      "sub": "Commercial · Microsoft / Insight",
       "thumb": ""
     },
     {
       "title": "Microsoft Surface Intel Device Showcase",
       "youtubeId": "spNSo0P5gQQ",
-      "sub": "",
+      "sub": "Commercial · Microsoft / Insight",
       "thumb": ""
     },
     {
-      "title": "Discover how Copilot empowers a more efficient workforce",
+      "title": "Discover How Copilot Empowers the Workforce",
       "youtubeId": "uahIfcXR7F8",
-      "sub": "",
+      "sub": "Commercial · Microsoft / Insight",
       "thumb": ""
     },
     {
-      "title": "Gonvarri : Hackathon 2024",
+      "title": "Gonvarri — Hackathon 2024",
       "youtubeId": "Q28n_qTDGps",
-      "sub": "",
-      "thumb": ""
+      "sub": "Event Film · Gonvarri / Insight",
+      "thumb": "",
+      "layout": "full"
     },
     {
-      "title": "Aroya Cruises : IT Transformation of the AROYA Cruise Ship",
+      "title": "Aroya Cruises — IT Transformation",
       "youtubeId": "dg_teS4s_YE",
-      "sub": "",
+      "sub": "Case Study · Aroya Cruises",
       "thumb": ""
     },
     {
-      "title": "West Buckland School : Enhancing learning - sustainable technology & innovation",
-      "youtubeId": "4v4yXu3a5Ik"
+      "title": "West Buckland School — Sustainable Technology",
+      "youtubeId": "4v4yXu3a5Ik",
+      "sub": "Case Study · West Buckland School",
+      "thumb": ""
     },
     {
-      "title": "University Hospital Birmingham : Enhancing IT Security",
-      "youtubeId": "Wdj2cEINk1A"
+      "title": "University Hospital Birmingham — IT Security",
+      "youtubeId": "Wdj2cEINk1A",
+      "sub": "Case Study · UHB / Insight",
+      "thumb": ""
     },
     {
-      "title": "APAX : Transforming lives - Digital wellbeing journey",
-      "youtubeId": "-3bs08HKUFk"
+      "title": "APAX — Digital Wellbeing Journey",
+      "youtubeId": "-3bs08HKUFk",
+      "sub": "Case Study · APAX / Insight",
+      "thumb": ""
     },
     {
-      "title": "PCA Chair Ron Delnevo visits Treorchy in Wales",
-      "youtubeId": "GWuewXRDDeg"
+      "title": "PCA — Ron Delnevo Visits Treorchy",
+      "youtubeId": "GWuewXRDDeg",
+      "sub": "Documentary · Payment Choice Alliance",
+      "thumb": ""
     },
     {
-      "title": "Vivent Case Study van Insight Nederland",
-      "youtubeId": "ivrk_nLl2LM"
+      "title": "Vivent Case Study",
+      "youtubeId": "ivrk_nLl2LM",
+      "sub": "Case Study · Vivent / Insight",
+      "thumb": ""
     },
     {
-      "title": "Eneco Case Study van Insight video",
-      "youtubeId": "0k9ziQKiJCY"
+      "title": "Eneco Case Study",
+      "youtubeId": "0k9ziQKiJCY",
+      "sub": "Case Study · Eneco / Insight",
+      "thumb": ""
     },
     {
-      "title": "Marshall_2024",
-      "youtubeId": "IbJaMDr382k"
+      "title": "2024 Showreel",
+      "youtubeId": "IbJaMDr382k",
+      "sub": "Director / Producer · London",
+      "thumb": ""
     },
     {
-      "title": "PaymentChoiceAlliance // PCA Champions",
-      "youtubeId": "-rLrP_p3gDA"
+      "title": "Payment Choice Alliance — PCA Champions",
+      "youtubeId": "-rLrP_p3gDA",
+      "sub": "Social · Payment Choice Alliance",
+      "thumb": ""
     },
     {
-      "title": "PaymentChoiceAlliance // Did you know you'd struggle to spend this £5 note ?",
-      "youtubeId": "Wv6DYn_vx8o"
+      "title": "Payment Choice Alliance — Cash in Crisis",
+      "youtubeId": "Wv6DYn_vx8o",
+      "sub": "Social · Payment Choice Alliance",
+      "thumb": ""
     }
   ]
 }
