@@ -645,10 +645,18 @@ async function renderImageGrid(containerId) {
   const el = $(containerId); if (!el) return;
   const path = el.getAttribute('data-source');
   const data = await fetch(path).then(r => r.json()).catch(() => ({ images: [] }));
-  el.innerHTML = data.images.map((src, i) => `
-    <figure class="card" style="animation-delay:${i * 40}ms">
-      <div class="thumb"><img src="${src}" alt="" loading="lazy"></div>
-    </figure>`).join('');
+  el.innerHTML = data.images.map((item, i) => {
+    // Handle both legacy string paths and optimised {src, srcset, w, h} objects
+    const src    = typeof item === 'string' ? item : item.src;
+    const alt    = typeof item === 'object' && item.alt ? escapeHtml(item.alt) : '';
+    const ratio  = item?.w && item?.h ? ` style="aspect-ratio:${item.w}/${item.h}"` : '';
+    const srcset = item?.srcset
+      ? ` srcset="${item.srcset}" sizes="(max-width:600px) 50vw, (max-width:900px) 33vw, 25vw"`
+      : '';
+    return `<figure class="card" style="animation-delay:${i * 40}ms">
+      <div class="thumb"${ratio}><img src="${escapeHtml(src)}"${srcset} alt="${alt}" loading="lazy"></div>
+    </figure>`;
+  }).join('');
   el.addEventListener('click', e => {
     const img = e.target.closest('img'); if (!img) return;
     openLightbox(img.src);
