@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marshall Visuals — monochrome direction mockup</title>
+<!-- MOCKUP ONLY: Fontshare CDN is a demo shortcut; production self-hosts woff2 (REDESIGN.md §4) -->
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f4f2ee; --ink:#141312; --ink-60:#5d5a55; --ink-30:#b9b5ae;
+  --hairline:#e2dfd9; --accent:#c44c16;
+  --sans:'Satoshi',-apple-system,sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55}
+img{display:block;max-width:100%}
+a{color:inherit}
+
+/* ── Nav ─────────────────────────────────────────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;gap:26px;
+  padding:0 28px;height:56px;background:color-mix(in srgb,var(--paper) 92%,transparent);
+  backdrop-filter:blur(8px);border-bottom:1px solid transparent;transition:border-color .3s}
+nav.scrolled{border-bottom-color:var(--hairline)}
+.wordmark{font-weight:900;letter-spacing:-.02em;font-size:15px;margin-right:auto}
+nav a.nlink{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;
+  text-decoration:none;color:var(--ink-60);padding:3px 0;border-bottom:1px solid transparent;transition:.2s}
+nav a.nlink:hover{color:var(--ink);border-bottom-color:var(--accent)}
+
+/* ── Hero ────────────────────────────────────────── */
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 28px 56px;position:relative;overflow:hidden}
+.hero-img{position:absolute;inset:0;z-index:-1}
+.hero-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.04);
+  animation:colourIn 2.2s ease 1s forwards}
+@keyframes colourIn{to{filter:grayscale(0) contrast(1)}}
+.hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(20,19,18,.55),transparent 55%)}
+.hero h1{color:#fff;font-size:clamp(40px,7vw,84px);font-weight:900;letter-spacing:-.03em;line-height:.98}
+.hero p{color:#eee;font-size:17px;max-width:46ch;margin-top:14px;font-weight:500}
+.hero a{display:inline-block;margin-top:22px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;
+  text-transform:uppercase;color:#fff;text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:4px;width:max-content}
+
+/* ── Shared section chrome ───────────────────────── */
+section{padding:72px 3vw;max-width:none}
+.shead{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--ink);padding-bottom:10px;margin-bottom:28px}
+.shead h2{font-size:24px;font-weight:700;letter-spacing:-.02em}
+.shead span{font-family:var(--mono);font-size:11px;color:var(--ink-30);margin-left:auto}
+
+/* ── Tiles: greyscale at rest, colour on hover ────── */
+.tile{position:relative;cursor:pointer;background:var(--ink);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s}
+.tile:hover{transform:translateY(-6px);box-shadow:0 18px 40px -18px rgba(20,19,18,.35)}
+.tile img{width:100%;height:100%;object-fit:cover;aspect-ratio:16/9;
+  filter:grayscale(1);transition:filter .3s ease,opacity .3s}
+.tile:hover img,.tile.open img{filter:grayscale(0)}
+.tile .ann{display:flex;gap:10px;padding:9px 2px 0;font-family:var(--mono);font-size:11px;color:var(--ink-60)}
+.tile .ann b{color:var(--ink);font-weight:700}
+.tile .ann em{font-style:normal;margin-left:auto;color:var(--ink-30)}
+.tile .play{position:absolute;top:12px;left:12px;width:30px;height:30px;border-radius:0;
+  background:rgba(20,19,18,.72);display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .25s}
+.tile:hover .play{opacity:1}
+.tile .play svg{width:12px;height:12px;fill:#fff}
+.tile:hover .play svg{fill:var(--accent)}
+
+/* Work grid: asymmetric spans */
+.wgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:18px 18px}
+.wgrid .w4{grid-column:span 4}.wgrid .w2{grid-column:span 2}.wgrid .w3{grid-column:span 3}
+
+/* Expand-in-place player (panel-08 pattern) */
+.player-shell{grid-column:1/-1;display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s ease}
+.player-shell.open{grid-template-rows:1fr}
+.player-inner{overflow:hidden;min-height:0}
+.player-frame{position:relative;aspect-ratio:16/9;background:#000;margin:4px 0 8px}
+.player-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.player-meta{display:flex;font-family:var(--mono);font-size:11px;color:var(--ink-60);padding-bottom:10px}
+.player-meta button{margin-left:auto;background:none;border:none;font-family:var(--mono);font-size:11px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--ink);cursor:pointer;border-bottom:1px solid var(--accent);padding:0 0 2px}
+
+/* Stills masonry-ish */
+.pgrid{columns:3;column-gap:18px}
+.pgrid .tile{margin-bottom:18px;break-inside:avoid}
+.pgrid .tile img{aspect-ratio:auto}
+
+/* BTS strip */
+.bts{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.bts .tile img{aspect-ratio:1/1}
+
+/* Archive index table */
+.idx{width:100%;border-collapse:collapse;font-size:14px}
+.idx tr{border-bottom:1px solid var(--hairline);transition:background .15s}
+.idx tr:hover{background:#fff}
+.idx td{padding:13px 10px 13px 2px;vertical-align:middle}
+.idx .nm{display:inline-block;transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.idx tr:hover .nm{transform:translateX(8px)}
+.idx .yr{font-family:var(--mono);font-size:11px;color:var(--ink-30);width:70px}
+.idx .nm{font-weight:700;letter-spacing:-.01em}
+.idx .what{color:var(--ink-60)}
+.idx .go{text-align:right;font-family:var(--mono);font-size:11px;color:var(--ink-30);width:40px}
+.idx tr:hover .go{color:var(--accent)}
+
+/* Electra band */
+.electra{display:grid;grid-template-columns:3fr 2fr;gap:28px;align-items:center}
+.electra .copy h3{font-size:32px;font-weight:900;letter-spacing:-.02em}
+.electra .copy p{color:var(--ink-60);margin:12px 0 18px;max-width:38ch}
+.electra .copy a{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.08em;
+  text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:3px}
+
+/* About / footer */
+.about{display:flex;gap:48px;align-items:flex-start}
+.about p{max-width:52ch;font-size:17px;font-weight:500}
+.about .contact{font-family:var(--mono);font-size:13px;color:var(--ink-60);margin-top:22px}
+.about .contact a{color:var(--accent);text-decoration:none}
+footer{border-top:1px solid var(--hairline);padding:22px 28px;display:flex;
+  font-family:var(--mono);font-size:11px;color:var(--ink-30)}
+footer span:last-child{margin-left:auto}
+
+@media (max-width:760px){
+  .wgrid{grid-template-columns:1fr}
+  .wgrid .w4,.wgrid .w2,.wgrid .w3{grid-column:1/-1}
+  .pgrid{columns:2}.bts{grid-template-columns:repeat(3,1fr)}
+  .electra{grid-template-columns:1fr}
+  nav{gap:14px;overflow-x:auto}
+}
+/* ── Scroll-driven entrances: sections slide in from alternating sides ───
+   Pure CSS (animation-timeline: view()) — zero JS, GPU-only. Falls back to
+   static layout in browsers without support. */
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline: view()){
+    body{overflow-x:clip}
+    section{animation:slideL both cubic-bezier(.16,1,.3,1);animation-timeline:view();animation-range:entry 0% entry 80%}
+    section:nth-of-type(even){animation-name:slideR}
+    @keyframes slideL{from{transform:translateX(-75vw) scale(.92);opacity:.01}to{transform:none;opacity:1}}
+    @keyframes slideR{from{transform:translateX(75vw) scale(.92);opacity:.01}to{transform:none;opacity:1}}
+    /* section heads sweep in from the opposite side — two-layer depth */
+    .shead{animation:headDrift both cubic-bezier(.16,1,.3,1);animation-timeline:view();animation-range:entry 0% entry 95%}
+    @keyframes headDrift{from{transform:translateX(26vw);opacity:0}to{transform:none;opacity:1}}
+    section:nth-of-type(even) .shead{animation-name:headDriftL}
+    @keyframes headDriftL{from{transform:translateX(-26vw);opacity:0}to{transform:none;opacity:1}}
+    /* mobile has no hover: tiles regain colour as they pass mid-viewport */
+    @media (max-width:760px){
+      .tile img{animation:colourPass both;animation-timeline:view();animation-range:cover 25% cover 55%}
+      @keyframes colourPass{from{filter:grayscale(1)}to{filter:grayscale(0)}}
+    }
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  .tile img,.hero-img img{filter:grayscale(0);animation:none}
+  .player-shell{transition:none}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <span class="wordmark">Marshall&nbsp;Visuals</span>
+  <a class="nlink" href="#work">Work</a>
+  <a class="nlink" href="#stills">Stills</a>
+  <a class="nlink" href="#bts">BTS</a>
+  <a class="nlink" href="#archive">Archive</a>
+  <a class="nlink" href="#electra">Electra</a>
+  <a class="nlink" href="#about">About</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-img"><img src="static/img/hero-greenwich.webp" alt=""></div>
+  <h1>Marshall</h1>
+  <p>Multimedia creative. Video, stills and design for brands that care how things look. London.</p>
+  <a href="#work">See the work</a>
+</header>
+
+<section id="work">
+  <div class="shead"><h2>Work</h2><span>commercial · documentary · event</span></div>
+  <div class="wgrid" id="wgrid">
+    <div class="tile w4" onclick="openPlayer('SyLqcxnxJe4','Surface Laptop 13&quot; &amp; Surface Pro 12&quot; Showcase','Commercial · Microsoft / Insight',this)">
+      <img src="https://img.youtube.com/vi/SyLqcxnxJe4/maxresdefault.jpg" onerror="this.src='https://img.youtube.com/vi/SyLqcxnxJe4/hqdefault.jpg'" alt="">
+      <span class="play"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z"/></svg></span>
+      <div class="ann"><b>Surface Laptop 13" &amp; Pro 12"</b><span>Microsoft / Insight</span><em>Commercial</em></div>
+    </div>
+    <div class="tile w2" onclick="openPlayer('9Z-TO-MqjPA','HP ProBook — Innovation Made Affordable','Commercial · HP / Insight',this)">
+      <img src="https://img.youtube.com/vi/9Z-TO-MqjPA/hqdefault.jpg" alt="">
+      <span class="play"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z"/></svg></span>
+      <div class="ann"><b>HP ProBook</b><em>Commercial</em></div>
+    </div>
+    <div class="player-shell" id="player-shell">
+      <div class="player-inner">
+        <div class="player-frame"><iframe id="player-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="player-meta"><span id="player-title"></span><button onclick="closePlayer()">Close</button></div>
+      </div>
+    </div>
+    <div class="tile w2" onclick="openPlayer('Q28n_qTDGps','Gonvarri — Hackathon 2024','Event Film · Gonvarri / Insight',this)">
+      <img src="https://img.youtube.com/vi/Q28n_qTDGps/hqdefault.jpg" alt="">
+      <span class="play"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z"/></svg></span>
+      <div class="ann"><b>Gonvarri Hackathon</b><em>Event film</em></div>
+    </div>
+    <div class="tile w2" onclick="openPlayer('uahIfcXR7F8','Discover How Copilot Empowers the Workforce','Commercial · Microsoft / Insight',this)">
+      <img src="https://img.youtube.com/vi/uahIfcXR7F8/hqdefault.jpg" alt="">
+      <span class="play"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z"/></svg></span>
+      <div class="ann"><b>Copilot at Work</b><em>Commercial</em></div>
+    </div>
+    <div class="tile w2" onclick="openPlayer('dg_teS4s_YE','Aroya Cruises — IT Transformation','Case Study · Aroya Cruises',this)">
+      <img src="https://img.youtube.com/vi/dg_teS4s_YE/hqdefault.jpg" alt="">
+      <span class="play"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z"/></svg></span>
+      <div class="ann"><b>Aroya Cruises</b><em>Case study</em></div>
+    </div>
+  </div>
+</section>
+
+<section id="stills">
+  <div class="shead"><h2>Stills &amp; Design</h2><span>events · portraits · graphics</span></div>
+  <div class="pgrid">
+    <div class="tile"><img src="static/img/photography/amdaris_wit_event_100424-03_1600w.webp" alt=""><div class="ann"><b>Amdaris WIT</b><em>Event</em></div></div>
+    <div class="tile"><img src="static/img/photography/amdaris_wit_event_100424-09-1_1600w.webp" alt=""><div class="ann"><b>Amdaris WIT</b><em>Event</em></div></div>
+    <div class="tile"><img src="static/img/photography/amdaris_wit_event_100424-28-3_1600w.webp" alt=""><div class="ann"><b>Amdaris WIT</b><em>Event</em></div></div>
+    <div class="tile"><img src="static/img/photography/amdaris_wit_event_100424-01-1_1600w.webp" alt=""><div class="ann"><b>Amdaris WIT</b><em>Event</em></div></div>
+    <div class="tile"><img src="static/img/photography/amdaris_wit_event_100424-08_1600w.webp" alt=""><div class="ann"><b>Amdaris WIT</b><em>Event</em></div></div>
+    <div class="tile"><img src="static/img/photography/amdaris_wit_event_100424-29-1_1600w.webp" alt=""><div class="ann"><b>Amdaris WIT</b><em>Event</em></div></div>
+  </div>
+</section>
+
+<section id="bts">
+  <div class="shead"><h2>Behind the Scenes</h2><span>how it gets made</span></div>
+  <div class="bts">
+    <div class="tile"><img src="https://aphex447589013.wordpress.com/wp-content/uploads/2022/07/000007" alt=""></div>
+    <div class="tile"><img src="https://aphex447589013.wordpress.com/wp-content/uploads/2022/07/000016" alt=""></div>
+    <div class="tile"><img src="https://aphex447589013.wordpress.com/wp-content/uploads/2022/07/000010" alt=""></div>
+    <div class="tile"><img src="https://aphex447589013.wordpress.com/wp-content/uploads/2022/07/000028" alt=""></div>
+    <div class="tile"><img src="https://aphex447589013.wordpress.com/wp-content/uploads/2022/07/000009" alt=""></div>
+  </div>
+</section>
+
+<section id="archive">
+  <div class="shead"><h2>The Archive</h2><span>12 clients · 2017 to now</span></div>
+  <table class="idx">
+    <tr><td class="yr">2019</td><td class="nm">Exhibition World</td><td class="what">Event coverage &amp; interview films</td><td class="go">↗</td></tr>
+    <tr><td class="yr">2019</td><td class="nm">ISE / AV+TV</td><td class="what">Trade show daily coverage</td><td class="go">↗</td></tr>
+    <tr><td class="yr">2018</td><td class="nm">Property Week</td><td class="what">Editorial video series</td><td class="go">↗</td></tr>
+    <tr><td class="yr">2018</td><td class="nm">Motor Trader</td><td class="what">Awards &amp; industry films</td><td class="go">↗</td></tr>
+    <tr><td class="yr">2018</td><td class="nm">Packaging News</td><td class="what">Awards coverage</td><td class="go">↗</td></tr>
+    <tr><td class="yr">2017</td><td class="nm">Quality Food Awards</td><td class="what">Ceremony film</td><td class="go">↗</td></tr>
+  </table>
+</section>
+
+<section id="electra">
+  <div class="shead"><h2>Electra</h2><span>short film · personal work</span></div>
+  <div class="electra">
+    <div class="tile"><img src="https://aphex447589013.wordpress.com/wp-content/uploads/2022/11/screenshot-2022-11-18-at-14.19.32.png" alt=""></div>
+    <div class="copy">
+      <h3>A short film.</h3>
+      <p>Written, shot and cut as personal work. Everything on this page in one project: direction, camera, stills, design.</p>
+      <a href="#">Watch Electra</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="shead"><h2>About</h2><span>london · working everywhere</span></div>
+  <div class="about">
+    <div>
+      <p>I'm Ash — a multimedia creative working across video, stills, behind-the-scenes and graphic design. Most of my commercial work is for technology brands; the rest is whatever looks worth pointing a camera at.</p>
+      <div class="contact">say hello → <a href="mailto:hello@marshallvisuals.com">hello@marshallvisuals.com</a></div>
+    </div>
+  </div>
+</section>
+
+<footer><span>Marshall Visuals</span><span>London</span></footer>
+
+<script>
+const nav = document.getElementById('nav');
+addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 30), {passive:true});
+
+const shell = document.getElementById('player-shell');
+const iframe = document.getElementById('player-iframe');
+let openTile = null;
+function openPlayer(id, title, sub, tile){
+  if (openTile === tile) return;
+  if (openTile) openTile.classList.remove('open');
+  openTile = tile; tile.classList.add('open');
+  iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+  document.getElementById('player-title').textContent = `${title}  ·  ${sub}`;
+  shell.classList.add('open');
+  shell.scrollIntoView({behavior:'smooth', block:'center'});
+}
+function closePlayer(){
+  shell.classList.remove('open');
+  if (openTile) openTile.classList.remove('open');
+  openTile = null;
+  shell.addEventListener('transitionend', () => { if (!shell.classList.contains('open')) iframe.src=''; }, {once:true});
+}
+</script>
+</body>
+</html>

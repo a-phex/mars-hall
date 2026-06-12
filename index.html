@@ -3,29 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ash Marshall — Videographer &amp; Director</title>
-  <meta name="description" content="Ash Marshall — Videographer, Director and Multimedia Producer based in London. Commercial and documentary work for brands across EMEA." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <title>Marshall — Multimedia Creative</title>
+  <meta name="description" content="Marshall — multimedia creative in London. Video, stills, behind the scenes and design for brands that care how things look." />
+  <link rel="preload" href="static/fonts/satoshi-900.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="static/fonts/satoshi-500.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preconnect" href="https://img.youtube.com" />
-  <link rel="stylesheet" href="static/css/style.css" />
+  <link rel="stylesheet" href="static/css/style.css?v=mono4" />
 </head>
 <body class="home">
 
 <!-- ░░░ HEADER / NAV ░░░ -->
 <header id="site-header">
-  <div class="nav-topbar">
-    <span class="topbar-left" id="topbar-location">London &nbsp;·&nbsp; Videographer &amp; Director</span>
-    <a class="topbar-right" id="topbar-linkedin" href="https://www.linkedin.com/in/ash-marshall-b7725bb9" target="_blank" rel="noreferrer">Message me on LinkedIn</a>
-  </div>
   <nav class="nav-main" id="siteNav">
-    <ul class="nav-group nav-left" id="navList">
+    <a class="nav-logo" href="#">Marshall</a>
+    <ul class="nav-group" id="navList">
       <li><a href="#work">Work</a></li>
-      <li><a href="#photography">Photography</a></li>
-    </ul>
-    <a class="nav-logo" href="#">Ash Marshall</a>
-    <ul class="nav-group nav-right">
+      <li><a href="#photography">Stills</a></li>
+      <li><a href="#bts">BTS</a></li>
+      <li><a href="#clients">Archive</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="https://www.linkedin.com/in/ash-marshall-b7725bb9" class="nav-contact" target="_blank" rel="noreferrer">Contact</a></li>
     </ul>
@@ -36,30 +31,13 @@
 </header>
 
 <!-- ░░░ HERO ░░░ -->
-<section class="hero">
-  <div class="hero-left">
-    <span class="hero-vol" id="hero-vol">Vol. I &nbsp;·&nbsp; 2025</span>
-    <div class="hero-headline-wrap">
-      <h1 class="hero-headline">MARSHALL</h1>
-    </div>
-    <div class="hero-lower">
-      <div class="hero-rule"></div>
-      <p class="hero-body" id="hero-tagline">Commercial and documentary work for <strong>brands and individuals</strong> who believe the way something looks is part of what it means.</p>
-    </div>
-  </div>
-  <div class="hero-right">
-    <div class="hero-collage">
-      <div class="hero-cell" style="background:#241b10"></div>
-      <div class="hero-cell" style="background:#14201a"></div>
-      <div class="hero-cell" style="background:#1e1428"></div>
-      <div class="hero-cell" style="background:#0e1620"></div>
-    </div>
-    <div class="hero-overlay"></div>
-    <div class="hero-caption" id="hero-caption">
-      <strong>Electra — Short Film</strong>
-      Director / DP &nbsp;·&nbsp; London, 2024
-    </div>
-  </div>
+<section class="hero" id="hero">
+  <div class="hero-media"><img src="static/img/hero-greenwich.webp" alt="" fetchpriority="high" /></div>
+  <div class="hero-bar hero-bar-top" aria-hidden="true"></div>
+  <div class="hero-bar hero-bar-bot" aria-hidden="true"></div>
+  <h1 class="hero-title">Marshall</h1>
+  <p class="hero-line" id="hero-tagline">Multimedia creative. Video, stills and design. London.</p>
+  <a class="hero-link" href="#work">See the work</a>
 </section>
 
 <!-- ░░░ WORK ░░░ -->
@@ -69,12 +47,13 @@
       <span class="section-name">Selected Work</span>
       <span class="section-count" id="work-count"></span>
     </div>
-    <div class="work-layout">
-      <div class="work-feature" id="work-feature">
+    <div id="work-feature" class="work-player-wrap">
+      <div class="work-player-stage" id="work-stage">
         <div class="skeleton-thumb"></div>
       </div>
-      <div class="work-sidebar" id="work-sidebar"></div>
+      <div class="work-player-anno" id="work-anno" aria-live="polite"></div>
     </div>
+    <div id="work-sidebar" class="work-bank"></div>
   </div>
 </section>
 
@@ -92,11 +71,31 @@
 <section id="photography" class="section section-photography">
   <div class="wrap">
     <div class="section-masthead">
-      <span class="section-name">Photography &amp; Design</span>
+      <span class="section-name">Stills &amp; Design</span>
+      <span class="section-count" id="photo-count"></span>
+    </div>
+    <div class="photo-masonry" id="photo-masonry">
+      <div class="photo-col" id="photo-col-0"></div>
+      <div class="photo-col" id="photo-col-1"></div>
+      <div class="photo-col" id="photo-col-2"></div>
+    </div>
+    <div class="photo-more-wrap">
+      <button class="photo-more-btn" id="photo-more-btn" hidden>View more</button>
     </div>
   </div>
-  <div class="photo-strip-wrap">
-    <div class="photo-strip" id="photo-strip"></div>
+</section>
+
+<!-- ░░░ BTS ░░░ -->
+<section id="bts" class="section section-bts">
+  <div class="wrap">
+    <div class="section-masthead">
+      <span class="section-name">Behind the Scenes</span>
+      <span class="section-count" id="bts-count"></span>
+    </div>
+    <div class="bts-grid" id="bts-grid"></div>
+    <div class="photo-more-wrap">
+      <button class="photo-more-btn" id="bts-more-btn" hidden>View more</button>
+    </div>
   </div>
 </section>
 
@@ -140,12 +139,17 @@
 </div>
 
 <!-- ░░░ LIGHTBOX ░░░ -->
-<div id="lightbox" class="lightbox" aria-hidden="true">
+<div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Image viewer">
   <div class="lightbox-backdrop" data-close="lightbox"></div>
-  <button class="lightbox-close" data-close="lightbox" aria-label="Close">✕</button>
-  <img id="lightboxImg" src="" alt="" />
+  <button class="lightbox-close" data-close="lightbox" aria-label="Close">&#x2715;</button>
+  <button class="lightbox-arrow lightbox-prev" id="lbPrev" aria-label="Previous">&#8249;</button>
+  <button class="lightbox-arrow lightbox-next" id="lbNext" aria-label="Next">&#8250;</button>
+  <figure class="lightbox-figure">
+    <img id="lightboxImg" src="" alt="" />
+    <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+  </figure>
 </div>
 
-<script src="static/js/app.js"></script>
+<script src="static/js/app.js?v=mono4"></script>
 </body>
 </html>
