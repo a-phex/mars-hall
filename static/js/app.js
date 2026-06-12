@@ -137,7 +137,7 @@ function initNav() {
   }
 
   // Scroll-spy — updates active nav link as sections scroll past
-  const spySections = ['work', 'clients', 'photography', 'bts', 'about'].map(id => ({
+  const spySections = ['work', 'clients', 'photography', 'bts', 'electra', 'about'].map(id => ({
     id,
     el: document.getElementById(id),
     link: document.querySelector(`.nav-group a[href="#${id}"]`),
@@ -165,7 +165,7 @@ function initNav() {
 // ─────────────────────────────────────────────────────────────
 function initReveal() {
   const targets = document.querySelectorAll(
-    '.section-work, .section-clients, .section-photography, .section-about'
+    '.section-work, .section-clients, .section-photography, .section-about, .section-electra'
   );
   if (!targets.length || !('IntersectionObserver' in window)) {
     targets.forEach(el => el.classList.add('visible'));
@@ -306,43 +306,254 @@ async function loadWork() {
 }
 
 // ─────────────────────────────────────────────────────────────
-//  CLIENT WORK SECTION
+//  THE ARCHIVE — index table with accordion player
 // ─────────────────────────────────────────────────────────────
 async function loadClients() {
-  const el = $('client-grid');
-  if (!el) return;
+  const listEl = $('archive-list');
+  if (!listEl) return;
   const data    = await fetch('data/clients.json').then(r => r.json()).catch(() => ({ clients: [] }));
   const clients = data.clients || [];
 
   if (!clients.length) {
-    el.closest('.section-clients').style.display = 'none';
+    const sec = listEl.closest('.section-clients');
+    if (sec) sec.style.display = 'none';
     return;
   }
 
-  el.innerHTML = clients.map((c, i) => {
-    // Use explicit cover, else auto-generate from first video thumbnail
-    const cover = c.cover || (c.videos?.length
-      ? `https://img.youtube.com/vi/${c.videos[0].youtubeId}/maxresdefault.jpg`
-      : '');
-    return `
-    <div class="album-card" data-client='${JSON.stringify(c).replaceAll("'", "&apos;")}' style="animation-delay:${i * 60}ms">
-      <div class="album-thumb">
-        ${cover ? `<img src="${cover}" alt="${escapeHtml(c.name)}" loading="lazy">` : ''}
-        ${c.logo ? `<img class="album-logo" src="${c.logo}" alt="${escapeHtml(c.name)} logo" onerror="this.style.display='none'">` : ''}
-      </div>
-      <div class="album-info">
-        <div class="album-name">${escapeHtml(c.name)}</div>
-        ${c.blurb ? `<p class="album-blurb">${escapeHtml(c.blurb)}</p>` : ''}
-      </div>
-    </div>`;
-  }).join('');
+  // Count badge
+  const totalVideos = clients.reduce((n, c) => n + (c.videos || []).length, 0);
+  const countEl = $('archive-count');
+  if (countEl) countEl.textContent = clients.length + ' clients · ' + totalVideos + ' films';
 
-  el.addEventListener('click', e => {
-    const card = e.target.closest('.album-card');
-    if (!card) return;
-    const client = JSON.parse(card.dataset.client.replaceAll('&apos;', "'"));
-    openClientPlaylist(client);
+  let openIdx = -1;
+
+  clients.forEach((client, idx) => {
+    const videos  = client.videos || [];
+    const nFilms  = videos.length;
+    const firstId = videos[0]?.youtubeId || '';
+
+    // ── Row
+    const row = document.createElement('div');
+    row.className = 'archive-row';
+    row.setAttribute('role', 'button');
+    row.setAttribute('tabindex', '0');
+    row.setAttribute('aria-expanded', 'false');
+    row.innerHTML =
+      `<span class="archive-row-name">${escapeHtml(client.name)}</span>` +
+      `<span class="archive-row-leader" aria-hidden="true"></span>` +
+      `<span class="archive-row-meta">${nFilms} film${nFilms !== 1 ? 's' : ''}<span class="archive-chevron" aria-hidden="true"></span></span>`;
+
+    // ── Panel (accordion)
+    const panel = document.createElement('div');
+    panel.className = 'archive-panel';
+    const inner = document.createElement('div');
+    inner.className = 'archive-panel-inner';
+
+    // Player frame
+    const playerWrap = document.createElement('div');
+    playerWrap.className = 'archive-player';
+
+    // If there's a cover, use it as poster src
+    const coverUrl = client.cover || (firstId ? `https://img.youtube.com/vi/${firstId}/maxresdefault.jpg` : '');
+
+    if (firstId) {
+      playerWrap.innerHTML =
+        `<div class="archive-player-stage" data-first="${escapeHtml(firstId)}">` +
+          `<img class="archive-poster" src="${escapeHtml(coverUrl)}" alt="${escapeHtml(client.name)}" loading="lazy"` +
+          ` onerror="this.src='https://img.youtube.com/vi/${escapeHtml(firstId)}/hqdefault.jpg'">` +
+        `</div>`;
+    }
+
+    // Thumb grid
+    const thumbGrid = document.createElement('div');
+    thumbGrid.className = 'archive-thumbs';
+
+    videos.forEach((v, vi) => {
+      const thumb = document.createElement('div');
+      thumb.className = 'archive-thumb';
+      thumb.setAttribute('role', 'button');
+      thumb.setAttribute('tabindex', '-1');
+      thumb.setAttribute('aria-label', v.title);
+      thumb.style.transitionDelay = (vi * 40) + 'ms';
+      const thumbUrl = `https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg`;
+      thumb.innerHTML =
+        `<div class="archive-thumb-img-wrap">` +
+          `<img src="${escapeHtml(thumbUrl)}" alt="${escapeHtml(v.title)}" loading="lazy">` +
+        `</div>` +
+        `<span class="archive-thumb-title">${escapeHtml(v.title)}</span>`;
+
+      // Click thumb: swap player src with autoplay
+      thumb.addEventListener('click', () => {
+        const stage = panel.querySelector('.archive-player-stage');
+        if (!stage) return;
+        // Mark active
+        panel.querySelectorAll('.archive-thumb').forEach(t => t.classList.remove('archive-thumb--active'));
+        thumb.classList.add('archive-thumb--active');
+        // Load iframe with autoplay
+        stage.innerHTML =
+          `<iframe src="https://www.youtube-nocookie.com/embed/${escapeHtml(v.youtubeId)}?autoplay=1&rel=0"` +
+          ` title="${escapeHtml(v.title)}" frameborder="0"` +
+          ` allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"` +
+          ` allowfullscreen></iframe>`;
+      });
+      thumb.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); thumb.click(); } });
+      thumbGrid.appendChild(thumb);
+    });
+
+    inner.appendChild(playerWrap);
+    inner.appendChild(thumbGrid);
+    panel.appendChild(inner);
+
+    // ── Toggle logic
+    function closePanel(animate) {
+      row.setAttribute('aria-expanded', 'false');
+      row.classList.remove('archive-row--open');
+      panel.style.gridTemplateRows = '0fr';
+      if (animate) {
+        // Clear iframe src after transition to stop audio
+        panel.addEventListener('transitionend', () => {
+          const stage = panel.querySelector('.archive-player-stage');
+          if (stage) {
+            stage.innerHTML = firstId
+              ? `<img class="archive-poster" src="${escapeHtml(coverUrl)}" alt="${escapeHtml(client.name)}" loading="lazy"` +
+                ` onerror="this.src='https://img.youtube.com/vi/${escapeHtml(firstId)}/hqdefault.jpg'">`
+              : '';
+          }
+          // Reset thumb active states
+          panel.querySelectorAll('.archive-thumb').forEach(t => t.classList.remove('archive-thumb--active'));
+        }, { once: true });
+      }
+    }
+
+    function openPanel() {
+      row.setAttribute('aria-expanded', 'true');
+      row.classList.add('archive-row--open');
+      panel.style.gridTemplateRows = '1fr';
+      // Enable thumb tabindex
+      panel.querySelectorAll('.archive-thumb').forEach(t => t.setAttribute('tabindex', '0'));
+    }
+
+    function toggleRow() {
+      if (openIdx === idx) {
+        // Close current
+        closePanel(true);
+        openIdx = -1;
+      } else {
+        // Close previous if open
+        if (openIdx !== -1) {
+          const prevRow   = listEl.querySelectorAll('.archive-row')[openIdx];
+          const prevPanel = listEl.querySelectorAll('.archive-panel')[openIdx];
+          if (prevRow)   { prevRow.setAttribute('aria-expanded', 'false'); prevRow.classList.remove('archive-row--open'); }
+          if (prevPanel) {
+            prevPanel.style.gridTemplateRows = '0fr';
+            prevPanel.addEventListener('transitionend', () => {
+              const stage = prevPanel.querySelector('.archive-player-stage');
+              if (stage) {
+                const pid = clients[openIdx]?.videos?.[0]?.youtubeId || '';
+                const pcv = clients[openIdx]?.cover || (pid ? `https://img.youtube.com/vi/${pid}/maxresdefault.jpg` : '');
+                stage.innerHTML = pid
+                  ? `<img class="archive-poster" src="${escapeHtml(pcv)}" alt="" loading="lazy"` +
+                    ` onerror="this.src='https://img.youtube.com/vi/${escapeHtml(pid)}/hqdefault.jpg'">`
+                  : '';
+              }
+              prevPanel.querySelectorAll('.archive-thumb').forEach(t => t.classList.remove('archive-thumb--active'));
+            }, { once: true });
+          }
+        }
+        openIdx = idx;
+        openPanel();
+      }
+    }
+
+    row.addEventListener('click', toggleRow);
+    row.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleRow(); } });
+
+    listEl.appendChild(row);
+    listEl.appendChild(panel);
   });
+}
+
+// ─────────────────────────────────────────────────────────────
+//  ELECTRA SECTION
+// ─────────────────────────────────────────────────────────────
+async function loadElectra() {
+  const el = $('electra-content');
+  if (!el) return;
+
+  const [pagesData, stillsData] = await Promise.all([
+    fetch('data/pages.json').then(r => r.json()).catch(() => null),
+    fetch('data/electra-stills.json').then(r => r.json()).catch(() => ({ images: [] })),
+  ]);
+
+  // Find the electra-film page
+  const page = pagesData?.pages?.find(p => p.slug === 'electra-film');
+
+  // Extract youtubeId from a video_embed block
+  const videoBlock = (page?.blocks || []).find(b => b.type === 'video_embed');
+  const youtubeId  = videoBlock?.youtubeId || '';
+
+  // Poster image: from info_box block image field
+  const infoBlock  = (page?.blocks || []).find(b => b.type === 'info_box');
+  const posterSrc  = infoBlock?.image || '';
+  const bodyText   = infoBlock?.body?.split('\n\n')[0] || '';
+
+  // Stills — up to 4
+  const stills = (stillsData.images || []).slice(0, 4);
+  const allStillItems = (stillsData.images || []).map(s => ({ src: s, alt: 'Electra still', caption: '', exif: '' }));
+
+  // Build LEFT: poster tile
+  const posterDiv = document.createElement('div');
+  posterDiv.className = 'electra-poster-tile';
+  if (posterSrc) {
+    posterDiv.innerHTML = `<img src="${escapeHtml(posterSrc)}" alt="Electra" loading="lazy">`;
+  }
+  posterDiv.setAttribute('role', 'button');
+  posterDiv.setAttribute('tabindex', '0');
+  posterDiv.setAttribute('aria-label', 'Play Electra');
+
+  // Click poster: swap to iframe if youtubeId, else open lightbox
+  function activatePoster() {
+    if (youtubeId) {
+      posterDiv.innerHTML =
+        `<iframe src="https://www.youtube-nocookie.com/embed/${escapeHtml(youtubeId)}?autoplay=1&rel=0"` +
+        ` title="Electra" frameborder="0"` +
+        ` allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"` +
+        ` allowfullscreen></iframe>`;
+      posterDiv.classList.add('electra-poster-tile--playing');
+    } else if (allStillItems.length && typeof openLightboxAt === 'function') {
+      openLightboxAt(allStillItems, 0);
+    }
+  }
+  posterDiv.addEventListener('click', activatePoster);
+  posterDiv.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activatePoster(); } });
+
+  // Build RIGHT: copy + stills strip
+  const copyDiv = document.createElement('div');
+  copyDiv.className = 'electra-copy';
+  const blurb = bodyText || 'Written, shot and cut as personal work. Direction, camera, stills and design in one project.';
+  copyDiv.innerHTML =
+    `<h2 class="electra-heading">A short film.</h2>` +
+    `<p class="electra-body">${escapeHtml(blurb)}</p>`;
+
+  if (stills.length) {
+    const strip = document.createElement('div');
+    strip.className = 'electra-stills-strip';
+    stills.forEach((src, si) => {
+      const tile = document.createElement('div');
+      tile.className = 'electra-still-tile';
+      tile.innerHTML = `<img src="${escapeHtml(src)}" alt="Electra still ${si + 1}" loading="lazy">`;
+      tile.addEventListener('click', () => {
+        if (typeof openLightboxAt === 'function') {
+          openLightboxAt(allStillItems, si);
+        }
+      });
+      strip.appendChild(tile);
+    });
+    copyDiv.appendChild(strip);
+  }
+
+  el.appendChild(posterDiv);
+  el.appendChild(copyDiv);
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -576,50 +787,60 @@ async function loadAbout() {
 
   const paragraphs = (block.body || '').split('\n\n').filter(Boolean);
   const skills     = block.skills || [];
+  const linkedin   = _site?.social?.linkedin || 'https://www.linkedin.com/in/ash-marshall-b7725bb9';
 
-  const aboutHeadline = _site?.about?.headline || 'Based in London,<br>working everywhere.';
-  const stats = block.stats || [];
-  el.innerHTML = `
-    <div class="about-grid">
-      <div class="about-portrait-wrap">
-        <div class="about-portrait-frame">
-          <div class="about-portrait">
-            ${block.image ? `<img src="${block.image}" alt="${escapeHtml(block.heading || 'Ash Marshall')}">` : ''}
-          </div>
-        </div>
-        <div class="about-portrait-caption">
-          <div class="about-portrait-caption-line"></div>
-          <span class="about-portrait-label">On set, 2024</span>
-          <div class="about-portrait-caption-line"></div>
-        </div>
-        ${stats.length ? `
-        <div class="about-stats">
-          ${stats.map(s => `
-          <div class="about-stat">
-            <span class="about-stat-value">${escapeHtml(s.value)}</span>
-            <span class="about-stat-label">${escapeHtml(s.label)}</span>
-          </div>`).join('')}
-        </div>` : ''}
-        ${skills.length ? `
-        <div class="about-skills-block">
-          <div class="about-skills-header">
-            <span class="about-skills-label">Skills &amp; Tools</span>
-            <span class="about-skills-count">${skills.length} discipline${skills.length !== 1 ? 's' : ''}</span>
-          </div>
-          <ul class="about-skills">
-            ${skills.map(s => `<li>${escapeHtml(s)}</li>`).join('')}
-          </ul>
-        </div>` : ''}
-      </div>
-      <div class="about-text">
-        <div class="about-eyebrow">About</div>
-        <h2 class="about-headline">${aboutHeadline}</h2>
-        <div class="about-rule"></div>
-        <div class="about-body">
-          ${paragraphs.map(p => `<p>${escapeHtml(p)}</p>`).join('')}
-        </div>
-      </div>
-    </div>`;
+  // LEFT: portrait + name + title + skills chips
+  const leftCol = document.createElement('div');
+  leftCol.className = 'about-left';
+
+  if (block.image) {
+    const portraitWrap = document.createElement('div');
+    portraitWrap.className = 'about-portrait-tile';
+    portraitWrap.innerHTML = `<img src="${escapeHtml(block.image)}" alt="${escapeHtml(block.heading || 'Ash Marshall')}" loading="lazy">`;
+    leftCol.appendChild(portraitWrap);
+  }
+
+  const nameEl = document.createElement('div');
+  nameEl.className = 'about-name';
+  nameEl.textContent = 'Marshall';
+  leftCol.appendChild(nameEl);
+
+  const titleEl = document.createElement('div');
+  titleEl.className = 'about-title-line';
+  titleEl.textContent = 'Multimedia Creative · London';
+  leftCol.appendChild(titleEl);
+
+  if (skills.length) {
+    const chipsWrap = document.createElement('div');
+    chipsWrap.className = 'about-chips';
+    skills.forEach(s => {
+      const chip = document.createElement('span');
+      chip.className = 'about-chip';
+      chip.textContent = s;
+      chipsWrap.appendChild(chip);
+    });
+    leftCol.appendChild(chipsWrap);
+  }
+
+  // RIGHT: blurb paragraphs + contact
+  const rightCol = document.createElement('div');
+  rightCol.className = 'about-right';
+
+  const bodyDiv = document.createElement('div');
+  bodyDiv.className = 'about-body-text';
+  bodyDiv.innerHTML = paragraphs.map(p => `<p>${escapeHtml(p)}</p>`).join('');
+  rightCol.appendChild(bodyDiv);
+
+  const contactDiv = document.createElement('div');
+  contactDiv.className = 'about-contact';
+  contactDiv.innerHTML =
+    `<span class="about-contact-label">say hello</span>` +
+    `<a class="about-contact-link" href="${escapeHtml(linkedin)}" target="_blank" rel="noreferrer noopener">LinkedIn ↗</a>`;
+  rightCol.appendChild(contactDiv);
+
+  el.appendChild(leftCol);
+  el.appendChild(rightCol);
+  el.classList.add('about-grid-new');
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -627,7 +848,7 @@ async function loadAbout() {
 // ─────────────────────────────────────────────────────────────
 function reorderSections() {
   if (!_site?.homepage_sections) return;
-  const SEC_ID = { 'home': 'work', 'client-work': 'clients', 'photography': 'photography', 'bts': 'bts', 'about': 'about' };
+  const SEC_ID = { 'home': 'work', 'client-work': 'clients', 'photography': 'photography', 'bts': 'bts', 'electra-film': 'electra', 'about': 'about' };
   const footer = document.querySelector('footer.site-footer');
   if (!footer) return;
   const parent = footer.parentElement;
@@ -1149,7 +1370,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initNav();
     initReveal();
     await loadSiteSettings();
-    await Promise.all([loadWork(), loadClients(), loadPhotography(), loadBTS(), loadAbout(), loadCustomSections()]);
+    await Promise.all([loadWork(), loadClients(), loadElectra(), loadPhotography(), loadBTS(), loadAbout(), loadCustomSections()]);
     reorderSections();
   } else if (isSubPage) {
     // Sub-page (about.html, photography.html, etc.)
@@ -1165,3 +1386,71 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 });
+
+// ─────────────────────────────────────────────────────────────
+//  COLOUR TORCH — cursor-following colour reveal inside tiles.
+//  A colour clone of the tile image is masked to a circle that
+//  tracks the pointer; the greyscale base stays put beneath it.
+// ─────────────────────────────────────────────────────────────
+const TORCH_SEL = '.work-tile, .work-player-stage, .photo-tile, .bts-tile, .electra-still-tile, .electra-poster-tile, .archive-thumb';
+
+function initTorch() {
+  if (window.matchMedia('(hover: none)').matches) return;
+
+  document.addEventListener('pointerover', (e) => {
+    const tile = e.target.closest(TORCH_SEL);
+    if (!tile || tile.dataset.torch) return;
+    const img = tile.querySelector('img');
+    if (!img || !img.src || img.classList.contains('torch-layer')) return;
+    tile.dataset.torch = '1';
+    const layer = img.cloneNode();
+    layer.classList.add('torch-layer');
+    layer.removeAttribute('id');
+    layer.setAttribute('alt', '');
+    layer.setAttribute('aria-hidden', 'true');
+    layer.loading = 'eager';
+    // pin the layer to the source image's box within the tile
+    const place = () => {
+      layer.style.left   = img.offsetLeft + 'px';
+      layer.style.top    = img.offsetTop + 'px';
+      layer.style.width  = img.offsetWidth + 'px';
+      layer.style.height = img.offsetHeight + 'px';
+    };
+    place();
+    tile.appendChild(layer);
+    tile._torchPlace = place;
+  }, { passive: true });
+
+  document.addEventListener('pointermove', (e) => {
+    const tile = e.target.closest(TORCH_SEL);
+    if (!tile || !tile.dataset.torch) return;
+    const r = tile.getBoundingClientRect();
+    tile.style.setProperty('--tx', (e.clientX - r.left) + 'px');
+    tile.style.setProperty('--ty', (e.clientY - r.top) + 'px');
+  }, { passive: true });
+}
+
+// ─────────────────────────────────────────────────────────────
+//  WORDMARK SCRAMBLE — one-shot resolve on load
+// ─────────────────────────────────────────────────────────────
+function initScramble() {
+  const el = document.querySelector('.nav-logo');
+  if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const FINAL = el.textContent;
+  const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#/\\|=+*';
+  const start = performance.now(), DUR = 750;
+  function tick(now) {
+    const p = Math.min(1, (now - start) / DUR);
+    const settled = Math.floor(p * FINAL.length);
+    let out = FINAL.slice(0, settled);
+    for (let i = settled; i < FINAL.length; i++) {
+      out += GLYPHS[(Math.random() * GLYPHS.length) | 0];
+    }
+    el.textContent = out;
+    if (p < 1) requestAnimationFrame(tick); else el.textContent = FINAL;
+  }
+  requestAnimationFrame(tick);
+}
+
+initTorch();
+initScramble();
