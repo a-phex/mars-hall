@@ -1,6 +1,78 @@
 {
   "images": [
     {
+      "src": "static/img/photography/EVENT_SUMMIT_2026-282_20260612_203522_177_1365w.webp",
+      "srcset": "static/img/photography/EVENT_SUMMIT_2026-282_20260612_203522_177_480w.webp 480w, static/img/photography/EVENT_SUMMIT_2026-282_20260612_203522_177_960w.webp 960w, static/img/photography/EVENT_SUMMIT_2026-282_20260612_203522_177_1365w.webp 1365w",
+      "w": 1365,
+      "h": 2048,
+      "exif": {
+        "camera": "SONY ILCE-7M3"
+      }
+    },
+    {
+      "src": "static/img/photography/EVENT_SUMMIT_2026-152_20260612_203436_704_1600w.webp",
+      "srcset": "static/img/photography/EVENT_SUMMIT_2026-152_20260612_203436_704_480w.webp 480w, static/img/photography/EVENT_SUMMIT_2026-152_20260612_203436_704_960w.webp 960w, static/img/photography/EVENT_SUMMIT_2026-152_20260612_203436_704_1600w.webp 1600w",
+      "w": 1600,
+      "h": 1066,
+      "exif": {
+        "camera": "SONY ILCE-7M3"
+      }
+    },
+    {
+      "src": "static/img/photography/EVENT_SUMMIT_2026-149_20260612_203425_918_1600w.webp",
+      "srcset": "static/img/photography/EVENT_SUMMIT_2026-149_20260612_203425_918_480w.webp 480w, static/img/photography/EVENT_SUMMIT_2026-149_20260612_203425_918_960w.webp 960w, static/img/photography/EVENT_SUMMIT_2026-149_20260612_203425_918_1600w.webp 1600w",
+      "w": 1600,
+      "h": 1066,
+      "exif": {
+        "camera": "SONY ILCE-7M3"
+      }
+    },
+    {
+      "src": "static/img/photography/EVENT_SUMMIT_2026-82_20260612_203346_269_1600w.webp",
+      "srcset": "static/img/photography/EVENT_SUMMIT_2026-82_20260612_203346_269_480w.webp 480w, static/img/photography/EVENT_SUMMIT_2026-82_20260612_203346_269_960w.webp 960w, static/img/photography/EVENT_SUMMIT_2026-82_20260612_203346_269_1600w.webp 1600w",
+      "w": 1600,
+      "h": 1066,
+      "exif": {
+        "camera": "SONY ILCE-7M3"
+      }
+    },
+    {
+      "src": "static/img/photography/EVENT_SUMMIT_2026-44_20260612_203318_410_1600w.webp",
+      "srcset": "static/img/photography/EVENT_SUMMIT_2026-44_20260612_203318_410_480w.webp 480w, static/img/photography/EVENT_SUMMIT_2026-44_20260612_203318_410_960w.webp 960w, static/img/photography/EVENT_SUMMIT_2026-44_20260612_203318_410_1600w.webp 1600w",
+      "w": 1600,
+      "h": 1066,
+      "exif": {
+        "camera": "SONY ILCE-7M3"
+      }
+    },
+    {
+      "src": "static/img/photography/EVENT_SUMMIT_2026-41_20260612_203310_076_1600w.webp",
+      "srcset": "static/img/photography/EVENT_SUMMIT_2026-41_20260612_203310_076_480w.webp 480w, static/img/photography/EVENT_SUMMIT_2026-41_20260612_203310_076_960w.webp 960w, static/img/photography/EVENT_SUMMIT_2026-41_20260612_203310_076_1600w.webp 1600w",
+      "w": 1600,
+      "h": 1066,
+      "exif": {
+        "camera": "SONY ILCE-7M3"
+      }
+    },
+    {
+      "src": "static/img/photography/EVENT_SUMMIT_2026-40_20260612_203309_524_1600w.webp",
+      "srcset": "static/img/photography/EVENT_SUMMIT_2026-40_20260612_203309_524_480w.webp 480w, static/img/photography/EVENT_SUMMIT_2026-40_20260612_203309_524_960w.webp 960w, static/img/photography/EVENT_SUMMIT_2026-40_20260612_203309_524_1600w.webp 1600w",
+      "w": 1600,
+      "h": 1066,
+      "exif": {
+        "camera": "SONY ILCE-7M3"
+      }
+    },
+    {
+      "src": "static/img/photography/EVENT_SUMMIT_2026-39_20260612_203309_059_1600w.webp",
+      "srcset": "static/img/photography/EVENT_SUMMIT_2026-39_20260612_203309_059_480w.webp 480w, static/img/photography/EVENT_SUMMIT_2026-39_20260612_203309_059_960w.webp 960w, static/img/photography/EVENT_SUMMIT_2026-39_20260612_203309_059_1600w.webp 1600w",
+      "w": 1600,
+      "h": 1066,
+      "exif": {
+        "camera": "SONY ILCE-7M3"
+      }
+    },
+    {
       "src": "static/img/photography/amdaris_wit_event_100424-03_1600w.webp",
       "srcset": "static/img/photography/amdaris_wit_event_100424-03_480w.webp 480w, static/img/photography/amdaris_wit_event_100424-03_960w.webp 960w, static/img/photography/amdaris_wit_event_100424-03_1600w.webp 1600w",
       "w": 1600,
