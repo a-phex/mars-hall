@@ -1,6 +1,63 @@
 {
   "images": [
     {
+      "src": "static/img/photography/EVENT_MTE25-01_20260612_205118_325_1600w.webp",
+      "srcset": "static/img/photography/EVENT_MTE25-01_20260612_205118_325_480w.webp 480w, static/img/photography/EVENT_MTE25-01_20260612_205118_325_960w.webp 960w, static/img/photography/EVENT_MTE25-01_20260612_205118_325_1600w.webp 1600w",
+      "w": 1600,
+      "h": 2400
+    },
+    {
+      "src": "static/img/photography/EVENT_WINDOWS_11_AT_CHANNEL_COMPANY_2606_20260612_205112_450_1600w.webp",
+      "srcset": "static/img/photography/EVENT_WINDOWS_11_AT_CHANNEL_COMPANY_2606_20260612_205112_450_480w.webp 480w, static/img/photography/EVENT_WINDOWS_11_AT_CHANNEL_COMPANY_2606_20260612_205112_450_960w.webp 960w, static/img/photography/EVENT_WINDOWS_11_AT_CHANNEL_COMPANY_2606_20260612_205112_450_1600w.webp 1600w",
+      "w": 1600,
+      "h": 1067
+    },
+    {
+      "src": "static/img/photography/EVENT_WINDOWS_11_AT_CHANNEL_COMPANY_2606_20260612_205109_226_1600w.webp",
+      "srcset": "static/img/photography/EVENT_WINDOWS_11_AT_CHANNEL_COMPANY_2606_20260612_205109_226_480w.webp 480w, static/img/photography/EVENT_WINDOWS_11_AT_CHANNEL_COMPANY_2606_20260612_205109_226_960w.webp 960w, static/img/photography/EVENT_WINDOWS_11_AT_CHANNEL_COMPANY_2606_20260612_205109_226_1600w.webp 1600w",
+      "w": 1600,
+      "h": 1067
+    },
+    {
+      "src": "static/img/photography/ITC24-36_20260612_205104_953_1600w.webp",
+      "srcset": "static/img/photography/ITC24-36_20260612_205104_953_480w.webp 480w, static/img/photography/ITC24-36_20260612_205104_953_960w.webp 960w, static/img/photography/ITC24-36_20260612_205104_953_1600w.webp 1600w",
+      "w": 1600,
+      "h": 2400
+    },
+    {
+      "src": "static/img/photography/ITC24-21_20260612_205102_919_1600w.webp",
+      "srcset": "static/img/photography/ITC24-21_20260612_205102_919_480w.webp 480w, static/img/photography/ITC24-21_20260612_205102_919_960w.webp 960w, static/img/photography/ITC24-21_20260612_205102_919_1600w.webp 1600w",
+      "w": 1600,
+      "h": 1067
+    },
+    {
+      "src": "static/img/photography/Ant_Morse_221124-13_20260612_205059_698_1600w.webp",
+      "srcset": "static/img/photography/Ant_Morse_221124-13_20260612_205059_698_480w.webp 480w, static/img/photography/Ant_Morse_221124-13_20260612_205059_698_960w.webp 960w, static/img/photography/Ant_Morse_221124-13_20260612_205059_698_1600w.webp 1600w",
+      "w": 1600,
+      "h": 2400
+    },
+    {
+      "src": "static/img/photography/Ant_Morse_221124-04_20260612_205058_173_1600w.webp",
+      "srcset": "static/img/photography/Ant_Morse_221124-04_20260612_205058_173_480w.webp 480w, static/img/photography/Ant_Morse_221124-04_20260612_205058_173_960w.webp 960w, static/img/photography/Ant_Morse_221124-04_20260612_205058_173_1600w.webp 1600w",
+      "w": 1600,
+      "h": 1067
+    },
+    {
+      "src": "static/img/photography/Ant_Morse_221124-02_20260612_205056_275_1600w.webp",
+      "srcset": "static/img/photography/Ant_Morse_221124-02_20260612_205056_275_480w.webp 480w, static/img/photography/Ant_Morse_221124-02_20260612_205056_275_960w.webp 960w, static/img/photography/Ant_Morse_221124-02_20260612_205056_275_1600w.webp 1600w",
+      "w": 1600,
+      "h": 2400
+    },
+    {
+      "src": "static/img/photography/EVENT_SUMMIT_2026-292_20260612_204119_139_1600w.webp",
+      "srcset": "static/img/photography/EVENT_SUMMIT_2026-292_20260612_204119_139_480w.webp 480w, static/img/photography/EVENT_SUMMIT_2026-292_20260612_204119_139_960w.webp 960w, static/img/photography/EVENT_SUMMIT_2026-292_20260612_204119_139_1600w.webp 1600w",
+      "w": 1600,
+      "h": 1066,
+      "exif": {
+        "camera": "SONY ILCE-7M3"
+      }
+    },
+    {
       "src": "static/img/photography/EVENT_SUMMIT_2026-282_20260612_203522_177_1365w.webp",
       "srcset": "static/img/photography/EVENT_SUMMIT_2026-282_20260612_203522_177_480w.webp 480w, static/img/photography/EVENT_SUMMIT_2026-282_20260612_203522_177_960w.webp 960w, static/img/photography/EVENT_SUMMIT_2026-282_20260612_203522_177_1365w.webp 1365w",
       "w": 1365,
