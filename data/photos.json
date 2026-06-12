@@ -73,15 +73,6 @@
       }
     },
     {
-      "src": "static/img/photography/crunchy-3_20260612_211156_620_1365w.webp",
-      "srcset": "static/img/photography/crunchy-3_20260612_211156_620_480w.webp 480w, static/img/photography/crunchy-3_20260612_211156_620_960w.webp 960w, static/img/photography/crunchy-3_20260612_211156_620_1365w.webp 1365w",
-      "w": 1365,
-      "h": 2048,
-      "exif": {
-        "camera": "SONY ILCE-7M3"
-      }
-    },
-    {
       "src": "static/img/photography/crunchy2-1_20260612_211156_097_1365w.webp",
       "srcset": "static/img/photography/crunchy2-1_20260612_211156_097_480w.webp 480w, static/img/photography/crunchy2-1_20260612_211156_097_960w.webp 960w, static/img/photography/crunchy2-1_20260612_211156_097_1365w.webp 1365w",
       "w": 1365,
@@ -100,15 +91,6 @@
       }
     },
     {
-      "src": "static/img/photography/crunchy2-4_20260612_211154_945_1365w.webp",
-      "srcset": "static/img/photography/crunchy2-4_20260612_211154_945_480w.webp 480w, static/img/photography/crunchy2-4_20260612_211154_945_960w.webp 960w, static/img/photography/crunchy2-4_20260612_211154_945_1365w.webp 1365w",
-      "w": 1365,
-      "h": 2048,
-      "exif": {
-        "camera": "SONY ILCE-7M3"
-      }
-    },
-    {
       "src": "static/img/photography/crunchy2-3_20260612_211154_418_1365w.webp",
       "srcset": "static/img/photography/crunchy2-3_20260612_211154_418_480w.webp 480w, static/img/photography/crunchy2-3_20260612_211154_418_960w.webp 960w, static/img/photography/crunchy2-3_20260612_211154_418_1365w.webp 1365w",
       "w": 1365,
@@ -118,26 +100,8 @@
       }
     },
     {
-      "src": "static/img/photography/crunchy2-7_20260612_211153_857_1365w.webp",
-      "srcset": "static/img/photography/crunchy2-7_20260612_211153_857_480w.webp 480w, static/img/photography/crunchy2-7_20260612_211153_857_960w.webp 960w, static/img/photography/crunchy2-7_20260612_211153_857_1365w.webp 1365w",
-      "w": 1365,
-      "h": 2048,
-      "exif": {
-        "camera": "SONY ILCE-7M3"
-      }
-    },
-    {
       "src": "static/img/photography/crunchy2-9_20260612_211153_215_1365w.webp",
       "srcset": "static/img/photography/crunchy2-9_20260612_211153_215_480w.webp 480w, static/img/photography/crunchy2-9_20260612_211153_215_960w.webp 960w, static/img/photography/crunchy2-9_20260612_211153_215_1365w.webp 1365w",
-      "w": 1365,
-      "h": 2048,
-      "exif": {
-        "camera": "SONY ILCE-7M3"
-      }
-    },
-    {
-      "src": "static/img/photography/crunchy2-6_20260612_211152_373_1365w.webp",
-      "srcset": "static/img/photography/crunchy2-6_20260612_211152_373_480w.webp 480w, static/img/photography/crunchy2-6_20260612_211152_373_960w.webp 960w, static/img/photography/crunchy2-6_20260612_211152_373_1365w.webp 1365w",
       "w": 1365,
       "h": 2048,
       "exif": {
@@ -167,15 +131,6 @@
       "srcset": "static/img/photography/crunchy2-8_20260612_211150_846_480w.webp 480w, static/img/photography/crunchy2-8_20260612_211150_846_960w.webp 960w, static/img/photography/crunchy2-8_20260612_211150_846_1365w.webp 1365w",
       "w": 1365,
       "h": 2048,
-      "exif": {
-        "camera": "SONY ILCE-7M3"
-      }
-    },
-    {
-      "src": "static/img/photography/crunchy2-5_20260612_211150_440_1600w.webp",
-      "srcset": "static/img/photography/crunchy2-5_20260612_211150_440_480w.webp 480w, static/img/photography/crunchy2-5_20260612_211150_440_960w.webp 960w, static/img/photography/crunchy2-5_20260612_211150_440_1600w.webp 1600w",
-      "w": 1600,
-      "h": 1066,
       "exif": {
         "camera": "SONY ILCE-7M3"
       }
