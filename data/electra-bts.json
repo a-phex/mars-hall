@@ -1,6 +1,22 @@
 [
-  {"src": "static/img/bts/000008.jpg", "alt": ""},
-  {"src": "static/img/bts/000015.jpg", "alt": ""},
-  {"src": "static/img/bts/000016-1.jpg", "alt": ""},
-  {"src": "static/img/bts/000024.jpg", "alt": ""}
+  {
+    "src": "static/img/blocks/electra-bts/EVENT_SUMMIT_2026-286_20260612_203641_775.jpg",
+    "alt": ""
+  },
+  {
+    "src": "static/img/bts/000008.jpg",
+    "alt": ""
+  },
+  {
+    "src": "static/img/bts/000015.jpg",
+    "alt": ""
+  },
+  {
+    "src": "static/img/bts/000016-1.jpg",
+    "alt": ""
+  },
+  {
+    "src": "static/img/bts/000024.jpg",
+    "alt": ""
+  }
 ]
