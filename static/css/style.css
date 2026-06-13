@@ -1543,30 +1543,42 @@ body:not(.home) .site-nav-legacy {
     filter: none !important;
     pointer-events: none;
     opacity: 0;
-    transition: opacity .25s ease;
-    -webkit-mask-image: radial-gradient(circle 150px at var(--tx, 50%) var(--ty, 50%), #000 35%, transparent 75%);
-            mask-image: radial-gradient(circle 150px at var(--tx, 50%) var(--ty, 50%), #000 35%, transparent 75%);
+    transition: opacity .3s ease;
+    /* larger, softer spotlight */
+    -webkit-mask-image: radial-gradient(circle 220px at var(--tx, 50%) var(--ty, 50%), #000 45%, transparent 80%);
+            mask-image: radial-gradient(circle 220px at var(--tx, 50%) var(--ty, 50%), #000 45%, transparent 80%);
     z-index: 2;
   }
   [data-torch]:hover .torch-layer { opacity: 1; }
-  /* Base image stays greyscale under the torch (torch IS the colour) */
-  [data-torch]:hover img:not(.torch-layer) { filter: grayscale(1) !important; }
-  /* Exceptions: actively-playing/selected tiles keep full colour */
-  .work-tile--active[data-torch]:hover img:not(.torch-layer),
-  .archive-thumb--active[data-torch]:hover img:not(.torch-layer) { filter: grayscale(0) !important; }
+  /* Active/playing tiles never need the spotlight (they stay full colour) */
   .work-tile--active .torch-layer,
   .archive-thumb--active .torch-layer { opacity: 0 !important; }
 }
 
-/* Touch devices: tiles colour in as they cross mid-viewport */
-@media (hover: none) and (prefers-reduced-motion: no-preference) {
+/* Scroll saturation: tiles regain colour while in the central viewport band and
+   fade to greyscale entering/leaving. Layered under the torch so colour returns
+   on scroll AND the cursor spotlight still pops. Greyscale-at-rest fallback when
+   scroll-timelines are unsupported. */
+@media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
-    .work-tile img, .photo-tile img, .bts-tile img,
-    .electra-still-tile img, .archive-thumb img {
-      animation: tileColourPass both linear;
+    .work-tile img:not(.torch-layer),
+    .photo-tile img:not(.torch-layer),
+    .bts-tile img:not(.torch-layer),
+    .electra-still-tile img:not(.torch-layer),
+    .archive-thumb img:not(.torch-layer) {
+      animation: tileSat both linear;
       animation-timeline: view();
-      animation-range: cover 20% cover 55%;
+      animation-range: cover 0% cover 100%;
     }
-    @keyframes tileColourPass { from { filter: grayscale(1); } to { filter: grayscale(0); } }
+    @keyframes tileSat {
+      0%       { filter: grayscale(1); }
+      25%, 75% { filter: grayscale(0); }
+      100%     { filter: grayscale(1); }
+    }
+    .work-tile--active img:not(.torch-layer),
+    .archive-thumb--active img:not(.torch-layer) {
+      animation: none !important;
+      filter: grayscale(0) !important;
+    }
   }
 }
