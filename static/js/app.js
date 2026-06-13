@@ -55,18 +55,17 @@ async function loadSiteSettings() {
     document.querySelectorAll('a[href*="youtube.com"]').forEach(a => { a.href = s.social.youtube; });
   }
 
-  // Section visibility - check homepage_sections first, then fall back to show_* flags
+  // Section visibility — driven generically by homepage_sections. Any section
+  // with visible:false is hidden. SEC_SLUG_TO_ID maps publisher slugs to the
+  // DOM section ids (kept in sync with SEC_ID in reorderSections).
   const secs = s.homepage_sections || [];
-  const getVis = (slug, showKey) => {
-    const hpSec = secs.find(x => x.slug === slug);
-    if (hpSec && hpSec.visible === false) return false;
-    if (s.sections && s.sections[showKey] === false) return false;
-    return true;
-  };
-  if (!getVis('client-work', 'show_clients'))    { const el = document.getElementById('clients');     if (el) el.style.display = 'none'; }
-  if (!getVis('photography', 'show_photography')) { const el = document.getElementById('photography'); if (el) el.style.display = 'none'; }
-  if (!getVis('bts', 'show_bts'))                { const el = document.getElementById('bts');         if (el) el.style.display = 'none'; }
-  if (!getVis('about', 'show_about'))             { const el = document.getElementById('about');       if (el) el.style.display = 'none'; }
+  const SEC_SLUG_TO_ID = { 'home': 'work', 'client-work': 'clients', 'photography': 'photography', 'bts': 'bts', 'electra-film': 'electra', 'about': 'about' };
+  secs.forEach(sec => {
+    if (sec && sec.visible === false) {
+      const el = document.getElementById(SEC_SLUG_TO_ID[sec.slug] || sec.slug);
+      if (el) el.style.display = 'none';
+    }
+  });
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -568,7 +567,7 @@ let _lbIndex  = 0;
  * Normalise a photos.json item into {src, alt, caption, exif, srcset, w, h}.
  */
 function normalisePhotoItem(item) {
-  if (typeof item === 'string') return { src: item, alt: '', caption: '', exif: '' };
+  if (typeof item === 'string') return { src: item, alt: '', caption: '', exif: '', full: '' };
   const src     = item.src || '';
   const alt     = item.alt || item.title || '';
   const caption = item.caption || item.title || '';
@@ -578,7 +577,7 @@ function normalisePhotoItem(item) {
     if (item[k]) exifParts.push(String(item[k]));
   });
   const exif    = exifParts.join('  ');
-  return { src, alt, caption, exif, srcset: item.srcset || '', w: item.w || 0, h: item.h || 0 };
+  return { src, alt, caption, exif, full: item.full || '', srcset: item.srcset || '', w: item.w || 0, h: item.h || 0 };
 }
 
 /**
@@ -668,7 +667,7 @@ async function loadPhotography() {
  * Objects may have youtubeId or a src ending in .mp4/.webm (video).
  */
 function normaliseBTSItem(item) {
-  if (typeof item === 'string') return { src: item, alt: '', caption: '', isVideo: false, youtubeId: '', title: '' };
+  if (typeof item === 'string') return { src: item, alt: '', caption: '', full: '', isVideo: false, youtubeId: '', title: '' };
   const src       = item.src || '';
   const isVideo   = !!(item.youtubeId || /\.(mp4|webm)$/i.test(src));
   return {
@@ -678,6 +677,7 @@ function normaliseBTSItem(item) {
     isVideo,
     youtubeId: item.youtubeId || '',
     title:     item.title || item.alt || '',
+    full:      item.full || '',
     thumb:     item.thumb || (item.youtubeId ? `https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg` : src),
   };
 }
@@ -1042,7 +1042,7 @@ function openLightboxAt(collection, index, fromTileImg) {
 
   function applyFrame() {
     const item = _lbItems[_lbIndex];
-    img.src = item.src || '';
+    img.src = item.full || item.src || '';
     img.alt = item.alt || '';
 
     // Caption + EXIF
@@ -1130,7 +1130,7 @@ function lbNavigate(delta) {
   const item = _lbItems[_lbIndex];
   const img  = $('lightboxImg');
   const cap  = $('lightboxCaption');
-  if (img) { img.src = item.src || ''; img.alt = item.alt || ''; }
+  if (img) { img.src = item.full || item.src || ''; img.alt = item.alt || ''; }
   const parts = [];
   if (item.caption) parts.push(`<span class="lb-caption-text">${escapeHtml(item.caption)}</span>`);
   if (item.exif)    parts.push(`<span class="lb-caption-exif">${escapeHtml(item.exif)}</span>`);

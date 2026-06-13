@@ -48,6 +48,12 @@
       "slug": "photography"
     },
     {
+      "slug": "bts",
+      "label": "Behind the Scenes",
+      "builtin": "bts",
+      "visible": true
+    },
+    {
       "icon": "🎬",
       "label": "Electra — Short Film",
       "slug": "electra-film",
