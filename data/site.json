@@ -30,16 +30,16 @@
   },
   "homepage_sections": [
     {
+      "builtin": "about",
+      "icon": "👤",
+      "label": "About",
+      "slug": "about"
+    },
+    {
       "builtin": "work",
       "icon": "🎬",
       "label": "Selected Work",
       "slug": "home"
-    },
-    {
-      "builtin": "clients",
-      "icon": "🎯",
-      "label": "The Archive",
-      "slug": "client-work"
     },
     {
       "builtin": "photography",
@@ -54,16 +54,16 @@
       "visible": true
     },
     {
+      "builtin": "clients",
+      "icon": "🎯",
+      "label": "The Archive",
+      "slug": "client-work"
+    },
+    {
       "icon": "🎬",
       "label": "Electra — Short Film",
       "slug": "electra-film",
       "visible": false
-    },
-    {
-      "builtin": "about",
-      "icon": "👤",
-      "label": "About",
-      "slug": "about"
     }
   ]
 }
