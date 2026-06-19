@@ -85,20 +85,29 @@ img { display: block; max-width: 100%; }
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid transparent;
-  transition: border-color .3s;
+  transition: opacity .45s ease, transform .45s ease, border-color .3s;
+}
+/* Hidden while at the very top (over the hero); fades + slides in once
+   you scroll, and back out when you return to the top. Launcher pattern. */
+#site-header:not(.scrolled) {
+  opacity: 0; transform: translateY(-100%); pointer-events: none;
 }
 #site-header.scrolled { border-bottom-color: var(--hairline); }
 
 .nav-main {
-  display: flex; align-items: center; gap: 26px;
-  height: var(--nav-h); padding: 0 var(--pad);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 7px; min-height: var(--nav-h); padding: 10px var(--pad);
+  position: relative;
 }
 .nav-logo {
   font-weight: 900; font-size: 16px; letter-spacing: -0.02em;
-  margin-right: auto;
   transition: font-variation-settings .25s, color .2s;
 }
-.nav-group { display: flex; align-items: center; gap: 22px; list-style: none; }
+.nav-group {
+  display: flex; align-items: center; justify-content: center;
+  flex-wrap: wrap; gap: 22px; list-style: none;
+}
 .nav-group a {
   font-family: var(--font-mono); font-size: 11px;
   letter-spacing: .08em; text-transform: uppercase;
@@ -229,7 +238,7 @@ img { display: block; max-width: 100%; }
 
 /* ── Mobile nav + responsive base ────────────────────────────── */
 @media (max-width: 760px) {
-  .nav-toggle { display: block; }
+  .nav-toggle { display: block; position: absolute; right: var(--pad); top: 8px; }
   .nav-group {
     position: fixed; inset: var(--nav-h) 0 auto 0;
     flex-direction: column; align-items: flex-start; gap: 0;
