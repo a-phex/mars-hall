@@ -232,13 +232,31 @@ img { display: block; max-width: 100%; }
     @keyframes pageProgress { to { transform: scaleX(1); } }
   }
 }
+/* Phones: the horizontal section sweep pushes content off-screen on a narrow
+   viewport (sideways scroll + clipped tiles). Swap it for a vertical fade-up
+   so the reveal stays, but nothing ever moves horizontally. */
+@media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .section,
+    .section:nth-of-type(even) { animation-name: secRiseMobile; }
+    .section-masthead,
+    .section:nth-of-type(even) .section-masthead { animation-name: headRiseMobile; }
+    @keyframes secRiseMobile  { from { transform: translateY(26px) scale(.98); opacity:.01; } to { transform:none; opacity:1; } }
+    @keyframes headRiseMobile { from { transform: translateY(16px); opacity:0; } to { transform:none; opacity:1; } }
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .hero-media img { animation: none; filter: grayscale(0); }
 }
 
 /* ── Mobile nav + responsive base ────────────────────────────── */
 @media (max-width: 760px) {
-  .nav-toggle { display: block; position: absolute; right: var(--pad); top: 8px; }
+  /* Keep the header (and its menu button) reachable at all times on phones —
+     the fade-on-scroll stays a desktop treatment. */
+  #site-header:not(.scrolled) { opacity: 1; transform: none; pointer-events: auto; }
+  #site-header { border-bottom-color: var(--hairline); }
+
+  .nav-toggle { display: block; position: absolute; right: var(--pad); top: 50%; transform: translateY(-50%); padding: 10px; }
   .nav-group {
     position: fixed; inset: var(--nav-h) 0 auto 0;
     flex-direction: column; align-items: flex-start; gap: 0;
@@ -247,7 +265,7 @@ img { display: block; max-width: 100%; }
     display: none;
   }
   .nav-main.open .nav-group { display: flex; }
-  .nav-group a { padding: 10px 0; font-size: 13px; }
+  .nav-group a { padding: 14px 0; font-size: 14px; width: 100%; }
   .hero { padding-bottom: 48px; }
   .section { padding: 56px 0; }
 }
@@ -425,7 +443,7 @@ img { display: block; max-width: 100%; }
 
 /* Mobile: 2 columns */
 @media (max-width: 760px) {
-  .work-bank { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .work-bank { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 }
 
 /* Reduced motion: no lift, images stay colour */
@@ -877,8 +895,8 @@ img { display: block; max-width: 100%; }
 }
 
 @media (max-width: 760px) {
-  .photo-masonry { grid-template-columns: repeat(3, 1fr); gap: 5px; }
-  .photo-col { gap: 5px; }
+  .photo-masonry { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+  .photo-col { gap: 6px; }
 }
 
 /* Reduced motion: colour always, no lifts, no drift */
@@ -1521,25 +1539,6 @@ body:not(.home) .site-nav-legacy {
 .site-footer-legacy { border-top: 1px solid var(--border); margin-top: 48px; padding: 24px; font-size: 13px; color: var(--muted); display: flex; justify-content: space-between; }
 .site-footer-legacy a { color: var(--muted); transition: color 0.2s; }
 .site-footer-legacy a:hover { color: var(--text); }
-
-/* ─────────────────────────────────────────────────────────────
-   HOME NETWORK — publisher edit button & hub link
-   ───────────────────────────────────────────────────────────── */
-.hub-link { color: var(--accent) !important; border: 1px solid rgba(229,57,27,0.3); border-radius: 3px !important; padding: 4px 10px !important; }
-.hub-link:hover { background: rgba(229,57,27,0.07) !important; }
-
-#edit-btn {
-  position: fixed; top: 14px; right: 16px; z-index: 9999;
-  font-size: 16px; line-height: 1; padding: 7px 9px;
-  border-radius: 6px;
-  background: rgba(255,255,255,0.85); backdrop-filter: blur(6px);
-  border: 1px solid var(--border);
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.3s;
-  text-decoration: none;
-}
-#edit-btn.visible { opacity: 1; pointer-events: auto; }
-#edit-btn:hover { background: rgba(229,57,27,0.08); border-color: rgba(229,57,27,0.4); }
 
 /* ═════════════════════════════════════════════════════════════
    COLOUR TORCH (sitting 5) — colour follows the cursor in tiles

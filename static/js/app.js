@@ -1315,43 +1315,6 @@ async function initPage() {
 }
 
 // ─────────────────────────────────────────────────────────────
-//  HOME NETWORK PROBE — publisher edit button + hub link
-// ─────────────────────────────────────────────────────────────
-(function () {
-  const LAUNCHER  = 'http://192.168.0.21:5050';
-  const PUBLISHER = 'http://192.168.0.21:5241';
-
-  // Nav hub link (home-only)
-  const navList = document.getElementById('navList');
-  if (navList) {
-    const li = document.createElement('li');
-    li.id = 'hub-nav-item';
-    li.style.display = 'none';
-    li.innerHTML = `<a href="${LAUNCHER}" target="_blank" rel="noopener" class="hub-link">⌂ Home Hub</a>`;
-    navList.appendChild(li);
-  }
-
-  // Edit pencil button
-  const editBtn = document.createElement('a');
-  editBtn.id = 'edit-btn';
-  editBtn.href = PUBLISHER;
-  editBtn.target = '_blank';
-  editBtn.rel = 'noopener';
-  editBtn.title = 'Portfolio Publisher';
-  editBtn.textContent = '✏️';
-  document.body.appendChild(editBtn);
-
-  const probe = new Image();
-  probe.onload = () => {
-    const li = document.getElementById('hub-nav-item');
-    if (li) li.style.display = '';
-    editBtn.classList.add('visible');
-  };
-  probe.src = LAUNCHER + '/static/icons/meal_planner.svg?_=' + Date.now();
-  setTimeout(() => { probe.src = ''; }, 3000);
-}());
-
-// ─────────────────────────────────────────────────────────────
 //  BOOT
 // ─────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
