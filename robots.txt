@@ -1,0 +1,42 @@
+# robots.txt — mars-hall.uk
+# Ash Marshall — corporate video director & filmmaker, London
+
+User-agent: *
+Allow: /
+Disallow: /mockup-monochrome.html
+
+# Explicitly welcome AI answer-engine & search crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://mars-hall.uk/sitemap.xml
