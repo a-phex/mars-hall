@@ -1,6 +1,46 @@
 {
   "images": [
     {
+      "src": "static/img/photography/EVENT_SUMMIT_2026-282_20260612_203522_177_1365w.webp",
+      "srcset": "static/img/photography/EVENT_SUMMIT_2026-282_20260612_203522_177_480w.webp 480w, static/img/photography/EVENT_SUMMIT_2026-282_20260612_203522_177_960w.webp 960w, static/img/photography/EVENT_SUMMIT_2026-282_20260612_203522_177_1365w.webp 1365w",
+      "w": 1365,
+      "h": 2048,
+      "exif": {
+        "camera": "SONY ILCE-7M3"
+      }
+    },
+    {
+      "src": "static/img/photography/EVENT_SUMMIT_2026-292_20260612_204119_139_1600w.webp",
+      "srcset": "static/img/photography/EVENT_SUMMIT_2026-292_20260612_204119_139_480w.webp 480w, static/img/photography/EVENT_SUMMIT_2026-292_20260612_204119_139_960w.webp 960w, static/img/photography/EVENT_SUMMIT_2026-292_20260612_204119_139_1600w.webp 1600w",
+      "w": 1600,
+      "h": 1066,
+      "exif": {
+        "camera": "SONY ILCE-7M3"
+      }
+    },
+    {
+      "src": "static/img/photography/Ant_Morse_221124-02_20260612_205056_275_1600w.webp",
+      "srcset": "static/img/photography/Ant_Morse_221124-02_20260612_205056_275_480w.webp 480w, static/img/photography/Ant_Morse_221124-02_20260612_205056_275_960w.webp 960w, static/img/photography/Ant_Morse_221124-02_20260612_205056_275_1600w.webp 1600w",
+      "w": 1600,
+      "h": 2400
+    },
+    {
+      "src": "static/img/photography/EVENT_SUMMIT_2026-149_20260612_203425_918_1600w.webp",
+      "srcset": "static/img/photography/EVENT_SUMMIT_2026-149_20260612_203425_918_480w.webp 480w, static/img/photography/EVENT_SUMMIT_2026-149_20260612_203425_918_960w.webp 960w, static/img/photography/EVENT_SUMMIT_2026-149_20260612_203425_918_1600w.webp 1600w",
+      "w": 1600,
+      "h": 1066,
+      "exif": {
+        "camera": "SONY ILCE-7M3"
+      }
+    },
+    {
+      "src": "static/img/photography/IMG_2343_20260713_152052_123_1170w.webp",
+      "srcset": "static/img/photography/IMG_2343_20260713_152052_123_480w.webp 480w, static/img/photography/IMG_2343_20260713_152052_123_960w.webp 960w, static/img/photography/IMG_2343_20260713_152052_123_1170w.webp 1170w",
+      "w": 1170,
+      "h": 1519,
+      "full": "static/img/photography/IMG_2343_20260713_152052_123_1170w.webp"
+    },
+    {
       "src": "static/img/photography/VLAD_NANU_150626-28_20260620_174444_812_1600w.webp",
       "srcset": "static/img/photography/VLAD_NANU_150626-28_20260620_174444_812_480w.webp 480w, static/img/photography/VLAD_NANU_150626-28_20260620_174444_812_960w.webp 960w, static/img/photography/VLAD_NANU_150626-28_20260620_174444_812_1600w.webp 1600w, static/img/photography/VLAD_NANU_150626-28_20260620_174444_812_2400w.webp 2400w",
       "w": 1600,
@@ -93,15 +133,6 @@
       }
     },
     {
-      "src": "static/img/photography/crunchy2-9_20260612_211153_215_1365w.webp",
-      "srcset": "static/img/photography/crunchy2-9_20260612_211153_215_480w.webp 480w, static/img/photography/crunchy2-9_20260612_211153_215_960w.webp 960w, static/img/photography/crunchy2-9_20260612_211153_215_1365w.webp 1365w",
-      "w": 1365,
-      "h": 2048,
-      "exif": {
-        "camera": "SONY ILCE-7M3"
-      }
-    },
-    {
       "src": "static/img/photography/heart-1_20260612_211151_385_1365w.webp",
       "srcset": "static/img/photography/heart-1_20260612_211151_385_480w.webp 480w, static/img/photography/heart-1_20260612_211151_385_960w.webp 960w, static/img/photography/heart-1_20260612_211151_385_1365w.webp 1365w",
       "w": 1365,
@@ -111,8 +142,8 @@
       }
     },
     {
-      "src": "static/img/photography/crunchy2-8_20260612_211150_846_1365w.webp",
-      "srcset": "static/img/photography/crunchy2-8_20260612_211150_846_480w.webp 480w, static/img/photography/crunchy2-8_20260612_211150_846_960w.webp 960w, static/img/photography/crunchy2-8_20260612_211150_846_1365w.webp 1365w",
+      "src": "static/img/photography/crunchy2-9_20260612_211153_215_1365w.webp",
+      "srcset": "static/img/photography/crunchy2-9_20260612_211153_215_480w.webp 480w, static/img/photography/crunchy2-9_20260612_211153_215_960w.webp 960w, static/img/photography/crunchy2-9_20260612_211153_215_1365w.webp 1365w",
       "w": 1365,
       "h": 2048,
       "exif": {
@@ -124,6 +155,15 @@
       "srcset": "static/img/photography/crunchy2-13_20260612_211148_269_480w.webp 480w, static/img/photography/crunchy2-13_20260612_211148_269_960w.webp 960w, static/img/photography/crunchy2-13_20260612_211148_269_1600w.webp 1600w",
       "w": 1600,
       "h": 1066,
+      "exif": {
+        "camera": "SONY ILCE-7M3"
+      }
+    },
+    {
+      "src": "static/img/photography/crunchy2-8_20260612_211150_846_1365w.webp",
+      "srcset": "static/img/photography/crunchy2-8_20260612_211150_846_480w.webp 480w, static/img/photography/crunchy2-8_20260612_211150_846_960w.webp 960w, static/img/photography/crunchy2-8_20260612_211150_846_1365w.webp 1365w",
+      "w": 1365,
+      "h": 2048,
       "exif": {
         "camera": "SONY ILCE-7M3"
       }
@@ -309,41 +349,8 @@
       "h": 1067
     },
     {
-      "src": "static/img/photography/Ant_Morse_221124-02_20260612_205056_275_1600w.webp",
-      "srcset": "static/img/photography/Ant_Morse_221124-02_20260612_205056_275_480w.webp 480w, static/img/photography/Ant_Morse_221124-02_20260612_205056_275_960w.webp 960w, static/img/photography/Ant_Morse_221124-02_20260612_205056_275_1600w.webp 1600w",
-      "w": 1600,
-      "h": 2400
-    },
-    {
-      "src": "static/img/photography/EVENT_SUMMIT_2026-292_20260612_204119_139_1600w.webp",
-      "srcset": "static/img/photography/EVENT_SUMMIT_2026-292_20260612_204119_139_480w.webp 480w, static/img/photography/EVENT_SUMMIT_2026-292_20260612_204119_139_960w.webp 960w, static/img/photography/EVENT_SUMMIT_2026-292_20260612_204119_139_1600w.webp 1600w",
-      "w": 1600,
-      "h": 1066,
-      "exif": {
-        "camera": "SONY ILCE-7M3"
-      }
-    },
-    {
-      "src": "static/img/photography/EVENT_SUMMIT_2026-282_20260612_203522_177_1365w.webp",
-      "srcset": "static/img/photography/EVENT_SUMMIT_2026-282_20260612_203522_177_480w.webp 480w, static/img/photography/EVENT_SUMMIT_2026-282_20260612_203522_177_960w.webp 960w, static/img/photography/EVENT_SUMMIT_2026-282_20260612_203522_177_1365w.webp 1365w",
-      "w": 1365,
-      "h": 2048,
-      "exif": {
-        "camera": "SONY ILCE-7M3"
-      }
-    },
-    {
       "src": "static/img/photography/EVENT_SUMMIT_2026-152_20260612_203436_704_1600w.webp",
       "srcset": "static/img/photography/EVENT_SUMMIT_2026-152_20260612_203436_704_480w.webp 480w, static/img/photography/EVENT_SUMMIT_2026-152_20260612_203436_704_960w.webp 960w, static/img/photography/EVENT_SUMMIT_2026-152_20260612_203436_704_1600w.webp 1600w",
-      "w": 1600,
-      "h": 1066,
-      "exif": {
-        "camera": "SONY ILCE-7M3"
-      }
-    },
-    {
-      "src": "static/img/photography/EVENT_SUMMIT_2026-149_20260612_203425_918_1600w.webp",
-      "srcset": "static/img/photography/EVENT_SUMMIT_2026-149_20260612_203425_918_480w.webp 480w, static/img/photography/EVENT_SUMMIT_2026-149_20260612_203425_918_960w.webp 960w, static/img/photography/EVENT_SUMMIT_2026-149_20260612_203425_918_1600w.webp 1600w",
       "w": 1600,
       "h": 1066,
       "exif": {
@@ -444,26 +451,8 @@
       "h": 770
     },
     {
-      "src": "static/img/photography/londoncustomkeyboards-09_1600w.webp",
-      "srcset": "static/img/photography/londoncustomkeyboards-09_480w.webp 480w, static/img/photography/londoncustomkeyboards-09_960w.webp 960w, static/img/photography/londoncustomkeyboards-09_1600w.webp 1600w",
-      "w": 1600,
-      "h": 770
-    },
-    {
-      "src": "static/img/photography/londoncustomkeyboards-10_1600w.webp",
-      "srcset": "static/img/photography/londoncustomkeyboards-10_480w.webp 480w, static/img/photography/londoncustomkeyboards-10_960w.webp 960w, static/img/photography/londoncustomkeyboards-10_1600w.webp 1600w",
-      "w": 1600,
-      "h": 770
-    },
-    {
       "src": "static/img/photography/mmt-sticker-3-10_1303w.webp",
       "srcset": "static/img/photography/mmt-sticker-3-10_480w.webp 480w, static/img/photography/mmt-sticker-3-10_960w.webp 960w, static/img/photography/mmt-sticker-3-10_1303w.webp 1303w",
-      "w": 1303,
-      "h": 1312
-    },
-    {
-      "src": "static/img/photography/multimediateam_sticker-10_1303w.webp",
-      "srcset": "static/img/photography/multimediateam_sticker-10_480w.webp 480w, static/img/photography/multimediateam_sticker-10_960w.webp 960w, static/img/photography/multimediateam_sticker-10_1303w.webp 1303w",
       "w": 1303,
       "h": 1312
     },
