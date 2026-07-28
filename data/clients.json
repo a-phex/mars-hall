@@ -1,42 +1,96 @@
 {
   "clients": [
     {
-      "name": "Exhibition World 2019",
+      "name": "CaseStudies Films",
       "blurb": "",
+      "year": "",
       "cover": "",
       "logo": "",
       "videos": [
         {
-          "title": "Elektra Awards 2019 | Electronics Weekly",
-          "youtubeId": "zEM290himyo"
+          "title": "Oxfordshire Youth Digital Futures: Bridging the Divide",
+          "youtubeId": "JYbnYTlZBh4",
+          "date": "2026-07-28"
         },
         {
-          "title": "EW BrightSparks -  the brightest and most talented young electronics engineers in the UK",
-          "youtubeId": "ZeJFrIZUzYs"
+          "title": "Gonvarri : Hackathon 2024",
+          "youtubeId": "Q28n_qTDGps",
+          "date": "2026-07-28"
         },
         {
-          "title": "Interview: CEO Lindsley Ruth questions the UK's vision for engineering | Electronics Weekly",
-          "youtubeId": "0zUcfqoRuBA"
+          "title": "Aroya Cruises : IT Transformation of the AROYA Cruise Ship",
+          "youtubeId": "dg_teS4s_YE",
+          "date": "2026-07-28"
         },
         {
-          "title": "Tackling issues around Employment and Careers in Engineering | Electronics Weekly",
-          "youtubeId": "epKp1a050LM"
+          "title": "West Buckland School : Enhancing learning - sustainable technology & innovation",
+          "youtubeId": "4v4yXu3a5Ik",
+          "date": "2026-07-28"
         },
         {
-          "title": "Chris Ard, TouchNetix: On recruiting young engineers - Embedded World 2019 | Electronics Weekly",
-          "youtubeId": "LzQNB6b7WBU"
+          "title": "University Hospital Birmingham : Enhancing IT Security",
+          "youtubeId": "Wdj2cEINk1A",
+          "date": "2026-07-28"
         },
         {
-          "title": "Randall Restle, Digi-Key: A great time to be an engineer - Embedded World 2019 | Electronics Weekly",
-          "youtubeId": "ACACf_8xxZU"
+          "title": "APAX : Transforming lives - Digital wellbeing journey",
+          "youtubeId": "-3bs08HKUFk",
+          "date": "2026-07-28"
         },
         {
-          "title": "Embedded World overview. Nuremberg 2019 | Electronics Weekly",
-          "youtubeId": "qpb28Pnn0rs"
+          "title": "CASESTUDY DRAGADOS ES EN CAP 180526",
+          "youtubeId": "9dbVx1i_BqI",
+          "date": "2026-07-28"
         },
         {
-          "title": "Embedded World 2019 preview | Electronics Weekly",
-          "youtubeId": "hmdFNvuOZ2U"
+          "title": "Vivent Case Study van Insight Nederland",
+          "youtubeId": "ivrk_nLl2LM",
+          "date": "2026-07-28"
+        },
+        {
+          "title": "Eneco Case Study van Insight video",
+          "youtubeId": "0k9ziQKiJCY",
+          "date": "2026-07-28"
+        },
+        {
+          "title": "Témoignage client : Boralex | Insight FR",
+          "youtubeId": "J5HXzMbguEs",
+          "date": "2026-07-28"
+        },
+        {
+          "title": "Wembley Park Undergoes Digital Upgrade with Eclipse Digital Media and Absen LED",
+          "youtubeId": "NdyCD35bjSo",
+          "date": "2026-07-28"
+        },
+        {
+          "title": "Inside the Midwich-equipped PytchAir private jet",
+          "youtubeId": "sh-4kRxw0cs",
+          "date": "2026-07-28"
+        },
+        {
+          "title": "Pot snacks: depot visit and retailer re-lay with Unilever Partners for Growth",
+          "youtubeId": "YSus9hpKAOQ",
+          "date": "2026-07-28"
+        }
+      ]
+    },
+    {
+      "name": "Payment Choice Alliance",
+      "blurb": "",
+      "cover": "",
+      "logo": "static/img/thumbs/1678904890199_20260512_081903_240.jpeg",
+      "videos": [
+        {
+          "title": "PaymentChoiceAlliance // PCA Champions",
+          "youtubeId": "-rLrP_p3gDA"
+        },
+        {
+          "title": "PaymentChoiceAlliance // Social 3",
+          "youtubeId": "O2iZj8yAbBE"
+        },
+        {
+          "title": "PaymentChoiceAlliance // Did you know you'd struggle to spend this £5 note ?",
+          "youtubeId": "Wv6DYn_vx8o"
         }
       ]
     },
@@ -349,78 +403,6 @@
       ]
     },
     {
-      "name": "Motor Trader",
-      "blurb": "",
-      "cover": "",
-      "logo": "",
-      "videos": [
-        {
-          "title": "Rising Stars Awards 2019 | Motor Trader Magazine 13 May 2019",
-          "youtubeId": "J203v1Z4SLc"
-        },
-        {
-          "title": "NextGear talks profits through capital use and knowledge",
-          "youtubeId": "qiQu9slgFr8"
-        },
-        {
-          "title": "The Bottom Line. Joe Hague",
-          "youtubeId": "u3VPUBJCqQw"
-        }
-      ]
-    },
-    {
-      "name": "Packaging News",
-      "blurb": "",
-      "cover": "",
-      "logo": "static/img/clients/packaging-news.png",
-      "videos": [
-        {
-          "title": "UK Packaging Awards & Luxury Packaging Awards 2019",
-          "youtubeId": "EIzcCTkg8W0"
-        },
-        {
-          "title": "Luxury Packaging awards judging day 2019",
-          "youtubeId": "GvU0MPghuAA"
-        },
-        {
-          "title": "Packaging Awards Judging Day 170719",
-          "youtubeId": "NJF9GZb-BMI"
-        },
-        {
-          "title": "DRS roundtable – sponsored by Britvic",
-          "youtubeId": "mZdFtE2Ln-Q"
-        },
-        {
-          "title": "Extended Producer Responsibility RoundTable",
-          "youtubeId": "weWjhHDsUBI"
-        }
-      ]
-    },
-    {
-      "name": "DFNI / Frontier",
-      "blurb": "",
-      "cover": "",
-      "logo": "",
-      "videos": [
-        {
-          "title": "DFNI - Cosmetics feature",
-          "youtubeId": "LbWIdyoBXEE"
-        },
-        {
-          "title": "Fiona Rayner, Blackjack Promotions | DFNI Perspectives",
-          "youtubeId": "EqT4oRz1UwE"
-        },
-        {
-          "title": "Frontier Awards 2019 Judging Day",
-          "youtubeId": "lmVmfdB8LbA"
-        },
-        {
-          "title": "DFNI Digest | DFNI Online",
-          "youtubeId": "XmXWETbbwBs"
-        }
-      ]
-    },
-    {
       "name": "Quality Food Awards",
       "blurb": "",
       "cover": "",
@@ -441,50 +423,6 @@
         {
           "title": "Meet the Buyer on The Street at LIT - Jane Milton: the UK buyers delegation",
           "youtubeId": "IdiJOiaQif4"
-        }
-      ]
-    },
-    {
-      "name": "Money Marketing Magazine",
-      "blurb": "",
-      "cover": "",
-      "logo": "",
-      "videos": [
-        {
-          "title": "Roundtable: Are advisers up to the later life care challenge?",
-          "youtubeId": "7KeJf7_cl4o"
-        },
-        {
-          "title": "Business protection under the spotlight: Money Marketing meets iPipeline's Paul Yates",
-          "youtubeId": "y07bKxz0gIE"
-        },
-        {
-          "title": "Protection zone: Are mortgage advisers making the most of protection?",
-          "youtubeId": "8OvlFv9STB4"
-        },
-        {
-          "title": "Protection zone: Spotlight on protection.",
-          "youtubeId": "NeOKLY1eoek"
-        },
-        {
-          "title": "Introducing…The Money Marketing DFM Centre",
-          "youtubeId": "592hMWgcrVA"
-        },
-        {
-          "title": "A note from the Editor | Money Marketing Interactive Harrogate 2019",
-          "youtubeId": "EXoFjJXbRo8"
-        },
-        {
-          "title": "Good Life Gurus : Chris Haems",
-          "youtubeId": "1TomRRie0Bc"
-        },
-        {
-          "title": "Good life gurus: Sam Sloma - From footballer to financial planner",
-          "youtubeId": "_8OYJ5X7Goc"
-        },
-        {
-          "title": "MM Masterclass: The IDD",
-          "youtubeId": "M2pVTwdp1vQ"
         }
       ]
     },
@@ -569,6 +507,162 @@
       ]
     },
     {
+      "name": "Packaging News",
+      "blurb": "",
+      "cover": "",
+      "logo": "static/img/clients/packaging-news.png",
+      "videos": [
+        {
+          "title": "UK Packaging Awards & Luxury Packaging Awards 2019",
+          "youtubeId": "EIzcCTkg8W0"
+        },
+        {
+          "title": "Luxury Packaging awards judging day 2019",
+          "youtubeId": "GvU0MPghuAA"
+        },
+        {
+          "title": "Packaging Awards Judging Day 170719",
+          "youtubeId": "NJF9GZb-BMI"
+        },
+        {
+          "title": "DRS roundtable – sponsored by Britvic",
+          "youtubeId": "mZdFtE2Ln-Q"
+        },
+        {
+          "title": "Extended Producer Responsibility RoundTable",
+          "youtubeId": "weWjhHDsUBI"
+        }
+      ]
+    },
+    {
+      "name": "Money Marketing Magazine",
+      "blurb": "",
+      "cover": "",
+      "logo": "",
+      "videos": [
+        {
+          "title": "Roundtable: Are advisers up to the later life care challenge?",
+          "youtubeId": "7KeJf7_cl4o"
+        },
+        {
+          "title": "Business protection under the spotlight: Money Marketing meets iPipeline's Paul Yates",
+          "youtubeId": "y07bKxz0gIE"
+        },
+        {
+          "title": "Protection zone: Are mortgage advisers making the most of protection?",
+          "youtubeId": "8OvlFv9STB4"
+        },
+        {
+          "title": "Protection zone: Spotlight on protection.",
+          "youtubeId": "NeOKLY1eoek"
+        },
+        {
+          "title": "Introducing…The Money Marketing DFM Centre",
+          "youtubeId": "592hMWgcrVA"
+        },
+        {
+          "title": "A note from the Editor | Money Marketing Interactive Harrogate 2019",
+          "youtubeId": "EXoFjJXbRo8"
+        },
+        {
+          "title": "Good Life Gurus : Chris Haems",
+          "youtubeId": "1TomRRie0Bc"
+        },
+        {
+          "title": "Good life gurus: Sam Sloma - From footballer to financial planner",
+          "youtubeId": "_8OYJ5X7Goc"
+        },
+        {
+          "title": "MM Masterclass: The IDD",
+          "youtubeId": "M2pVTwdp1vQ"
+        }
+      ]
+    },
+    {
+      "name": "DFNI / Frontier",
+      "blurb": "",
+      "cover": "",
+      "logo": "",
+      "videos": [
+        {
+          "title": "DFNI - Cosmetics feature",
+          "youtubeId": "LbWIdyoBXEE"
+        },
+        {
+          "title": "Fiona Rayner, Blackjack Promotions | DFNI Perspectives",
+          "youtubeId": "EqT4oRz1UwE"
+        },
+        {
+          "title": "Frontier Awards 2019 Judging Day",
+          "youtubeId": "lmVmfdB8LbA"
+        },
+        {
+          "title": "DFNI Digest | DFNI Online",
+          "youtubeId": "XmXWETbbwBs"
+        }
+      ]
+    },
+    {
+      "name": "Motor Trader",
+      "blurb": "",
+      "cover": "",
+      "logo": "",
+      "videos": [
+        {
+          "title": "Rising Stars Awards 2019 | Motor Trader Magazine 13 May 2019",
+          "youtubeId": "J203v1Z4SLc"
+        },
+        {
+          "title": "NextGear talks profits through capital use and knowledge",
+          "youtubeId": "qiQu9slgFr8"
+        },
+        {
+          "title": "The Bottom Line. Joe Hague",
+          "youtubeId": "u3VPUBJCqQw"
+        }
+      ]
+    },
+    {
+      "name": "Exhibition World 2019",
+      "blurb": "",
+      "cover": "",
+      "logo": "",
+      "videos": [
+        {
+          "title": "Elektra Awards 2019 | Electronics Weekly",
+          "youtubeId": "zEM290himyo"
+        },
+        {
+          "title": "EW BrightSparks -  the brightest and most talented young electronics engineers in the UK",
+          "youtubeId": "ZeJFrIZUzYs"
+        },
+        {
+          "title": "Interview: CEO Lindsley Ruth questions the UK's vision for engineering | Electronics Weekly",
+          "youtubeId": "0zUcfqoRuBA"
+        },
+        {
+          "title": "Tackling issues around Employment and Careers in Engineering | Electronics Weekly",
+          "youtubeId": "epKp1a050LM"
+        },
+        {
+          "title": "Chris Ard, TouchNetix: On recruiting young engineers - Embedded World 2019 | Electronics Weekly",
+          "youtubeId": "LzQNB6b7WBU"
+        },
+        {
+          "title": "Randall Restle, Digi-Key: A great time to be an engineer - Embedded World 2019 | Electronics Weekly",
+          "youtubeId": "ACACf_8xxZU"
+        },
+        {
+          "title": "Embedded World overview. Nuremberg 2019 | Electronics Weekly",
+          "youtubeId": "qpb28Pnn0rs"
+        },
+        {
+          "title": "Embedded World 2019 preview | Electronics Weekly",
+          "youtubeId": "hmdFNvuOZ2U"
+        }
+      ]
+    },
+    {
       "name": "Inspire",
       "blurb": "",
       "cover": "",
@@ -621,26 +715,6 @@
         {
           "title": "Suicide Squad - Official Trailer 1 [HD]",
           "youtubeId": "CmRih_VtVAs"
-        }
-      ]
-    },
-    {
-      "name": "Payment Choice Alliance",
-      "blurb": "",
-      "cover": "",
-      "logo": "static/img/thumbs/1678904890199_20260512_081903_240.jpeg",
-      "videos": [
-        {
-          "title": "PaymentChoiceAlliance // PCA Champions",
-          "youtubeId": "-rLrP_p3gDA"
-        },
-        {
-          "title": "PaymentChoiceAlliance // Social 3",
-          "youtubeId": "O2iZj8yAbBE"
-        },
-        {
-          "title": "PaymentChoiceAlliance // Did you know you'd struggle to spend this £5 note ?",
-          "youtubeId": "Wv6DYn_vx8o"
         }
       ]
     }
