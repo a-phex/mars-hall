@@ -8,7 +8,7 @@
   <meta name="referrer" content="no-referrer" />
   <meta name="description" content="A private photo gallery from Ash Marshall." />
   <link rel="preload" href="../static/fonts/satoshi-900.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="gallery.css?v=2" />
+  <link rel="stylesheet" href="gallery.css?v=3" />
 </head>
 <body>
 
@@ -58,6 +58,8 @@
         <button class="g-btn g-btn-solid" id="dlAll">Download all</button>
       </div>
     </div>
+    <div class="g-films" id="films" hidden></div>
+    <div class="g-subhead" id="photosHead" hidden>Photos</div>
     <div class="g-grid" id="grid"></div>
   </section>
 
@@ -99,6 +101,6 @@
   <button class="g-lb-nav g-lb-next" id="lbNext" aria-label="Next">›</button>
 </div>
 
-<script src="gallery.js?v=2"></script>
+<script src="gallery.js?v=3"></script>
 </body>
 </html>

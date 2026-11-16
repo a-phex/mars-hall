@@ -6,7 +6,7 @@
 const $ = id => document.getElementById(id);
 const SITE = window.GALLERY_SITE || '/';
 const slug = decodeURIComponent(location.hash.slice(1)).replace(/[^a-z0-9-]/gi, '');
-let BASE = '', key = null, meta = null, files = [], thumbs = {}, fulls = {}, current = -1;
+let BASE = '', key = null, meta = null, files = [], films = [], thumbs = {}, fulls = {}, current = -1;
 
 // Site links: in Rig's preview they point at the local copy of the site.
 document.querySelectorAll('[data-site]').forEach(a => { a.href = SITE + a.dataset.site; });
@@ -65,6 +65,7 @@ async function boot() {
   }
   $('gateClient').textContent = meta.client;
   const bits = ['From Ash Marshall'];
+  if (meta.videos) bits.push(plural(meta.videos, 'film'));
   if (meta.count) bits.push(plural(meta.count, 'photo'));
   if (meta.expires) bits.push('Until ' + fmtDate(meta.expires));
   $('gateMeta').textContent = bits.join('  ·  ');
@@ -82,7 +83,9 @@ async function unlock(password, quiet) {
     key = await deriveKey(password);
     const manifest = JSON.parse(new TextDecoder().decode(await decrypt(b64(meta.manifest))));
     try { sessionStorage.setItem('g:' + slug, password); } catch (e) { /* fine */ }
-    files = manifest.files || [];
+    const all = manifest.files || [];
+    films = all.filter(f => f.kind === 'video');
+    files = all.filter(f => f.kind !== 'video');
     renderGallery(manifest);
   } catch (e) {
     key = null;
@@ -104,7 +107,9 @@ $('gateForm').addEventListener('submit', e => {
 // ── Gallery ─────────────────────────────────────────────────────────────
 function renderGallery(manifest) {
   $('galTitle').textContent = meta.client;
-  $('galCount').textContent = plural(files.length, 'photo');
+  $('galCount').textContent = [films.length ? plural(films.length, 'film') : '', files.length ? plural(files.length, 'photo') : ''].filter(Boolean).join(' · ');
+  renderFilms();
+  $('photosHead').hidden = !(films.length && files.length);
   $('galNote').textContent = manifest.note || '';
   $('galExpiry').textContent = meta.expires ? 'Available until ' + fmtDate(meta.expires) : '';
   const grid = $('grid');
@@ -126,6 +131,7 @@ function renderGallery(manifest) {
   });
   show('gallery');
   if (files.length < 2) $('dlAll').hidden = true;
+  else if (films.length) $('dlAll').textContent = 'Download all photos';
   loadMore();
 
   // Thumbnails, a few at a time, in order.
@@ -166,6 +172,96 @@ async function downloadOne(i, btn) {
     btn.textContent = 'Saved';
   } catch (e) { btn.textContent = 'Try again'; }
   setTimeout(() => { btn.disabled = false; btn.textContent = label; }, 1800);
+}
+
+
+// ── Films ───────────────────────────────────────────────────────────────
+// Streams are HLS under a random 128-bit path that only the decrypted manifest
+// reveals. Apple's own player on WebKit (Safari, every iOS browser); hls.js
+// everywhere else, because Chrome claims native HLS and then fails on it.
+const fmtDur = s => { s = Math.round(s || 0); const h = Math.floor(s / 3600), m = Math.floor(s / 60) % 60, x = String(s % 60).padStart(2, '0'); return h ? `${h}:${String(m).padStart(2, '0')}:${x}` : `${m}:${x}`; };
+const fmtSize = n => n >= 1e9 ? (n / 1e9).toFixed(1) + ' GB' : Math.max(1, Math.round(n / 1e6)) + ' MB';
+const prettyName = n => n.replace(/\.[^.]+$/, '').replace(/[_]+/g, ' ').trim();
+const isWebKit = () => /Apple/.test(navigator.vendor || '');
+let hlsReady = null;
+function loadHls() {
+  if (!hlsReady) hlsReady = new Promise((res, rej) => {
+    const s = document.createElement('script');
+    s.src = 'hls.min.js?v=1.5.17'; s.onload = () => res(window.Hls); s.onerror = rej;
+    document.head.appendChild(s);
+  });
+  return hlsReady;
+}
+
+function renderFilms() {
+  const wrap = $('films');
+  wrap.innerHTML = '';
+  wrap.hidden = !films.length;
+  if (!films.length) return;
+  if (!isWebKit()) loadHls().catch(() => {});
+  films.forEach((f, i) => {
+    const el = document.createElement('article');
+    el.className = 'g-film';
+    const res = f.h ? (f.h >= 2160 ? '4K' : f.h + 'p') : '';
+    el.innerHTML = `
+      <div class="g-film-stage" style="aspect-ratio:${f.w || 16} / ${f.h || 9}">
+        <video playsinline preload="none"></video>
+        <button class="g-play" type="button" aria-label="Play"><span></span></button>
+      </div>
+      <div class="g-film-meta">
+        <div class="g-film-title"></div>
+        <div class="g-film-info"></div>
+        ${f.file ? `<a class="g-btn g-film-dl" href="${BASE}/g/${slug}/${f.file}" download>Download <span>${fmtSize(f.size)}</span></a>` : ''}
+      </div>`;
+    el.querySelector('.g-film-title').textContent = prettyName(f.name);
+    el.querySelector('.g-film-info').textContent = [fmtDur(f.duration), res].filter(Boolean).join('  ·  ');
+    const video = el.querySelector('video'), btn = el.querySelector('.g-play');
+    btn.addEventListener('click', () => startFilm(f, video, el));
+    wrap.appendChild(el);
+    setTimeout(() => el.classList.add('in'), 60 * i);
+    fetchBlob(`t/${f.id}.bin`).then(buf => {
+      video.poster = URL.createObjectURL(new Blob([buf], { type: 'image/jpeg' }));
+      el.classList.add('has-poster');
+    }).catch(() => {});
+  });
+}
+
+async function startFilm(f, video, el) {
+  el.classList.add('playing');
+  video.controls = true;
+  const url = `${BASE}/g/${slug}/${f.hls}`;
+  try {
+    if (isWebKit() && video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = url;
+    } else {
+      const Hls = await loadHls();
+      if (!Hls || !Hls.isSupported()) throw new Error('no-mse');
+      const hls = new Hls({ capLevelToPlayerSize: true, maxBufferLength: 30 });
+      let recovered = 0;
+      hls.on(Hls.Events.ERROR, (_, d) => {
+        if (!d.fatal) return;
+        if (recovered++ > 3) { hls.destroy(); return filmError(el); }
+        if (d.type === Hls.ErrorTypes.NETWORK_ERROR) hls.startLoad();
+        else if (d.type === Hls.ErrorTypes.MEDIA_ERROR) hls.recoverMediaError();
+        else { hls.destroy(); filmError(el); }
+      });
+      hls.loadSource(url);
+      hls.attachMedia(video);
+    }
+  } catch (e) {
+    if (f.file) video.src = `${BASE}/g/${slug}/${f.file}`;  // last resort: the original
+    else return filmError(el);
+  }
+  // Pause any other film that's playing.
+  document.querySelectorAll('.g-film video').forEach(v => { if (v !== video) v.pause(); });
+  video.play().catch(() => {});
+}
+
+function filmError(el) {
+  el.classList.remove('playing');
+  el.classList.add('failed');
+  const info = el.querySelector('.g-film-info');
+  info.textContent = 'This film won’t play in this browser. ' + (el.querySelector('.g-film-dl') ? 'Use Download to watch it.' : 'Try Safari or Chrome.');
 }
 
 // ── Zip (stored, no compression: photos are already compressed) ─────────
@@ -222,7 +318,7 @@ $('dlAll').addEventListener('click', async () => {
   } catch (e) {
     btn.textContent = 'Something went wrong — try again';
   }
-  setTimeout(() => { btn.disabled = false; btn.textContent = 'Download all'; }, 2500);
+  setTimeout(() => { btn.disabled = false; btn.textContent = films.length ? 'Download all photos' : 'Download all'; }, 2500);
 });
 
 // ── Lightbox ────────────────────────────────────────────────────────────
