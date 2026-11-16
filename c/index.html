@@ -8,7 +8,7 @@
   <meta name="referrer" content="no-referrer" />
   <meta name="description" content="A private photo gallery from Ash Marshall." />
   <link rel="preload" href="../static/fonts/satoshi-900.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="gallery.css?v=1" />
+  <link rel="stylesheet" href="gallery.css?v=2" />
 </head>
 <body>
 
@@ -61,24 +61,28 @@
     <div class="g-grid" id="grid"></div>
   </section>
 
-  <!-- Organic click-through -->
+  <!-- A quiet way back to the rest of the work -->
   <section class="g-more" id="more" hidden>
-    <div class="g-masthead">
-      <h2 class="g-title g-title-sm">More from Marshall</h2>
-      <a class="g-count g-link" href="/#work" data-site="#work">All work →</a>
-    </div>
-    <div class="g-more-row" id="moreRow"></div>
+    <details class="g-drawer" id="moreDrawer">
+      <summary>
+        <span class="g-drawer-label">More from Marshall</span>
+        <span class="g-drawer-hint">Films, stills and behind the scenes</span>
+        <span class="g-drawer-icon" aria-hidden="true"></span>
+      </summary>
+      <div class="g-drawer-body">
+        <div class="g-more-row" id="moreRow"></div>
+        <a class="g-drawer-all" href="/#work" data-site="#work">See all the work →</a>
+      </div>
+    </details>
   </section>
 </main>
 
 <footer class="g-footer">
-  <p class="g-footer-cta">Let's make something.</p>
-  <p class="g-footer-sub">Corporate films, brand content, stills and music videos. London and UK-wide.</p>
-  <a class="g-footer-btn" href="https://www.linkedin.com/in/ash-marshall-b7725bb9" target="_blank" rel="noreferrer">Message me on LinkedIn ↗</a>
-  <div class="g-footer-bottom">
-    <a class="g-footer-sig" href="/" data-site="">Marshall</a>
+  <a class="g-footer-sig" href="/" data-site="">Marshall</a>
+  <nav class="g-footer-links">
     <a href="/" data-site="">mars-hall.uk</a>
-  </div>
+    <a href="https://www.linkedin.com/in/ash-marshall-b7725bb9" target="_blank" rel="noreferrer">Get in touch</a>
+  </nav>
 </footer>
 
 <!-- Lightbox -->
@@ -95,6 +99,6 @@
   <button class="g-lb-nav g-lb-next" id="lbNext" aria-label="Next">›</button>
 </div>
 
-<script src="gallery.js?v=1"></script>
+<script src="gallery.js?v=2"></script>
 </body>
 </html>
