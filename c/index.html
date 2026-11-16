@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Private gallery — Marshall</title>
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <meta name="referrer" content="no-referrer" />
+  <meta name="description" content="A private photo gallery from Ash Marshall." />
+  <link rel="preload" href="../static/fonts/satoshi-900.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="gallery.css?v=1" />
+</head>
+<body>
+
+<header class="g-header">
+  <a class="g-logo" href="/" data-site="">Marshall</a>
+  <nav class="g-nav">
+    <a href="/#work" data-site="#work">Work</a>
+    <a href="/#photography" data-site="#photography">Stills</a>
+    <a href="/#about" data-site="#about">About</a>
+    <a href="https://www.linkedin.com/in/ash-marshall-b7725bb9" target="_blank" rel="noreferrer">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <!-- Locked -->
+  <section class="g-gate" id="gate" hidden>
+    <p class="g-kicker">Private gallery</p>
+    <h1 class="g-client" id="gateClient">&nbsp;</h1>
+    <p class="g-meta" id="gateMeta"></p>
+    <form class="g-form" id="gateForm" autocomplete="off">
+      <label class="g-sr" for="pw">Password</label>
+      <input id="pw" type="password" placeholder="Password" autocomplete="current-password" autocapitalize="off" spellcheck="false" required />
+      <button type="submit" id="gateBtn">Open</button>
+    </form>
+    <p class="g-error" id="gateError" role="alert"></p>
+    <p class="g-hint">The password came with your link. Photos are decrypted on this device, so they're only ever visible to people with it.</p>
+  </section>
+
+  <!-- Message (expired / missing / no link) -->
+  <section class="g-gate" id="message" hidden>
+    <p class="g-kicker" id="msgKicker">Private gallery</p>
+    <h1 class="g-client" id="msgTitle"></h1>
+    <p class="g-meta g-meta-wide" id="msgBody"></p>
+    <a class="g-cta" href="/" data-site="">See the work</a>
+  </section>
+
+  <!-- Unlocked -->
+  <section class="g-gallery" id="gallery" hidden>
+    <div class="g-masthead">
+      <h1 class="g-title" id="galTitle"></h1>
+      <span class="g-count" id="galCount"></span>
+    </div>
+    <div class="g-bar">
+      <p class="g-note" id="galNote"></p>
+      <div class="g-actions">
+        <span class="g-expiry" id="galExpiry"></span>
+        <button class="g-btn g-btn-solid" id="dlAll">Download all</button>
+      </div>
+    </div>
+    <div class="g-grid" id="grid"></div>
+  </section>
+
+  <!-- Organic click-through -->
+  <section class="g-more" id="more" hidden>
+    <div class="g-masthead">
+      <h2 class="g-title g-title-sm">More from Marshall</h2>
+      <a class="g-count g-link" href="/#work" data-site="#work">All work →</a>
+    </div>
+    <div class="g-more-row" id="moreRow"></div>
+  </section>
+</main>
+
+<footer class="g-footer">
+  <p class="g-footer-cta">Let's make something.</p>
+  <p class="g-footer-sub">Corporate films, brand content, stills and music videos. London and UK-wide.</p>
+  <a class="g-footer-btn" href="https://www.linkedin.com/in/ash-marshall-b7725bb9" target="_blank" rel="noreferrer">Message me on LinkedIn ↗</a>
+  <div class="g-footer-bottom">
+    <a class="g-footer-sig" href="/" data-site="">Marshall</a>
+    <a href="/" data-site="">mars-hall.uk</a>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="g-lb" id="lb" hidden aria-modal="true" role="dialog">
+  <button class="g-lb-close" id="lbClose" aria-label="Close">×</button>
+  <button class="g-lb-nav g-lb-prev" id="lbPrev" aria-label="Previous">‹</button>
+  <figure class="g-lb-fig">
+    <img id="lbImg" alt="" />
+    <figcaption>
+      <span id="lbName"></span>
+      <button class="g-btn" id="lbDl">Download</button>
+    </figcaption>
+  </figure>
+  <button class="g-lb-nav g-lb-next" id="lbNext" aria-label="Next">›</button>
+</div>
+
+<script src="gallery.js?v=1"></script>
+</body>
+</html>
