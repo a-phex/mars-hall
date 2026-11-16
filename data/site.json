@@ -54,17 +54,17 @@
       "visible": true
     },
     {
-      "builtin": "clients",
-      "icon": "🎯",
-      "label": "The Archive",
-      "slug": "client-work"
-    },
-    {
       "icon": "🎬",
       "label": "Electra — Short Film",
       "slug": "electra-film",
       "visible": true,
       "builtin": "electra"
+    },
+    {
+      "builtin": "clients",
+      "icon": "🎯",
+      "label": "The Archive",
+      "slug": "client-work"
     }
   ]
 }
