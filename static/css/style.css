@@ -728,16 +728,51 @@ img { display: block; max-width: 100%; }
   max-width: 60ch;
   margin-bottom: 20px;
 }
+.electra-meta {
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--ink-60); margin-bottom: 10px;
+}
+.electra-awards {
+  list-style: none; display: flex; flex-wrap: wrap; gap: 6px;
+  margin: -6px 0 20px;
+}
+.electra-awards li {
+  font-family: var(--font-mono); font-size: 10.5px;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--ink);
+  border: 1px solid var(--hairline); border-radius: var(--radius);
+  padding: 5px 9px;
+}
+.electra-awards li::before { content: "★ "; color: var(--cinder); }
+.electra-actions { display: flex; gap: 22px; margin-bottom: 22px; }
+.electra-watch {
+  background: none; border: none; cursor: pointer; padding: 0 0 4px;
+  font-family: var(--font-mono); font-size: 12px;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--ink);
+  border-bottom: 2px solid var(--cinder);
+}
+.electra-watch + .electra-watch { border-bottom-color: var(--ink-30); }
+.electra-watch:hover { color: var(--cinder); }
+.electra-play-badge {
+  position: absolute; inset: 0; display: flex;
+  align-items: center; justify-content: center; pointer-events: none;
+}
 
-/* Stills strip */
+/* Stills: 2x2 at 16:9, so scope frames keep their composition */
 .electra-stills-strip {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 8px;
+}
+.electra-more {
+  position: absolute; right: 8px; bottom: 8px; z-index: 2;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em;
+  color: #fff; background: rgba(20,19,18,.72);
+  padding: 3px 7px; border-radius: var(--radius); pointer-events: none;
 }
 .electra-still-tile {
   position: relative;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: var(--radius);
   background: var(--hairline);

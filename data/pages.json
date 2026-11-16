@@ -121,10 +121,17 @@
           "type": "info_box",
           "label": "Electra",
           "heading": "Electra",
-          "body": "A university film project — a collection of hero stills, behind-the-scenes and the final cut.",
+          "body": "A university short film from 2016 that went on to win Best Direction, Best Sound Design, Best Production Design and Best Concept.",
           "image": "static/img/Electra/screenshot-2022-11-18-at-14.19.32.webp",
           "skills": [],
-          "stats": []
+          "stats": [],
+          "year": "2016",
+          "awards": [
+            "Best Direction",
+            "Best Sound Design",
+            "Best Production Design",
+            "Best Concept"
+          ]
         },
         {
           "id": "electra-stills",
@@ -135,13 +142,13 @@
         {
           "id": "electra-trailer",
           "type": "video_embed",
-          "label": "Trailer",
+          "label": "Electra, teaser",
           "youtubeId": "pFjN3nzheBw"
         },
         {
           "id": "electra-main",
           "type": "video_embed",
-          "label": "Main Film",
+          "label": "Electra, the film",
           "youtubeId": "t95c_MQEEHU"
         },
         {

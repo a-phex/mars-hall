@@ -42,8 +42,19 @@ def build_block():
     bts = load("bts.json", [])
     pages = load("pages.json", {}).get("pages", [])
 
+    clients = load("clients.json", {}).get("clients", [])
+
     photo_n = len(photos.get("images", photos) if isinstance(photos, dict) else photos)
     bts_n = len(bts.get("items", bts) if isinstance(bts, dict) else bts)
+
+    # Mirror the live page: a section hidden in site.json stays out of the text too.
+    hidden = {s.get("slug") for s in site.get("homepage_sections", []) if s.get("visible") is False}
+
+    # Electra: the short film's info block
+    electra = {}
+    for p in pages:
+        if p.get("slug") == "electra-film":
+            electra = next((b for b in p.get("blocks", []) if b.get("type") == "info_box"), {})
 
     # About body + skills from pages.json
     about_paras, skills = [], []
@@ -72,7 +83,7 @@ def build_block():
     if skills:
         out.append("<p><strong>Skills &amp; tools:</strong> " + esc(", ".join(skills)) + "</p>")
 
-    if videos:
+    if videos and "home" not in hidden:
         out.append(f"<h2>Selected Work — {len(videos)} films</h2>")
         out.append("<ul>")
         for v in videos:
@@ -81,10 +92,28 @@ def build_block():
             out.append(f"<li>{title}" + (f" — {sub}" if sub else "") + "</li>")
         out.append("</ul>")
 
-    if photo_n:
+    # Archive: client names only. "Inspire" holds other people's reference
+    # videos, so it must never be presented to crawlers as Ash's work.
+    groups = [c for c in clients if c.get("name") and c["name"].strip().lower() != "inspire"
+              and any(v.get("youtubeId") for v in c.get("videos", []))]
+    if groups and "client-work" not in hidden:
+        films = sum(len([v for v in c.get("videos", []) if v.get("youtubeId")]) for c in groups)
+        out.append(f"<h2>The Archive — {films} films for {len(groups)} clients</h2>")
+        out.append("<ul>" + "".join(f"<li>{esc(c['name'])}</li>" for c in groups) + "</ul>")
+
+    if electra and "electra-film" not in hidden:
+        year = esc(electra.get("year"))
+        out.append("<h2>Electra — short film" + (f" ({year})" if year else "") + "</h2>")
+        if electra.get("body"):
+            out.append(f"<p>{esc(electra['body'].split(chr(10) * 2)[0])}</p>")
+        awards = [a for a in electra.get("awards", []) if a]
+        if awards:
+            out.append("<p><strong>Awards:</strong> " + esc(", ".join(awards)) + "</p>")
+
+    if photo_n and "photography" not in hidden:
         out.append("<h2>Photography &amp; Design</h2>")
         out.append(f"<p>{photo_n} stills — event coverage, portraits and graphic design.</p>")
-    if bts_n:
+    if bts_n and "bts" not in hidden:
         out.append("<h2>Behind the Scenes</h2>")
         out.append(f"<p>{bts_n} behind-the-scenes frames from shoots and productions.</p>")
 

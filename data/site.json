@@ -63,7 +63,8 @@
       "icon": "🎬",
       "label": "Electra — Short Film",
       "slug": "electra-film",
-      "visible": false
+      "visible": true,
+      "builtin": "electra"
     }
   ]
 }

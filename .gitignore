@@ -1,2 +1,11 @@
 .DS_Store
 static/img/photography/originals/
+
+# Local working files: kept on disk, never published to the live site
+.claude/
+REDESIGN.md
+mockup-monochrome.html
+*.bak
+
+# Full-res originals the publisher keeps beside every upload (any section)
+static/img/**/originals/

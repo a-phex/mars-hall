@@ -1,6 +1,6 @@
 # Ash Marshall — Corporate Video Director & Filmmaker (London)
 
-> London-based videographer and director creating cinematic corporate films, brand content and music videos for UK and international clients. 28+ productions delivered for brands including Microsoft, HP and Gonvarri.
+> London-based videographer and director creating cinematic corporate films, brand content and music videos for UK and international clients. 140+ films delivered for brands and publishers including Microsoft, HP, Property Week, Money Marketing and Packaging News.
 
 Ash Marshall is a London-based multimedia director who leads video production end-to-end — from concept and shoot through to edit, colour and delivery. Corporate and brand work is the core of the practice today, with a growing focus on music video direction.
 
@@ -15,7 +15,12 @@ Ash Marshall is a London-based multimedia director who leads video production en
 - Microsoft — Surface device showcases, Copilot workforce films
 - HP — ProBook product films
 - Gonvarri — Hackathon 2024 event film
-- 28+ films in total across corporate, product and event work
+- Property Week, Money Marketing, Packaging News, Industry Retail News, Motor Trader, Exhibition World — interviews, awards coverage and roundtables
+- ISE / InfoComm 2019 — 50 trade-show interviews and features
+- 140+ films in total across corporate, product and event work
+
+## Short film
+Electra (2016) — a university short film that won Best Direction, Best Sound Design, Best Production Design and Best Concept.
 
 ## Craft & tools
 Cinematography, lighting & gaffing, colour grading, sound mixing. Adobe Premiere Pro, After Effects, DaVinci Resolve, Cinema 4D, TouchDesigner, OBS.

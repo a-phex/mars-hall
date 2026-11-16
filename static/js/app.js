@@ -62,8 +62,14 @@ async function loadSiteSettings() {
   const SEC_SLUG_TO_ID = { 'home': 'work', 'client-work': 'clients', 'photography': 'photography', 'bts': 'bts', 'electra-film': 'electra', 'about': 'about' };
   secs.forEach(sec => {
     if (sec && sec.visible === false) {
-      const el = document.getElementById(SEC_SLUG_TO_ID[sec.slug] || sec.slug);
+      const id = SEC_SLUG_TO_ID[sec.slug] || sec.slug;
+      const el = document.getElementById(id);
       if (el) el.style.display = 'none';
+      // A hidden section must not leave a nav link pointing at nothing.
+      document.querySelectorAll(`.nav-group a[href="#${id}"]`).forEach(a => {
+        const li = a.closest('li');
+        if (li) li.style.display = 'none';
+      });
     }
   });
 }
@@ -484,68 +490,102 @@ async function loadElectra() {
     fetch('data/electra-stills.json').then(r => r.json()).catch(() => ({ images: [] })),
   ]);
 
-  // Find the electra-film page
-  const page = pagesData?.pages?.find(p => p.slug === 'electra-film');
+  const page   = pagesData?.pages?.find(p => p.slug === 'electra-film');
+  const blocks = page?.blocks || [];
 
-  // Extract youtubeId from a video_embed block
-  const videoBlock = (page?.blocks || []).find(b => b.type === 'video_embed');
-  const youtubeId  = videoBlock?.youtubeId || '';
+  // The full film plays from the poster; the teaser is offered alongside it.
+  const vids   = blocks.filter(b => b.type === 'video_embed' && b.youtubeId);
+  const film   = vids.find(b => b.id === 'electra-main') || vids[vids.length - 1] || null;
+  const teaser = vids.find(b => b.id === 'electra-trailer' && b !== film) || null;
 
-  // Poster image: from info_box block image field
-  const infoBlock  = (page?.blocks || []).find(b => b.type === 'info_box');
-  const posterSrc  = infoBlock?.image || '';
-  const bodyText   = infoBlock?.body?.split('\n\n')[0] || '';
+  const info      = blocks.find(b => b.type === 'info_box') || {};
+  const posterSrc = info.image || '';
+  const bodyText  = (info.body || '').split('\n\n')[0];
+  const year      = info.year || '';
+  const awards    = Array.isArray(info.awards) ? info.awards.filter(Boolean) : [];
 
-  // Stills — up to 4
-  const stills = (stillsData.images || []).slice(0, 4);
-  const allStillItems = (stillsData.images || []).map(s => ({ src: s, alt: 'Electra still', caption: '', exif: '' }));
+  // Stills are stored as plain paths; tolerate {src} objects as well.
+  const stills = (stillsData.images || [])
+    .map(s => (typeof s === 'string' ? s : s && s.src))
+    .filter(Boolean);
+  const lightboxItems = stills.map((src, i) => ({ src, alt: `Electra, still ${i + 1}`, caption: '', exif: '' }));
 
-  // Build LEFT: poster tile
+  el.innerHTML = '';
+
+  // LEFT: poster tile that turns into the player
   const posterDiv = document.createElement('div');
   posterDiv.className = 'electra-poster-tile';
-  if (posterSrc) {
-    posterDiv.innerHTML = `<img src="${escapeHtml(posterSrc)}" alt="Electra" loading="lazy">`;
-  }
   posterDiv.setAttribute('role', 'button');
   posterDiv.setAttribute('tabindex', '0');
   posterDiv.setAttribute('aria-label', 'Play Electra');
+  if (posterSrc) {
+    posterDiv.innerHTML = `<img src="${escapeHtml(posterSrc)}" alt="Electra, film poster" loading="lazy">` +
+      (film ? `<span class="electra-play-badge" aria-hidden="true"><span class="work-play-icon">&#9654;</span></span>` : '');
+  }
 
-  // Click poster: swap to iframe if youtubeId, else open lightbox
+  function play(block) {
+    if (!block) return;
+    posterDiv.innerHTML =
+      `<iframe src="https://www.youtube-nocookie.com/embed/${escapeHtml(block.youtubeId)}?autoplay=1&rel=0"` +
+      ` title="${escapeHtml(block.label || 'Electra')}" frameborder="0"` +
+      ` allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"` +
+      ` allowfullscreen></iframe>`;
+    posterDiv.classList.add('electra-poster-tile--playing');
+    const r = posterDiv.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > window.innerHeight) smoothScrollTo(posterDiv, 600);
+  }
+
   function activatePoster() {
-    if (youtubeId) {
-      posterDiv.innerHTML =
-        `<iframe src="https://www.youtube-nocookie.com/embed/${escapeHtml(youtubeId)}?autoplay=1&rel=0"` +
-        ` title="Electra" frameborder="0"` +
-        ` allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"` +
-        ` allowfullscreen></iframe>`;
-      posterDiv.classList.add('electra-poster-tile--playing');
-    } else if (allStillItems.length && typeof openLightboxAt === 'function') {
-      openLightboxAt(allStillItems, 0);
-    }
+    if (posterDiv.classList.contains('electra-poster-tile--playing')) return;
+    if (film) play(film);
+    else if (lightboxItems.length && typeof openLightboxAt === 'function') openLightboxAt(lightboxItems, 0);
   }
   posterDiv.addEventListener('click', activatePoster);
   posterDiv.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activatePoster(); } });
 
-  // Build RIGHT: copy + stills strip
+  // RIGHT: copy, awards, watch links, stills
   const copyDiv = document.createElement('div');
   copyDiv.className = 'electra-copy';
-  const blurb = bodyText || 'Written, shot and cut as personal work. Direction, camera, stills and design in one project.';
+  const blurb = bodyText || 'Written, shot and cut as personal work.';
   copyDiv.innerHTML =
+    `<p class="electra-meta">Short film${year ? ' &middot; ' + escapeHtml(year) : ''}</p>` +
     `<h2 class="electra-heading">A short film.</h2>` +
-    `<p class="electra-body">${escapeHtml(blurb)}</p>`;
+    `<p class="electra-body">${escapeHtml(blurb)}</p>` +
+    (awards.length ? `<ul class="electra-awards">${awards.map(a => `<li>${escapeHtml(a)}</li>`).join('')}</ul>` : '');
+
+  if (film || teaser) {
+    const actions = document.createElement('div');
+    actions.className = 'electra-actions';
+    [[film, 'Watch the film'], [teaser, 'Teaser']].forEach(([block, label]) => {
+      if (!block) return;
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'electra-watch';
+      b.textContent = label;
+      b.addEventListener('click', () => play(block));
+      actions.appendChild(b);
+    });
+    copyDiv.appendChild(actions);
+  }
 
   if (stills.length) {
     const strip = document.createElement('div');
     strip.className = 'electra-stills-strip';
-    stills.forEach((src, si) => {
+    const shown = stills.slice(0, 4);
+    shown.forEach((src, si) => {
       const tile = document.createElement('div');
       tile.className = 'electra-still-tile';
-      tile.innerHTML = `<img src="${escapeHtml(src)}" alt="Electra still ${si + 1}" loading="lazy">`;
-      tile.addEventListener('click', () => {
-        if (typeof openLightboxAt === 'function') {
-          openLightboxAt(allStillItems, si);
-        }
-      });
+      tile.setAttribute('role', 'button');
+      tile.setAttribute('tabindex', '0');
+      tile.setAttribute('aria-label', `Open Electra still ${si + 1}`);
+      tile.innerHTML = `<img src="${escapeHtml(src)}" alt="Electra, still ${si + 1}" loading="lazy">`;
+      const extra = stills.length - shown.length;
+      if (si === shown.length - 1 && extra > 0) {
+        tile.insertAdjacentHTML('beforeend', `<span class="electra-more">+${extra}</span>`);
+      }
+      const open = () => { if (typeof openLightboxAt === 'function') openLightboxAt(lightboxItems, si); };
+      tile.addEventListener('click', open);
+      tile.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
       strip.appendChild(tile);
     });
     copyDiv.appendChild(strip);
@@ -870,7 +910,7 @@ function reorderSections() {
 async function loadCustomSections() {
   const site = _site;
   if (!site?.homepage_sections) return;
-  const BUILTIN = new Set(['home', 'client-work', 'photography', 'bts', 'about']);
+  const BUILTIN = new Set(['home', 'client-work', 'photography', 'bts', 'about', 'electra-film']);
   const custom = site.homepage_sections.filter(s => !BUILTIN.has(s.slug) && s.visible !== false);
   if (!custom.length) return;
   const container = document.getElementById('custom-sections');

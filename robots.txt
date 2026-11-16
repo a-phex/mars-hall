@@ -3,7 +3,6 @@
 
 User-agent: *
 Allow: /
-Disallow: /mockup-monochrome.html
 
 # Explicitly welcome AI answer-engine & search crawlers
 User-agent: GPTBot
