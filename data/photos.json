@@ -41,16 +41,6 @@
       "full": "static/img/photography/IMG_2343_20260713_152052_123_1170w.webp"
     },
     {
-      "src": "static/img/photography/VLAD_NANU_150626-28_20260620_174444_812_1600w.webp",
-      "srcset": "static/img/photography/VLAD_NANU_150626-28_20260620_174444_812_480w.webp 480w, static/img/photography/VLAD_NANU_150626-28_20260620_174444_812_960w.webp 960w, static/img/photography/VLAD_NANU_150626-28_20260620_174444_812_1600w.webp 1600w, static/img/photography/VLAD_NANU_150626-28_20260620_174444_812_2400w.webp 2400w",
-      "w": 1600,
-      "h": 1067,
-      "full": "static/img/photography/VLAD_NANU_150626-28_20260620_174444_812_2400w.webp",
-      "exif": {
-        "camera": "SONY ILCE-7M4"
-      }
-    },
-    {
       "src": "static/img/photography/VLAD_NANU_150626-25_20260620_174435_684_1600w.webp",
       "srcset": "static/img/photography/VLAD_NANU_150626-25_20260620_174435_684_480w.webp 480w, static/img/photography/VLAD_NANU_150626-25_20260620_174435_684_960w.webp 960w, static/img/photography/VLAD_NANU_150626-25_20260620_174435_684_1600w.webp 1600w, static/img/photography/VLAD_NANU_150626-25_20260620_174435_684_2400w.webp 2400w",
       "w": 1600,
