@@ -137,7 +137,7 @@ img { display: block; max-width: 100%; }
 .hero-title { line-height: 0; }
 .hero-title img {
   display: block; height: auto;
-  width: clamp(260px, 46vw, 640px); max-width: 100%;
+  width: clamp(150px, 23vw, 320px); max-width: 100%;
   filter: drop-shadow(0 2px 18px rgba(0,0,0,.25));
 }
 .hero-line {
