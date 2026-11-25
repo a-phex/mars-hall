@@ -62,21 +62,41 @@
       "size": "l"
     },
     {
+      "title": "Surface Laptop with 5G — Hands On",
+      "youtubeId": "i646SlroC3o",
+      "sub": "Commercial · Microsoft / Insight",
+      "thumb": "",
+      "project": "pmwwg8hbwjm4",
+      "size": "s"
+    },
+    {
+      "title": "Surface Laptop 13\" & Surface Pro 12\" Showcase",
+      "youtubeId": "SyLqcxnxJe4",
+      "sub": "Commercial · Microsoft / Insight",
+      "thumb": "",
+      "project": "pmwwg8hbwjm4",
+      "size": "s"
+    },
+    {
+      "title": "Microsoft Surface Intel Device Showcase",
+      "youtubeId": "spNSo0P5gQQ",
+      "sub": "Commercial · Microsoft / Insight",
+      "thumb": "",
+      "project": "pmwwg8hbwjm4",
+      "size": "s"
+    },
+    {
       "title": "HP ProBook — Innovation Made Affordable",
       "youtubeId": "9Z-TO-MqjPA",
       "sub": "Commercial · HP / Insight",
-      "thumb": ""
+      "thumb": "",
+      "project": "pmwwg8hbwjm4",
+      "size": "l"
     },
     {
       "title": "Insight at Digital Ship Summit 2026",
       "youtubeId": "xjvvkAw_lrY",
       "sub": "",
-      "thumb": ""
-    },
-    {
-      "title": "Surface Laptop with 5G — Hands On",
-      "youtubeId": "i646SlroC3o",
-      "sub": "Commercial · Microsoft / Insight",
       "thumb": ""
     },
     {
@@ -98,28 +118,36 @@
       "thumb": ""
     },
     {
-      "title": "Surface Laptop 13\" & Surface Pro 12\" Showcase",
-      "youtubeId": "SyLqcxnxJe4",
-      "sub": "Commercial · Microsoft / Insight",
-      "thumb": ""
+      "title": "Payment Choice Alliance — PCA Champions",
+      "youtubeId": "-rLrP_p3gDA",
+      "sub": "Social · Payment Choice Alliance",
+      "thumb": "",
+      "project": "pmwwg67mud5s",
+      "size": "s"
     },
     {
-      "title": "Microsoft Surface Intel Device Showcase",
-      "youtubeId": "spNSo0P5gQQ",
-      "sub": "Commercial · Microsoft / Insight",
-      "thumb": ""
-    },
-    {
-      "title": "PCA   Take Action Now",
-      "youtubeId": "VGPCvBv7Nrc",
-      "sub": "",
-      "thumb": ""
+      "title": "Payment Choice Alliance — Cash in Crisis",
+      "youtubeId": "Wv6DYn_vx8o",
+      "sub": "Social · Payment Choice Alliance",
+      "thumb": "",
+      "project": "pmwwg67mud5s",
+      "size": "s"
     },
     {
       "title": "PCA — Ron Delnevo Visits Treorchy",
       "youtubeId": "GWuewXRDDeg",
       "sub": "Documentary · Payment Choice Alliance",
-      "thumb": ""
+      "thumb": "",
+      "project": "pmwwg67mud5s",
+      "size": "s"
+    },
+    {
+      "title": "PCA   Take Action Now",
+      "youtubeId": "VGPCvBv7Nrc",
+      "sub": "",
+      "thumb": "",
+      "project": "pmwwg67mud5s",
+      "size": "l"
     },
     {
       "title": "Discover How Copilot Empowers the Workforce",
@@ -152,21 +180,9 @@
       "thumb": ""
     },
     {
-      "title": "Payment Choice Alliance — PCA Champions",
-      "youtubeId": "-rLrP_p3gDA",
-      "sub": "Social · Payment Choice Alliance",
-      "thumb": ""
-    },
-    {
       "title": "The AV Awards 2023",
       "youtubeId": "uvEwHxEwpbw",
       "sub": "",
-      "thumb": ""
-    },
-    {
-      "title": "Payment Choice Alliance — Cash in Crisis",
-      "youtubeId": "Wv6DYn_vx8o",
-      "sub": "Social · Payment Choice Alliance",
       "thumb": ""
     },
     {
@@ -241,6 +257,16 @@
       "id": "ph5hqohd",
       "name": "Case Studies",
       "desc": ""
+    },
+    {
+      "id": "pmwwg67mud5s",
+      "name": "Payment Choice Alliance",
+      "desc": "A set of really nice freelance videos I worked on with PCA, the payment choice advocacy group through 2022 - 2025. \nA mix of case study and street interview work."
+    },
+    {
+      "id": "pmwwg8hbwjm4",
+      "name": "Microsoft Surface Presenter videos",
+      "desc": "A set of videos I created for a range of Microsoft Surface devices, in which I acted as a tech presenter, showing off the new specifications of each device."
     }
   ]
 }
