@@ -1496,4 +1496,4 @@ function initScramble() {
 }
 
 initTorch();
-initScramble();
+// initScramble() retired: the wordmark is now the badge image

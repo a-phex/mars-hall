@@ -38,7 +38,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--hairline);
 }
-.g-logo { font-weight: 900; font-size: 16px; letter-spacing: -0.02em; }
+.g-logo { display: block; line-height: 0; }
+.g-logo img { display: block; height: 28px; width: auto; }
 .g-nav { display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; }
 .g-nav a, .g-kicker, .g-meta, .g-count, .g-expiry, .g-hint, .g-error, .g-cap {
   font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;

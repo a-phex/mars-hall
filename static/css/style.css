@@ -100,10 +100,9 @@ img { display: block; max-width: 100%; }
   gap: 7px; min-height: var(--nav-h); padding: 10px var(--pad);
   position: relative;
 }
-.nav-logo {
-  font-weight: 900; font-size: 16px; letter-spacing: -0.02em;
-  transition: font-variation-settings .25s, color .2s;
-}
+.nav-logo { display: block; line-height: 0; transition: opacity .2s; }
+.nav-logo img { display: block; height: 28px; width: auto; }
+.nav-logo:hover { opacity: .8; }
 .nav-group {
   display: flex; align-items: center; justify-content: center;
   flex-wrap: wrap; gap: 22px; list-style: none;
