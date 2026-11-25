@@ -80,8 +80,7 @@ def build_block():
     if about_paras:
         out.append("<h2>About Ash Marshall</h2>")
         out += [f"<p>{esc(p)}</p>" for p in about_paras]
-    if skills:
-        out.append("<p><strong>Skills &amp; tools:</strong> " + esc(", ".join(skills)) + "</p>")
+    # Tools deliberately left out: the site sells stories and ideas, not software.
 
     if videos and "home" not in hidden:
         out.append(f"<h2>Selected Work — {len(videos)} films</h2>")
