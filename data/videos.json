@@ -16,13 +16,50 @@
       "title": "Oxfordshire Youth Digital Futures: Bridging the Divide",
       "youtubeId": "JYbnYTlZBh4",
       "sub": "",
-      "thumb": ""
+      "thumb": "",
+      "project": "ph5hqohd",
+      "size": "s"
+    },
+    {
+      "title": "CASESTUDY DRAGADOS ES EN CAP 180526",
+      "youtubeId": "9dbVx1i_BqI",
+      "sub": "",
+      "thumb": "",
+      "project": "ph5hqohd",
+      "size": "s"
+    },
+    {
+      "title": "Gonvarri — Hackathon 2024",
+      "youtubeId": "Q28n_qTDGps",
+      "sub": "Event Film · Gonvarri / Insight",
+      "thumb": "",
+      "layout": "full",
+      "project": "ph5hqohd",
+      "size": "s"
+    },
+    {
+      "title": "Eneco Case Study",
+      "youtubeId": "0k9ziQKiJCY",
+      "sub": "Case Study · Eneco / Insight",
+      "thumb": "",
+      "project": "ph5hqohd",
+      "size": "s"
+    },
+    {
+      "title": "Aroya Cruises — IT Transformation",
+      "youtubeId": "dg_teS4s_YE",
+      "sub": "Case Study · Aroya Cruises",
+      "thumb": "",
+      "project": "ph5hqohd",
+      "size": "s"
     },
     {
       "title": "West Buckland School — Sustainable Technology",
       "youtubeId": "4v4yXu3a5Ik",
       "sub": "Case Study · West Buckland School",
-      "thumb": ""
+      "thumb": "",
+      "project": "ph5hqohd",
+      "size": "l"
     },
     {
       "title": "HP ProBook — Innovation Made Affordable",
@@ -51,12 +88,6 @@
     {
       "title": "Data Sovereignty Trilemma Infographic",
       "youtubeId": "QKVUC_Zr4Qk",
-      "sub": "",
-      "thumb": ""
-    },
-    {
-      "title": "CASESTUDY DRAGADOS ES EN CAP 180526",
-      "youtubeId": "9dbVx1i_BqI",
       "sub": "",
       "thumb": ""
     },
@@ -97,19 +128,6 @@
       "thumb": ""
     },
     {
-      "title": "Gonvarri — Hackathon 2024",
-      "youtubeId": "Q28n_qTDGps",
-      "sub": "Event Film · Gonvarri / Insight",
-      "thumb": "",
-      "layout": "full"
-    },
-    {
-      "title": "Aroya Cruises — IT Transformation",
-      "youtubeId": "dg_teS4s_YE",
-      "sub": "Case Study · Aroya Cruises",
-      "thumb": ""
-    },
-    {
       "title": "University Hospital Birmingham — IT Security",
       "youtubeId": "Wdj2cEINk1A",
       "sub": "Case Study · UHB / Insight",
@@ -125,12 +143,6 @@
       "title": "Vivent Case Study",
       "youtubeId": "ivrk_nLl2LM",
       "sub": "Case Study · Vivent / Insight",
-      "thumb": ""
-    },
-    {
-      "title": "Eneco Case Study",
-      "youtubeId": "0k9ziQKiJCY",
-      "sub": "Case Study · Eneco / Insight",
       "thumb": ""
     },
     {
@@ -222,6 +234,13 @@
       "youtubeId": "qVVD6kOUs1E",
       "sub": "",
       "thumb": ""
+    }
+  ],
+  "projects": [
+    {
+      "id": "ph5hqohd",
+      "name": "New project",
+      "desc": ""
     }
   ]
 }
