@@ -888,6 +888,16 @@ async function loadAbout() {
   const P = t => `<p>${escapeHtml(t)}</p>`;
 
   el.className = 'about-v2';
+  // A landscape photo gets the editorial treatment: the intro sits over the
+  // image's open space (right side). Portrait photos sit beside the text.
+  if (block.image) {
+    const probe = new Image();
+    probe.onload = () => {
+      const wide = probe.naturalWidth > probe.naturalHeight * 1.2;
+      el.classList.toggle('about-v2--overlay', wide);
+    };
+    probe.src = block.image;
+  }
   el.innerHTML = `
     <div class="about-hero">
       ${block.image ? `<figure class="about-photo"><img src="${escapeHtml(block.image)}" alt="Ash Marshall" loading="lazy"></figure>` : ''}

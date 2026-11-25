@@ -1109,6 +1109,42 @@ img { display: block; max-width: 100%; }
   color: var(--ink); text-wrap: balance;
 }
 
+/* Overlay mode: landscape photo full width, intro over its open right side */
+.about-v2--overlay .about-hero {
+  display: block; position: relative;
+  aspect-ratio: 16 / 9; max-height: 88svh; min-height: 520px;
+  overflow: hidden; border-radius: var(--radius);
+}
+.about-v2--overlay .about-photo {
+  position: absolute; inset: 0; aspect-ratio: auto; max-height: none; border-radius: 0;
+}
+.about-v2--overlay .about-photo img { object-position: 30% 40%; }
+.about-v2--overlay .about-photo:hover img { transform: none; }
+.about-v2--overlay .about-photo::after { inset: 18px; }
+/* the window is bright already; a soft wash from the right guarantees legibility */
+.about-v2--overlay .about-hero::before {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(90deg, transparent 38%, color-mix(in srgb, var(--paper) 55%, transparent) 62%, color-mix(in srgb, var(--paper) 78%, transparent));
+}
+.about-v2--overlay .about-intro {
+  position: absolute; z-index: 2; top: 50%; right: clamp(28px, 5vw, 80px);
+  transform: translateY(-50%);
+  width: min(44%, 560px); max-width: none;
+}
+.about-v2--overlay .about-heading { font-size: clamp(40px, 5.4vw, 84px); margin-bottom: 22px; }
+.about-v2--overlay .about-copy { color: var(--ink); opacity: .78; }
+.about-v2--overlay .about-hero:hover .about-photo img { filter: grayscale(0); }
+
+@media (max-width: 1100px) {
+  .about-v2--overlay .about-hero { aspect-ratio: auto; max-height: none; min-height: 0; overflow: visible; }
+  .about-v2--overlay .about-hero::before { display: none; }
+  .about-v2--overlay .about-photo { position: relative; aspect-ratio: 4 / 3; margin-bottom: 28px; }
+  .about-v2--overlay .about-photo img { object-position: 28% 40%; }
+  .about-v2--overlay .about-intro { position: static; transform: none; width: auto; max-width: 62ch; }
+  .about-v2--overlay .about-copy { color: var(--ink-60); opacity: 1; font-size: 16px; line-height: 1.75; }
+  .about-v2--overlay .about-lede { font-size: 19px; }
+}
+
 @media (max-width: 900px) {
   .about-hero, .about-more { grid-template-columns: 1fr; }
   .about-photo { max-width: 520px; aspect-ratio: 4 / 5; }
