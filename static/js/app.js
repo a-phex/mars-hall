@@ -1496,4 +1496,4 @@ function initScramble() {
 }
 
 initTorch();
-// initScramble() retired: the wordmark is now the badge image
+// initScramble() retired: the nav no longer carries a wordmark

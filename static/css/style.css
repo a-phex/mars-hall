@@ -100,9 +100,6 @@ img { display: block; max-width: 100%; }
   gap: 7px; min-height: var(--nav-h); padding: 10px var(--pad);
   position: relative;
 }
-.nav-logo { display: block; line-height: 0; transition: opacity .2s; }
-.nav-logo img { display: block; height: 28px; width: auto; }
-.nav-logo:hover { opacity: .8; }
 .nav-group {
   display: flex; align-items: center; justify-content: center;
   flex-wrap: wrap; gap: 22px; list-style: none;
@@ -137,10 +134,11 @@ img { display: block; max-width: 100%; }
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(to top, rgba(20,19,18,.58), transparent 52%);
 }
-.hero-title {
-  color: #fff;
-  font-size: clamp(48px, 9vw, 110px);
-  font-weight: 900; letter-spacing: -0.03em; line-height: .95;
+.hero-title { line-height: 0; }
+.hero-title img {
+  display: block; height: auto;
+  width: clamp(260px, 46vw, 640px); max-width: 100%;
+  filter: drop-shadow(0 2px 18px rgba(0,0,0,.25));
 }
 .hero-line {
   color: #efedea; font-size: 17px; font-weight: 500;
