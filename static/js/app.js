@@ -274,6 +274,9 @@ async function loadWork() {
     `</div>`;
   }).join('');
 
+  // Long lists fold to two and a half rows
+  setupFold(bankEl, $('work-more-btn'), () => rowsHeight(bankEl, 2.55));
+
   // Cache tile references
   const tiles = bankEl.querySelectorAll('.work-tile');
   activeTile = tiles[0] || null;
@@ -308,6 +311,64 @@ async function loadWork() {
     tile.addEventListener('click', handleActivate);
     tile.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleActivate(); } });
   });
+}
+
+// ─────────────────────────────────────────────────────────────
+//  FOLD — one tidy ending for every long section
+//  Collapsed: the section is clipped to a set height and fades into the
+//  page, with View more sitting in the fade. Expanded: it eases open.
+// ─────────────────────────────────────────────────────────────
+function rowsHeight(el, rows) {
+  const top0 = el.getBoundingClientRect().top;
+  const tops = [...new Set([...el.children].filter(c => c.offsetParent)
+    .map(c => Math.round(c.getBoundingClientRect().top - top0)))].sort((a, b) => a - b);
+  if (tops.length < 2 || tops.length <= Math.ceil(rows)) return 0;
+  const whole = Math.floor(rows);
+  return tops[whole] + (tops[1] - tops[0]) * (rows - whole);
+}
+
+function setupFold(el, btn, collapsedPx) {
+  if (!el || !btn) return null;
+  const wrap = btn.closest('.photo-more-wrap');
+  let expanded = false;
+  el.classList.add('fold');
+  const fold = () => {
+    const h = collapsedPx();
+    const worth = h && el.scrollHeight > h + 120;
+    btn.hidden = !worth;
+    if (wrap) wrap.classList.toggle('is-empty', !worth);
+    if (!worth) {
+      el.classList.remove('is-folded'); el.style.maxHeight = '';
+      if (wrap) wrap.classList.remove('over-fold');
+      return;
+    }
+    if (expanded) return;
+    el.style.maxHeight = h + 'px';
+    el.classList.add('is-folded');
+    if (wrap) wrap.classList.add('over-fold');
+    btn.textContent = 'View more';
+  };
+  btn.addEventListener('click', () => {
+    expanded = !expanded;
+    if (expanded) {
+      el.style.maxHeight = el.scrollHeight + 'px';
+      el.classList.remove('is-folded');
+      if (wrap) wrap.classList.remove('over-fold');
+      btn.textContent = 'View fewer';
+      const done = e => { if (e.target === el && expanded) el.style.maxHeight = 'none'; el.removeEventListener('transitionend', done); };
+      el.addEventListener('transitionend', done);
+    } else {
+      el.style.maxHeight = el.scrollHeight + 'px';
+      void el.offsetHeight;
+      fold();
+      const top = el.getBoundingClientRect().top;
+      if (top < 0) smoothScrollTo(el.closest('section') || el, 500);
+    }
+  });
+  let t = null;
+  window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(fold, 150); });
+  fold();
+  return { refold: fold };
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -662,40 +723,45 @@ async function loadPhotography() {
   const countEl = $('photo-count');
   if (countEl) countEl.textContent = allImages.length + ' stills';
 
-  const cols   = [masonry.querySelector('#photo-col-0'), masonry.querySelector('#photo-col-1'), masonry.querySelector('#photo-col-2')];
-  const hidden = [];
-
-  allImages.forEach((norm, i) => {
-    const tile = buildPhotoTile(norm, i, allImages);
-    if (i >= photoCount) {
-      tile.classList.add('photo-tile--hidden');
-      hidden.push(tile);
-    }
-    cols[i % 3].appendChild(tile);
-  });
-
-  // View-more button
-  const btn = $('photo-more-btn');
-  if (btn && hidden.length) {
-    btn.removeAttribute('hidden');
-    let expanded = false;
-    btn.addEventListener('click', () => {
-      expanded = !expanded;
-      hidden.forEach(t => {
-        if (expanded) {
-          t.classList.remove('photo-tile--hidden');
-          t.classList.add('photo-tile--entering');
-          // remove entering class after transition
-          t.addEventListener('transitionend', () => t.classList.remove('photo-tile--entering'), { once: true });
-        } else {
-          t.classList.add('photo-tile--hidden');
-        }
-      });
-      btn.textContent = expanded ? 'View fewer' : 'View more';
+  // Balanced masonry: each tile goes in the currently shortest column (by
+  // aspect ratio), so the columns end level instead of ragged.
+  const tiles = allImages.map((norm, i) => buildPhotoTile(norm, i, allImages));
+  const ratio = n => (n.w && n.h ? n.h / n.w : 1) + (n.caption ? 0.06 : 0) + 0.02;
+  const narrow = window.matchMedia('(max-width: 760px)');
+  let fold = null;
+  function layout() {
+    const n = narrow.matches ? 2 : 3;
+    masonry.innerHTML = '';
+    masonry.style.gridTemplateColumns = `repeat(${n}, minmax(0, 1fr))`;
+    const cols = Array.from({ length: n }, (_, k) => {
+      const c = document.createElement('div');
+      c.className = 'photo-col'; c.id = 'photo-col-' + k;
+      masonry.appendChild(c);
+      return c;
     });
-  } else if (btn) {
-    btn.setAttribute('hidden', '');
+    const heights = new Array(n).fill(0);
+    allImages.forEach((norm, i) => {
+      const k = heights.indexOf(Math.min(...heights));
+      cols[k].appendChild(tiles[i]);
+      heights[k] += ratio(norm);
+    });
+    if (fold) fold.refold();
   }
+  // Collapsed height: where the first `photoCount` stills reach in the
+  // shortest column, so every column is full right down to the fade.
+  function collapsed() {
+    const top0 = masonry.getBoundingClientRect().top;
+    const reach = [...masonry.querySelectorAll('.photo-col')].map(col => {
+      const firsts = [...col.children].filter(t => +t.dataset.index < photoCount);
+      const last = firsts[firsts.length - 1];
+      return last ? last.getBoundingClientRect().bottom - top0 : 0;
+    }).filter(Boolean);
+    return reach.length ? Math.max(420, Math.min(...reach)) : 0;
+  }
+  tiles.forEach((t, i) => { t.dataset.index = i; });
+  layout();
+  fold = setupFold(masonry, $('photo-more-btn'), collapsed);
+  narrow.addEventListener('change', layout);
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -728,7 +794,6 @@ async function loadBTS() {
 
   const raw  = await fetch('data/bts.json').then(r => r.json()).catch(() => []);
   const items = (Array.isArray(raw) ? raw : []).map(normaliseBTSItem);
-  const BTS_PREVIEW = 10;
 
   if (!items.length) {
     const sec = document.getElementById('bts');
@@ -750,9 +815,7 @@ async function loadBTS() {
   // Index offset: bts items start after photo items in lightbox collections
   // They use their own collection — we pass btsImageItems separately
 
-  const hidden = [];
-
-  items.forEach((item, i) => {
+  items.forEach((item) => {
     const tile = document.createElement('div');
     tile.className = 'bts-tile';
 
@@ -781,34 +844,10 @@ async function loadBTS() {
       tile.addEventListener('click', () => openLightboxAt(btsImageItems, imgIdx >= 0 ? imgIdx : 0));
     }
 
-    if (i >= BTS_PREVIEW) {
-      tile.classList.add('photo-tile--hidden');
-      hidden.push(tile);
-    }
     grid.appendChild(tile);
   });
 
-  // View-more button
-  const btn = $('bts-more-btn');
-  if (btn && hidden.length) {
-    btn.removeAttribute('hidden');
-    let expanded = false;
-    btn.addEventListener('click', () => {
-      expanded = !expanded;
-      hidden.forEach(t => {
-        if (expanded) {
-          t.classList.remove('photo-tile--hidden');
-          t.classList.add('photo-tile--entering');
-          t.addEventListener('transitionend', () => t.classList.remove('photo-tile--entering'), { once: true });
-        } else {
-          t.classList.add('photo-tile--hidden');
-        }
-      });
-      btn.textContent = expanded ? 'View fewer' : 'View more';
-    });
-  } else if (btn) {
-    btn.setAttribute('hidden', '');
-  }
+  setupFold(grid, $('bts-more-btn'), () => rowsHeight(grid, window.innerWidth <= 760 ? 4.55 : 2.55));
 }
 
 // ─────────────────────────────────────────────────────────────
