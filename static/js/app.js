@@ -864,62 +864,53 @@ async function loadAbout() {
   const block = (aboutPage.blocks || []).find(b => b.type === 'info_box');
   if (!block) return;
 
-  const paragraphs = (block.body || '').split('\n\n').filter(Boolean);
-  const skills     = block.skills || [];
+  const paragraphs = (block.body || '').split('\n\n').map(p => p.trim()).filter(Boolean);
   const linkedin   = _site?.social?.linkedin || 'https://www.linkedin.com/in/ash-marshall-b7725bb9';
 
-  // LEFT: portrait + name + title + skills chips
-  const leftCol = document.createElement('div');
-  leftCol.className = 'about-left';
-
-  if (block.image) {
-    const portraitWrap = document.createElement('div');
-    portraitWrap.className = 'about-portrait-tile';
-    portraitWrap.innerHTML = `<img src="${escapeHtml(block.image)}" alt="${escapeHtml(block.heading || 'Ash Marshall')}" loading="lazy">`;
-    leftCol.appendChild(portraitWrap);
+  // Read the bio's shape: intro paragraphs, a "…:" lead-in followed by short
+  // lines (a list of services), then the rest. The last of the rest becomes a
+  // pull quote. Plain bios without a list still lay out cleanly.
+  const leadIdx = paragraphs.findIndex(p => p.endsWith(':'));
+  let intro = paragraphs, listLead = '', list = [], rest = [];
+  if (leadIdx > 0) {
+    let j = leadIdx + 1;
+    while (j < paragraphs.length && paragraphs[j].length <= 100 && !/[.!?]$/.test(paragraphs[j])) j++;
+    if (j - leadIdx - 1 >= 2) {
+      intro = paragraphs.slice(0, leadIdx);
+      listLead = paragraphs[leadIdx].replace(/:$/, '');
+      list = paragraphs.slice(leadIdx + 1, j);
+      rest = paragraphs.slice(j);
+    }
   }
+  const quote = rest.length >= 2 ? rest[rest.length - 1] : '';
+  if (quote) rest = rest.slice(0, -1);
+  const [lede, ...introRest] = intro;
+  const P = t => `<p>${escapeHtml(t)}</p>`;
 
-  const nameEl = document.createElement('div');
-  nameEl.className = 'about-name';
-  nameEl.textContent = 'Marshall';
-  leftCol.appendChild(nameEl);
-
-  const titleEl = document.createElement('div');
-  titleEl.className = 'about-title-line';
-  titleEl.textContent = 'Multimedia Creative · London';
-  leftCol.appendChild(titleEl);
-
-  if (skills.length) {
-    const chipsWrap = document.createElement('div');
-    chipsWrap.className = 'about-chips';
-    skills.forEach(s => {
-      const chip = document.createElement('span');
-      chip.className = 'about-chip';
-      chip.textContent = s;
-      chipsWrap.appendChild(chip);
-    });
-    leftCol.appendChild(chipsWrap);
-  }
-
-  // RIGHT: blurb paragraphs + contact
-  const rightCol = document.createElement('div');
-  rightCol.className = 'about-right';
-
-  const bodyDiv = document.createElement('div');
-  bodyDiv.className = 'about-body-text';
-  bodyDiv.innerHTML = paragraphs.map(p => `<p>${escapeHtml(p)}</p>`).join('');
-  rightCol.appendChild(bodyDiv);
-
-  const contactDiv = document.createElement('div');
-  contactDiv.className = 'about-contact';
-  contactDiv.innerHTML =
-    `<span class="about-contact-label">say hello</span>` +
-    `<a class="about-contact-link" href="${escapeHtml(linkedin)}" target="_blank" rel="noreferrer noopener">LinkedIn ↗</a>`;
-  rightCol.appendChild(contactDiv);
-
-  el.appendChild(leftCol);
-  el.appendChild(rightCol);
-  el.classList.add('about-grid-new');
+  el.className = 'about-v2';
+  el.innerHTML = `
+    <div class="about-hero">
+      ${block.image ? `<figure class="about-photo"><img src="${escapeHtml(block.image)}" alt="Ash Marshall" loading="lazy"></figure>` : ''}
+      <div class="about-intro">
+        <p class="about-kicker">Producer · Director · London</p>
+        <h3 class="about-heading">Ash Marshall</h3>
+        ${lede ? `<p class="about-lede">${escapeHtml(lede)}</p>` : ''}
+        <div class="about-copy">${introRest.map(P).join('')}</div>
+        <a class="about-hello" href="${escapeHtml(linkedin)}" target="_blank" rel="noreferrer noopener">Say hello on LinkedIn <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    ${list.length ? `
+    <div class="about-services">
+      <p class="about-label">${escapeHtml(listLead)}</p>
+      <ol class="about-service-list">
+        ${list.map((t, i) => `<li><span class="about-num">${String(i + 1).padStart(2, '0')}</span><span>${escapeHtml(t)}</span></li>`).join('')}
+      </ol>
+    </div>` : ''}
+    ${(rest.length || quote) ? `
+    <div class="about-more">
+      <div class="about-copy about-copy-cols">${rest.map(P).join('')}</div>
+      ${quote ? `<blockquote class="about-quote">${escapeHtml(quote)}</blockquote>` : ''}
+    </div>` : ''}`;
 }
 
 // ─────────────────────────────────────────────────────────────
