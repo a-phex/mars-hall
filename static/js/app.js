@@ -193,10 +193,26 @@ function initReveal() {
 async function loadWork() {
   const data   = await fetch('data/videos.json').then(r => r.json()).catch(() => ({ videos: [] }));
   const videos = data.videos || [];
+  const projMeta = {};
+  (data.projects || []).forEach(p => { if (p && p.id) projMeta[p.id] = p; });
 
-  // Count badge
+  // Group the flat list into items: a single film, or a project of films.
+  // A project sits where its first film sits.
+  const items = [];
+  const projItem = {};
+  videos.forEach((v, i) => {
+    const pid = v.project && projMeta[v.project] ? v.project : '';
+    if (!pid) { items.push({ kind: 'film', idx: i }); return; }
+    if (!projItem[pid]) { projItem[pid] = { kind: 'project', id: pid, meta: projMeta[pid], films: [] }; items.push(projItem[pid]); }
+    projItem[pid].films.push(i);
+  });
+  const filmProject = {};
+  items.filter(it => it.kind === 'project').forEach(p => p.films.forEach((i, n) => { filmProject[i] = { p, n }; }));
+  const nProjects = items.filter(it => it.kind === 'project').length;
+
   const countEl = $('work-count');
-  if (countEl) countEl.textContent = videos.length + ' film' + (videos.length !== 1 ? 's' : '');
+  if (countEl) countEl.textContent = videos.length + ' film' + (videos.length !== 1 ? 's' : '') +
+    (nProjects ? ' · ' + nProjects + ' project' + (nProjects !== 1 ? 's' : '') : '');
 
   if (!videos.length) return;
 
@@ -205,108 +221,215 @@ async function loadWork() {
   const bankEl   = $('work-sidebar');
   if (!stageEl || !annoEl || !bankEl) return;
 
-  let activeIdx = 0;
   let activeTile = null;
+  const ytThumb = (v, q) => v.thumb || `https://img.youtube.com/vi/${v.youtubeId}/${q}.jpg`;
 
-  // ── Annotation updater
-  function setAnno(v) {
+  // ── Annotation: title, sub, and where you are in a project
+  function setAnno(v, i) {
+    const fp = filmProject[i];
     annoEl.innerHTML =
       `<span class="work-anno-title">${escapeHtml(v.title)}</span>` +
-      (v.sub ? `<span class="work-anno-sep"> · </span><span class="work-anno-sub">${escapeHtml(v.sub)}</span>` : '');
+      (v.sub ? `<span class="work-anno-sep"> · </span><span class="work-anno-sub">${escapeHtml(v.sub)}</span>` : '') +
+      (fp ? `<span class="work-anno-sep"> · </span><span class="work-anno-sub">` +
+            ((v.sub || '').toLowerCase().includes((fp.p.meta.name || '').toLowerCase()) ? '' : escapeHtml(fp.p.meta.name || 'Project') + ' · ') +
+            `${fp.n + 1} of ${fp.p.films.length}</span>` +
+            (fp.p.films.length > 1 ? `<button class="work-anno-next" type="button">Next in project →</button>` : '') : '');
+    const nx = annoEl.querySelector('.work-anno-next');
+    if (nx) nx.addEventListener('click', () => {
+      const next = fp.p.films[(fp.n + 1) % fp.p.films.length];
+      const tile = bankEl.querySelector(`.work-tile[data-idx="${next}"]`);
+      if (tile) activateTile(tile, next, false);
+    });
   }
 
-  // ── Load player (iframe autoplay) into stage
-  function loadPlayer(v) {
+  function loadPlayer(v, i) {
     stageEl.innerHTML =
       `<iframe src="https://www.youtube-nocookie.com/embed/${escapeHtml(v.youtubeId)}?autoplay=1&rel=0"` +
       ` title="${escapeHtml(v.title)}" frameborder="0"` +
       ` allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"` +
       ` allowfullscreen></iframe>`;
-    setAnno(v);
+    setAnno(v, i);
   }
 
-  // ── Show poster (first load or on tile click before play)
-  function showPoster(v) {
-    const hq  = `https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg`;
-    const max = `https://img.youtube.com/vi/${v.youtubeId}/maxresdefault.jpg`;
+  function showPoster(v, i) {
+    const hq  = ytThumb(v, 'hqdefault');
+    const max = v.thumb || `https://img.youtube.com/vi/${v.youtubeId}/maxresdefault.jpg`;
     stageEl.innerHTML =
       `<img class="work-poster" src="${max}" width="1280" height="720" alt="${escapeHtml(v.title)}" loading="eager"` +
       ` onerror="this.src='${hq}'" onload="if(this.naturalWidth<320&&this.src!=='${hq}')this.src='${hq}'">` +
       `<button class="work-poster-play" aria-label="Play ${escapeHtml(v.title)}">` +
         `<span class="work-play-icon" aria-hidden="true">&#9654;</span>` +
       `</button>`;
-    stageEl.querySelector('.work-poster-play').addEventListener('click', () => loadPlayer(v));
-    setAnno(v);
+    stageEl.querySelector('.work-poster-play').addEventListener('click', () => loadPlayer(v, i));
+    setAnno(v, i);
   }
 
-  // ── Scroll player into view only if fully out of viewport
   function maybeScrollToPlayer() {
     const rect = stageEl.getBoundingClientRect();
-    if (rect.bottom < 0 || rect.top > window.innerHeight) {
-      smoothScrollTo(stageEl, 600);
-    }
+    if (rect.bottom < 0 || rect.top > window.innerHeight) smoothScrollTo(stageEl, 600);
   }
 
-  // ── Activate a tile
-  function activateTile(tile, v) {
+  function activateTile(tile, i, scroll = true) {
     if (activeTile) activeTile.classList.remove('work-tile--active');
     tile.classList.add('work-tile--active');
     activeTile = tile;
-    loadPlayer(v);
-    maybeScrollToPlayer();
+    loadPlayer(videos[i], i);
+    if (scroll) maybeScrollToPlayer();
   }
 
-  // ── Render poster for first video
-  showPoster(videos[0]);
+  showPoster(videos[0], 0);
 
-  // ── Build the bank
-  bankEl.innerHTML = videos.map((v, i) => {
-    const thumb = v.thumb || `https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg`;
-    return `<div class="work-tile${i === 0 ? ' work-tile--active' : ''}" data-idx="${i}" role="button" tabindex="0"` +
-      ` aria-label="${escapeHtml(v.title)}">` +
+  // ── A single film tile (unchanged look)
+  function filmTile(i) {
+    const v = videos[i];
+    return `<div class="work-tile" data-idx="${i}" role="button" tabindex="0" aria-label="${escapeHtml(v.title)}">` +
       `<div class="work-tile-img-wrap">` +
-        `<img class="work-tile-img" src="${thumb}" width="320" height="180" alt="${escapeHtml(v.title)}" loading="lazy">` +
+        `<img class="work-tile-img" src="${ytThumb(v, 'hqdefault')}" width="320" height="180" alt="${escapeHtml(v.title)}" loading="lazy">` +
       `</div>` +
       `<div class="work-tile-meta">` +
         `<div class="work-tile-title">${escapeHtml(v.title)}</div>` +
         (v.sub ? `<div class="work-tile-sub">${escapeHtml(v.sub)}</div>` : '') +
       `</div>` +
     `</div>`;
-  }).join('');
+  }
 
-  // Long lists fold to two and a half rows
-  setupFold(bankEl, $('work-more-btn'), () => rowsHeight(bankEl, 2.55));
+  // ── Project layout: bands on a 3-column grid, always a clean rectangle.
+  //   Large → 2×2 with up to two films stacked beside it (one goes tall,
+  //   none and it goes full width). Wide → a full-width strip. Smalls run
+  //   three to a row; a lone one goes wide, a pair splits 2 + 1.
+  function projectCells(films) {
+    const size = i => ({ l: 'l', w: 'w' }[videos[i].size] || 's');
+    const cells = []; let row = 1, k = 0;
+    const put = (i, c, r, cs, rs) => cells.push({ i, c, r, cs, rs });
+    while (k < films.length) {
+      const i = films[k], s = size(i);
+      if (s === 'l') {
+        const side = [];
+        while (side.length < 2 && k + 1 + side.length < films.length && size(films[k + 1 + side.length]) !== 'l') side.push(films[k + 1 + side.length]);
+        if (!side.length) put(i, 1, row, 3, 2);
+        else {
+          put(i, 1, row, 2, 2);
+          if (side.length === 1) put(side[0], 3, row, 1, 2);
+          else { put(side[0], 3, row, 1, 1); put(side[1], 3, row + 1, 1, 1); }
+        }
+        row += 2; k += 1 + side.length;
+      } else if (s === 'w') {
+        put(i, 1, row, 3, 1); row += 1; k += 1;
+      } else {
+        const run = [];
+        while (run.length < 3 && k + run.length < films.length && size(films[k + run.length]) === 's') run.push(films[k + run.length]);
+        if (run.length === 1) put(run[0], 1, row, 3, 1);
+        else if (run.length === 2) { put(run[0], 1, row, 2, 1); put(run[1], 3, row, 1, 1); }
+        else run.forEach((j, n) => put(j, n + 1, row, 1, 1));
+        row += 1; k += run.length;
+      }
+    }
+    return cells;
+  }
 
-  // Cache tile references
+  function projectBlock(p, nth) {
+    const m = p.meta;
+    const cells = projectCells(p.films).map(c => {
+      const v = videos[c.i];
+      const big = c.cs > 1 || c.rs > 1;
+      const hq = ytThumb(v, 'hqdefault');
+      const src = big && !v.thumb ? `https://img.youtube.com/vi/${v.youtubeId}/maxresdefault.jpg` : hq;
+      return `<div class="work-tile work-ptile" data-idx="${c.i}" role="button" tabindex="0" aria-label="${escapeHtml(v.title)}"` +
+        ` style="grid-column:${c.c} / span ${c.cs};grid-row:${c.r} / span ${c.rs}">` +
+        `<div class="work-tile-img-wrap">` +
+          `<img class="work-tile-img" src="${src}" alt="${escapeHtml(v.title)}" loading="lazy"` +
+          (big ? ` onload="if(this.naturalWidth<200&&this.src!=='${hq}')this.src='${hq}'" onerror="this.src='${hq}'"` : '') + `>` +
+          `<span class="work-ptile-title">${escapeHtml(v.title)}</span>` +
+        `</div>` +
+      `</div>`;
+    }).join('');
+    return `<div class="work-project${nth % 2 ? ' work-project--right' : ''}" data-project="${escapeHtml(p.id)}">` +
+      `<div class="work-project-head">` +
+        `<div class="work-project-kicker">Project · ${p.films.length} film${p.films.length !== 1 ? 's' : ''}</div>` +
+        `<h3 class="work-project-name">${escapeHtml(m.name || 'Project')}</h3>` +
+        (m.desc ? `<p class="work-project-desc">${escapeHtml(m.desc)}</p>` : '') +
+      `</div>` +
+      `<div class="work-project-films"><div class="work-project-grid">${cells}</div></div>` +
+    `</div>`;
+  }
+
+  let nth = 0;
+  bankEl.innerHTML = items.map(it => it.kind === 'film' ? filmTile(it.idx) : projectBlock(it, nth++)).join('');
+
+  // Projects span as many grid rows as they need (measured, so it holds at any width)
+  const projects = [...bankEl.querySelectorAll('.work-project')];
+  function sizeProjects() {
+    if (!projects.length) return;
+    const one = bankEl.querySelector(':scope > .work-tile');
+    const gap = parseFloat(getComputedStyle(bankEl).rowGap) || 0;
+    const unit = one ? one.getBoundingClientRect().height : 200;
+    const cols = getComputedStyle(bankEl).gridTemplateColumns.split(' ').length;
+    projects.forEach(p => {
+      // Full-width (phones): nothing sits beside it, so it just takes its natural height
+      p.classList.toggle('is-natural', cols <= 2);
+      if (cols <= 2) { p.style.gridRow = ''; return; }
+      // natural height = header + films at true 16:9, measured unstretched
+      p.style.gridRow = ''; p.classList.add('is-measuring');
+      const h = p.getBoundingClientRect().height;
+      p.classList.remove('is-measuring');
+      p.style.gridRow = 'span ' + Math.max(2, Math.ceil((h + gap) / (unit + gap) - 0.15));
+    });
+  }
+  sizeProjects();
+  let rt = null;
+  window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(sizeProjects, 120); });
+
+  // Fold at two and a half rows, but never through the middle of a project
+  setupFold(bankEl, $('work-more-btn'), () => {
+    sizeProjects();
+    let h = rowsHeight(bankEl, 2.55);
+    if (!h) return h;
+    const top0 = bankEl.getBoundingClientRect().top;
+    const one = bankEl.querySelector(':scope > .work-tile');
+    const step = one ? one.getBoundingClientRect().height : 200;
+    for (let moved = true; moved;) {
+      moved = false;
+      projects.forEach(p => {
+        const r = p.getBoundingClientRect();
+        const t = r.top - top0, b = r.bottom - top0;
+        const want = b + Math.max(step * 0.55, 200);
+        if (t < h && b > h - 60 && want > h + 1) { h = want; moved = true; }
+      });
+    }
+    return h;
+  });
+
   const tiles = bankEl.querySelectorAll('.work-tile');
-  activeTile = tiles[0] || null;
+  activeTile = bankEl.querySelector('.work-tile[data-idx="0"]');
+  if (activeTile) activeTile.classList.add('work-tile--active');
 
-  // ── Living thumbnails
+  // ── Living thumbnails + activation
   const YT_FRAMES = ['mq1.jpg', 'mq2.jpg', 'mq3.jpg'];
-  tiles.forEach((tile, i) => {
+  tiles.forEach(tile => {
+    const i   = +tile.dataset.idx;
     const v   = videos[i];
     const img = tile.querySelector('.work-tile-img');
-    const hq  = v.thumb || `https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg`;
+    let rest = img.src;
     let cycleTimer = null;
 
     tile.addEventListener('mouseenter', () => {
+      if (v.thumb) return;
+      rest = img.src;
       let frame = 0;
       cycleTimer = setInterval(() => {
         frame = (frame + 1) % YT_FRAMES.length;
         img.src = `https://img.youtube.com/vi/${v.youtubeId}/${YT_FRAMES[frame]}`;
       }, 600);
     });
-
     tile.addEventListener('mouseleave', () => {
       clearInterval(cycleTimer);
       cycleTimer = null;
-      img.src = hq;
+      if (!v.thumb) img.src = rest;
     });
 
-    // Click / keyboard activation
     function handleActivate() {
       if (tile.classList.contains('work-tile--active')) return;
-      activateTile(tile, v);
+      activateTile(tile, i);
     }
     tile.addEventListener('click', handleActivate);
     tile.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleActivate(); } });

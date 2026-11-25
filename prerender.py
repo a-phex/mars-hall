@@ -85,7 +85,20 @@ def build_block():
     if videos and "home" not in hidden:
         out.append(f"<h2>Selected Work — {len(videos)} films</h2>")
         out.append("<ul>")
+        projects = {p.get("id"): p for p in load("videos.json", {}).get("projects", []) if p.get("id")}
+        seen = set()
         for v in videos:
+            pid = v.get("project")
+            if pid in projects:
+                if pid in seen:
+                    continue
+                seen.add(pid)
+                p = projects[pid]
+                films = [esc(x.get("title")) for x in videos if x.get("project") == pid]
+                desc = esc(p.get("desc"))
+                out.append(f"<li>{esc(p.get('name'))}" + (f" — {desc}" if desc else "")
+                           + "<ul>" + "".join(f"<li>{t}</li>" for t in films) + "</ul></li>")
+                continue
             title = esc(v.get("title"))
             sub = esc(v.get("sub"))
             out.append(f"<li>{title}" + (f" — {sub}" if sub else "") + "</li>")
