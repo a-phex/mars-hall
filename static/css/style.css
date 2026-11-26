@@ -1098,7 +1098,7 @@ img { display: block; max-width: 100%; }
 .about-photo {
   position: relative; margin: 0;
   aspect-ratio: 4 / 5; overflow: hidden;
-  background: var(--hairline); border-radius: var(--radius);
+  background: var(--hairline); border-radius: 10px;
   max-height: 78svh;
 }
 .about-photo img {
@@ -1108,7 +1108,7 @@ img { display: block; max-width: 100%; }
 }
 .about-photo:hover img { filter: grayscale(0); transform: scale(1.02); }
 .about-photo::after {      /* a fine frame line, like a print mount */
-  content: ''; position: absolute; inset: 14px; border: 1px solid rgba(244,242,238,.35); pointer-events: none;
+  content: ''; position: absolute; inset: 14px; border: 1px solid rgba(244,242,238,.35); border-radius: 4px; pointer-events: none;
 }
 
 .about-intro { max-width: 56ch; }
@@ -1169,10 +1169,10 @@ img { display: block; max-width: 100%; }
 .about-v2--overlay .about-hero {
   display: block; position: relative;
   aspect-ratio: 16 / 9; max-height: 88svh; min-height: 520px;
-  overflow: hidden; border-radius: var(--radius);
+  overflow: hidden; border-radius: 10px;
 }
 .about-v2--overlay .about-photo {
-  position: absolute; inset: 0; aspect-ratio: auto; max-height: none; border-radius: 0;
+  position: absolute; inset: 0; aspect-ratio: auto; max-height: none; border-radius: 10px;
 }
 .about-v2--overlay .about-photo img { object-position: 30% 40%; }
 .about-v2--overlay .about-photo:hover img { transform: none; }
