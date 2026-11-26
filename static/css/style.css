@@ -134,7 +134,7 @@ img { display: block; max-width: 100%; }
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(to top, rgba(20,19,18,.58), transparent 52%);
 }
-/* Wordmark then mark, side by side; the mark is ~1.15x the wordmark's height */
+/* Wordmark then mark, side by side; the mark is about the wordmark's height */
 .hero-title {
   --logo-w: clamp(150px, 23vw, 320px);
   line-height: 0; display: flex; align-items: center;
@@ -145,7 +145,7 @@ img { display: block; max-width: 100%; }
   filter: drop-shadow(0 2px 18px rgba(0,0,0,.25));
 }
 .hero-title .hero-wordmark { width: var(--logo-w); }
-.hero-title .hero-mark { width: auto; height: calc(var(--logo-w) * .2043 * 1.15); }
+.hero-title .hero-mark { width: auto; height: calc(var(--logo-w) * .2043 * 1.035); }
 .hero-line {
   color: #efedea; font-size: 17px; font-weight: 500;
   max-width: 46ch; margin-top: 14px;
