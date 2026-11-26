@@ -134,12 +134,18 @@ img { display: block; max-width: 100%; }
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(to top, rgba(20,19,18,.58), transparent 52%);
 }
-.hero-title { line-height: 0; }
+/* Mark + wordmark sit side by side; the mark is ~1.35x the wordmark's height */
+.hero-title {
+  --logo-w: clamp(150px, 23vw, 320px);
+  line-height: 0; display: flex; align-items: center;
+  gap: calc(var(--logo-w) * .06);
+}
 .hero-title img {
-  display: block; height: auto;
-  width: clamp(150px, 23vw, 320px); max-width: 100%;
+  display: block; height: auto; max-width: 100%;
   filter: drop-shadow(0 2px 18px rgba(0,0,0,.25));
 }
+.hero-title .hero-wordmark { width: var(--logo-w); }
+.hero-title .hero-mark { width: auto; height: calc(var(--logo-w) * .2043 * 1.35); }
 .hero-line {
   color: #efedea; font-size: 17px; font-weight: 500;
   max-width: 46ch; margin-top: 14px;
