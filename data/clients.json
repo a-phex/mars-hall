@@ -95,6 +95,16 @@
       "logo": "static/img/thumbs/1678904890199_20260512_081903_240.jpeg",
       "videos": [
         {
+          "title": "PCA   Take Action Now",
+          "youtubeId": "VGPCvBv7Nrc",
+          "date": "2026-11-27"
+        },
+        {
+          "title": "PaymentChoice   Treorchy 310524",
+          "youtubeId": "luC4n3nUTnk",
+          "date": "2026-11-27"
+        },
+        {
           "title": "PaymentChoiceAlliance // PCA Champions",
           "youtubeId": "-rLrP_p3gDA"
         },
@@ -105,16 +115,6 @@
         {
           "title": "PaymentChoiceAlliance // Did you know you'd struggle to spend this £5 note ?",
           "youtubeId": "Wv6DYn_vx8o"
-        },
-        {
-          "title": "PCA   Take Action Now",
-          "youtubeId": "VGPCvBv7Nrc",
-          "date": "2026-11-27"
-        },
-        {
-          "title": "PaymentChoice   Treorchy 310524",
-          "youtubeId": "luC4n3nUTnk",
-          "date": "2026-11-27"
         }
       ]
     },
