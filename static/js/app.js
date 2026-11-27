@@ -244,7 +244,7 @@ async function loadWork() {
 
   function loadPlayer(v, i) {
     stageEl.innerHTML =
-      `<iframe src="https://www.youtube-nocookie.com/embed/${escapeHtml(v.youtubeId)}?autoplay=1&rel=0"` +
+      `<iframe src="https://www.youtube-nocookie.com/embed/${escapeHtml(v.youtubeId)}?autoplay=1&rel=0&enablejsapi=1"` +
       ` title="${escapeHtml(v.title)}" frameborder="0"` +
       ` allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"` +
       ` allowfullscreen></iframe>`;
@@ -580,7 +580,7 @@ async function loadClients() {
         thumb.classList.add('archive-thumb--active');
         // Load iframe with autoplay
         stage.innerHTML =
-          `<iframe src="https://www.youtube-nocookie.com/embed/${escapeHtml(v.youtubeId)}?autoplay=1&rel=0"` +
+          `<iframe src="https://www.youtube-nocookie.com/embed/${escapeHtml(v.youtubeId)}?autoplay=1&rel=0&enablejsapi=1"` +
           ` title="${escapeHtml(v.title)}" frameborder="0"` +
           ` allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"` +
           ` allowfullscreen></iframe>`;
@@ -710,7 +710,7 @@ async function loadElectra() {
   function play(block) {
     if (!block) return;
     posterDiv.innerHTML =
-      `<iframe src="https://www.youtube-nocookie.com/embed/${escapeHtml(block.youtubeId)}?autoplay=1&rel=0"` +
+      `<iframe src="https://www.youtube-nocookie.com/embed/${escapeHtml(block.youtubeId)}?autoplay=1&rel=0&enablejsapi=1"` +
       ` title="${escapeHtml(block.label || 'Electra')}" frameborder="0"` +
       ` allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"` +
       ` allowfullscreen></iframe>`;
@@ -1106,7 +1106,7 @@ async function loadCustomSections() {
       } else if (block.type === 'video_embed') {
         const div = document.createElement('div');
         div.className = 'video-embed';
-        div.innerHTML = `<iframe src="https://www.youtube.com/embed/${block.youtubeId}" frameborder="0" allowfullscreen></iframe>`;
+        div.innerHTML = `<iframe src="https://www.youtube.com/embed/${block.youtubeId}?enablejsapi=1" frameborder="0" allowfullscreen></iframe>`;
         wrap.appendChild(div);
       } else {
         const grid = document.createElement('div');
@@ -1131,7 +1131,7 @@ async function loadCustomSections() {
 // ─────────────────────────────────────────────────────────────
 function loadPlayer(container, youtubeId, title = '') {
   container.innerHTML = `<iframe
-    src="https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1&autoplay=1"
+    src="https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1&autoplay=1&enablejsapi=1"
     title="${escapeHtml(title)}" frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen></iframe>`;
@@ -1493,7 +1493,7 @@ async function initPage() {
       sec.className = 'section-sp';
       if (block.label) { const h2 = document.createElement('h2'); h2.className = 'section-title'; h2.textContent = block.label; sec.appendChild(h2); }
       const wrap = document.createElement('div'); wrap.className = 'video-embed';
-      wrap.innerHTML = `<iframe src="https://www.youtube.com/embed/${block.youtubeId}" title="${escapeHtml(block.label || '')}" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>`;
+      wrap.innerHTML = `<iframe src="https://www.youtube.com/embed/${block.youtubeId}?enablejsapi=1" title="${escapeHtml(block.label || '')}" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>`;
       sec.appendChild(wrap); container.appendChild(sec); continue;
     }
 

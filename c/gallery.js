@@ -216,6 +216,7 @@ function renderFilms() {
     el.querySelector('.g-film-title').textContent = prettyName(f.name);
     el.querySelector('.g-film-info').textContent = [fmtDur(f.duration), res].filter(Boolean).join('  ·  ');
     const video = el.querySelector('video'), btn = el.querySelector('.g-play');
+    video.dataset.film = prettyName(f.name);   // names the film in visitor stats
     btn.addEventListener('click', () => startFilm(f, video, el));
     wrap.appendChild(el);
     setTimeout(() => el.classList.add('in'), 60 * i);
